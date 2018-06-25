@@ -19,6 +19,8 @@ if ( ! function_exists( 'add_filter' ) ) {
 }
 /* DEFINICIONES */
 
+define('RUTA_PLUGIN_BOOKING', '/goquoting/');
+
 /* LIBRERIAS */
 // Dependencias
 require_once('app/booking-system-create-pages.php');
