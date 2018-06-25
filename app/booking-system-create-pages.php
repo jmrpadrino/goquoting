@@ -1,6 +1,6 @@
 <?php
 // VALIDAR SI LA PAGINA DEL COTIZADOR ESTA CREADA SINO CREARLA
-add_action( 'plugins_loaded', 'gg_create_quote_pages' );
+add_action( 'activated_plugin', 'gg_create_quote_pages' );
 function gg_create_quote_pages() {
     
     $quote_page = get_page_by_path('check-availability');
@@ -23,7 +23,7 @@ function gg_create_quote_pages() {
     if (!$quote_page){
         // Create post object
         $my_post = array(
-            'post_title'    => 'GOQuoting - Accommodarion',
+            'post_title'    => 'GOQuoting - Accommodation',
             'post_name'     => 'accommodation',
             'post_content'  => '[goquoting-accommodation]',
             'post_status'   => 'publish',
