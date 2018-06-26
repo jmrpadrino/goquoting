@@ -1,10 +1,21 @@
 <?php $prefix = 'gg_'; ?>
 <style>
     /* Common styles */
+    body{
+        font-size: 14px;
+    }
     body,
     h1,h2,h3,h4,h5,h6{
         font-family: 'Didact Gothic',sans-serif;
-        font-size: 14px;
+    }
+    h1,h2,h3,h4,h5,h6{
+        font-size: 18px;
+        color: darkgrey;
+    }
+    .ship-title{
+        font-size: 24px;
+        font-weight: bold;
+        color: dimgray;
     }
     .no-padding{
         padding: 0px;
@@ -26,7 +37,7 @@
     }
     .ship-inside-box{
         border-radius: 6px;
-        box-shadow: 0px 11px 31px #f1f1f1;
+        box-shadow: 0px 10px 20px rgba(45, 45, 45, 0.1);
         margin: 0 auto;
         margin-bottom: 12px;
         padding: 36px 20px;
@@ -67,12 +78,14 @@
     /* CHECK AVAILABILITY VIEW */
     .cabins-available-list{
         margin: 0;
+        margin-top: 28px;
         padding: 0;
         list-style: none;
     }
     .cabins-available-list .cabin-list-item{
-        display: block;
-        clear: both;
+        display: table;
+        width: 100%;
+        margin-bottom: 8px;
     }
     .square-box{
         position: relative;
@@ -239,12 +252,12 @@
                 );
                 $cabinas = get_posts($args);
             ?>
-            <div id="<?= get_post_meta($barco->ID, $prefix . 'dispo_ID', true)?>" class="ship-container">
+            <div id="<?= esc_html(get_post_meta($barco->ID, $prefix . 'dispo_ID', true)) ?>" class="ship-container">
                 <div class="ship-thumbnail">
                     <img src="<?= get_post_meta($barco->ID, $prefix . 'ship_wiki_image', true) ?>" class="img-responsive" alt="<?= $barco->post_title ?>">
                 </div>
                 <div class="ship-inside-box ship-departure-dates">
-                    <h2><?= $barco->post_title ?></h2>
+                    <h2 class="ship-title"><?= $barco->post_title ?></h2>
                     <h3>Departure Dates</h3>
                     <p class="text-right"><span class="see-all-dates"><?= _e('See all Dates', 'gogalapagos') ?></span><span class="hide-all-dates text-right hidden"><?= _e('Hide Dates', 'gogalapagos') ?></span></p>
                     <ul class="list-inline ship-departure-dates-list">
@@ -364,24 +377,16 @@
                     </ul>
                 </div>
                 <div class="ship-inside-box">                
-                    <p><?= _e('Cabins available on this date', 'gogalapagos') ?></p>
+                    <h3><?= _e('Cabins available on this date', 'gogalapagos') ?></h3>
                     <ul class="cabins-available-list">
                         <?php foreach( $cabinas as $cabina ){ ?>
-                        <li class="cabin-list-item"><h4 class="pull-left cabin-list-name"><?= $cabina->post_title ?></h4> <span class="pull-right cabin-list-price">$ 3250</span></li>
+                        <li class="cabin-list-item"><span class="pull-left cabin-list-name"><?= $cabina->post_title ?></span> <span class="pull-right cabin-list-price">$ 3250</span></li>
                         <?php } ?>
-                        <?php /*
-                        <li class="cabin-list-item"><h4 class="pull-left cabin-list-name">Legend Balcony Suite</h4> <span class="pull-right cabin-list-price">$ 3250</span></li> 
-                        <li class="cabin-list-item"><h4 class="pull-left cabin-list-name">Balcony Suite</h4> <span class="pull-right cabin-list-price">$ 2798</span></li> 
-                        <li class="cabin-list-item"><h4 class="pull-left cabin-list-name">Legend Balcony +</h4> <span class="pull-right cabin-list-price">$ 2848</span></li> 
-                        <li class="cabin-list-item"><h4 class="pull-left cabin-list-name">Junior Suite</h4> <span class="pull-right cabin-list-price">$ 2346</span></li> 
-                        <li class="cabin-list-item"><h4 class="pull-left cabin-list-name">Junior Suite +</h4> <span class="pull-right cabin-list-price">$ 2396</span></li> 
-                        <li class="cabin-list-item"><h4 class="pull-left cabin-list-name">Standard Cabin</h4> <span class="pull-right cabin-list-price">$ 1662</span></li> 
-                        <li class="cabin-list-item"><h4 class="pull-left cabin-list-name">Standard Plus Cabin</h4> <span class="pull-right cabin-list-price">$ 2058</span></li> 
-                        */ ?>
                     </ul>
                 </div>
             </div>
             <?php } // FIN bucle barcos ?>
+            
             <button name="availability" value="true" class="text-center submit-button submit-button-cabin" type="submit">
                 <span class="next-step"><?= _e('Next Step', 'gogalapagos') ?></span>
                 <span class="next-step-title"><?= _e('Select Your Cabin', 'gogalapagos') ?></span>
@@ -391,7 +396,7 @@
 </div>
 <!-- Modal -->
 <div class="modal fade" id="more-days-info" tabindex="-1" role="dialog" aria-labelledby="moreDaysInfo">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-xs" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
                 <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-chevron-left"></i></span></button>
