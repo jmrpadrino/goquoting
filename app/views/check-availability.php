@@ -5,6 +5,7 @@
     /* Common styles */
     body{
         font-size: 14px;
+        background: #e6e6e6;
     }
     body,
     h1,h2,h3,h4,h5,h6{
@@ -94,6 +95,17 @@
     /*---------------*/
 
     /* CHECK AVAILABILITY VIEW */
+    .ship-thumbnail{
+        max-height: 220px;
+        overflow: hidden;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+    .ship-thumbnail img{
+        height: 100%;
+        width: 100%;
+    }
     .cabins-available-list{
         margin: 0;
         margin-top: 28px;
@@ -203,23 +215,82 @@
     .datepicker-control-label{
         margin: 18px auto;
     }
-    .counter-controller{}
     .counter-operation{
-        display: inline-block;
-        transform: translateY(-5px);
+        display: inline-flex;
+        width: 24px;
+        background: white;
+        height: 42px;
+        justify-content: center;
+        align-items: center;
+    }
+    .counter-operation.add{
+        transform: translateX(3px) translateY(-6px);
+        border-radius: 6px 0px 0px 6px;
+    }
+    .counter-operation.subtract{
+        transform: translateX(-3px) translateY(-6px);
+        border-radius: 0px 6px 6px 0px;
     }
     .pax-counter{
         border:none;
         text-align: center;
         font-size: 28px;
+        border-left: 1px solid #e8e8e8;
+        border-right: 1px solid #e8e8e8;
     }
     .filter-search-placeholder button,
     .filter-search-placeholder .more-than-nine{
         display: inline-block;
         margin: 18px 0;
     }
+    .filter-control-select{
+        margin-bottom: 12px;
+        border: none;
+    }
+    .offer-search-filter-placeholder label{
+        transform: translateY(-6px);
+    }
+    .offer-search-filter-placeholder span{
+        display: inline-flex;
+        border: 1px solid #ccc;
+        width: 34px;
+        height: 34px;
+        margin-left: 12px;
+        padding: 5px;
+        align-content: center;
+        justify-content: center;
+        background: white;
+    }
+    .offer-search-filter-placeholder span:before{
+        content: '';
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: darkorange;
+        display: none;
+        
+    }
+    .offer-search-filter-placeholder input[type=checkbox]:checked + span:before{
+        display:block;
+    }
+    .offer-search-filter-checkbox{
+        display: none;
+    }
+    /*--- MODALES ---*/
+    .modal-header{
+        background: darkorange;        
+        border-radius: 6px 6px 0px 0px;
+    }
+    .modal.error .modal-header{
+        background: darkred;        
+    }
+    .modal-header *{
+        color: white;
+        opacity: 1;
+    }
+    /*---------------*/
 </style>
-<form method="get" action="<?= home_url('accommodation') ?>">
+<form id="set-date-form" method="get" action="<?= home_url('accommodation') ?>">
     <div class="container">
         <?php
             $args = array(
@@ -239,9 +310,9 @@
                     <div class="col-xs-10 col-xs-offset-1 text-center datepicker-control">
                         <label for="dtp_input2" class="col-md-2 datepicker-control-label">Select dates</label>
                         <div class="input-daterange input-group" id="datepicker">
-                            <input type="text" class="input-sm form-control" name="date-start" value="<?= date('Y-m-d')?>" />
+                            <input type="text" class="input-sm form-control" name="date-start" value="<?= date('Y-m-d', strtotime("+7 days"))?>" />
                             <span class="input-group-addon"><?= _e('to','gogalapagos') ?></span>
-                            <input type="text" class="input-sm form-control" name="date-end" value="<?= date('Y-m-d', strtotime("+30 days")) ?>" />
+                            <input type="text" class="input-sm form-control" name="date-end" value="<?= date('Y-m-d', strtotime("+37 days")) ?>" />
                         </div>
                     </div>
                 </div>
@@ -283,20 +354,23 @@
                     </div>
                     <div class="col-xs-10 col-xs-offset-1">
                         <div id="filter-controls-placeholder" class="filter-controls-placeholder" style="display: none;">
-                            <select name="duration-search-filter" class="form-control">
+                            <select name="duration-search-filter" class="form-control filter-control-select">
                                 <option value="0"><?= _e('All Durations', 'gogalapagos') ?></option>
                                 <option value="4">4 <?= _e('Days', 'gogalapagos') ?></option>
                                 <option value="8">8 <?= _e('Days', 'gogalapagos') ?></option>
                                 <option value="12">12 <?= _e('Days', 'gogalapagos') ?></option>
                             </select>
-                            <select name="ship-search-filter" class="form-control">
+                            <select name="ship-search-filter" class="form-control filter-control-select">
                                 <option value="0"><?= _e('All Ships', 'gogalapagos') ?></option>
                                 <option value="BAR003">Galapagos Legend</option>
                                 <option value="BAR001">Coral Yacths</option>
                             </select>
                             <div class="form-group text-right">
-                                <label for="offer-search-filter"><?= _e('Offers Only') ?></label>
-                                <input type="checkbox" name="offer-search-filter" id="offer-search-filter">
+                                <div class="offer-search-filter-placeholder">
+                                    <label class="offer-search-filter-label" for="offer-search-filter"><?= _e('Offers Only') ?></label>
+                                    <input class="offer-search-filter-checkbox" type="checkbox" name="offer-search-filter" id="offer-search-filter">
+                                    <span></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -316,10 +390,10 @@
         </div>
     </div>
 
-    <input id="input-ship" type="hidden" name="ship" value="BAR003">
-    <input id="input-departure" type="hidden" name="departure" value="<?= date('Y-m-d')?>">
-    <input id="input-promo" type="hidden" name="promo" value="CUP001">
-    <input id="input-duration" type="hidden" name="duration" value="4">
+    <input id="input-ship" type="hidden" name="ship" value="">
+    <input id="input-departure" type="hidden" name="departure" value="">
+    <input id="input-promo" type="hidden" name="promo" value="">
+    <input id="input-duration" type="hidden" name="duration" value="">
     <div class="ships-container">
             <?php foreach ($barcos as $barco){ ?>
             <?php 
@@ -349,14 +423,14 @@
                                 <p class="text-right"><span class="see-all-dates"><?= _e('See all Dates', 'gogalapagos') ?></span><span class="hide-all-dates text-right hidden"><?= _e('Hide Dates', 'gogalapagos') ?></span></p>
                                 <ul class="list-inline ship-departure-dates-list">
                                     <li>
-                                        <div class="square-box departure-placeholder" data-departure="2018-06-05" data-promo="CUP001">
+                                        <div class="square-box departure-placeholder" data-departure="2018-06-05" data-promo="1207">
                                             <div class="departure-placeholder-month"><?= _e('Jun', 'gogalapagos') ?></div>
                                             <div class="departure-placeholder-date">5</div>
                                             <div class="departure-placeholder-promo"><i class="fa fa-star"></i></div>
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="square-box departure-placeholder" data-departure="2018-06-12" data-promo="CUP001">
+                                        <div class="square-box departure-placeholder" data-departure="2018-06-12" data-promo="1207">
                                             <div class="departure-placeholder-month"><?= _e('Jun', 'gogalapagos') ?></div>
                                             <div class="departure-placeholder-date">12</div>
                                             <div class="departure-placeholder-promo"><i class="fa fa-star"></i></div>
@@ -375,14 +449,14 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="square-box departure-placeholder" data-departure="2018-06-30" data-promo="TKF001">
+                                        <div class="square-box departure-placeholder" data-departure="2018-06-30" data-promo="1218">
                                             <div class="departure-placeholder-month"><?= _e('Jun', 'gogalapagos') ?></div>
                                             <div class="departure-placeholder-date">30</div>
                                             <div class="departure-placeholder-promo"><i class="fa fa-star"></i></div>
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="square-box departure-placeholder" data-departure="2018-07-02" data-promo="CUP001">
+                                        <div class="square-box departure-placeholder" data-departure="2018-07-02" data-promo="1207">
                                             <div class="departure-placeholder-month"><?= _e('Jul', 'gogalapagos') ?></div>
                                             <div class="departure-placeholder-date">2</div>
                                             <div class="departure-placeholder-promo"><i class="fa fa-star"></i></div>
@@ -395,7 +469,7 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="square-box departure-placeholder" data-departure="2018-07-16" data-promo="TKF001">
+                                        <div class="square-box departure-placeholder" data-departure="2018-07-16" data-promo="1218">
                                             <div class="departure-placeholder-month"><?= _e('Jul', 'gogalapagos') ?></div>
                                             <div class="departure-placeholder-date">16</div>
                                             <div class="departure-placeholder-promo"><i class="fa fa-star"></i></div>
@@ -481,13 +555,13 @@
             </div>
             <?php } // FIN bucle barcos ?>
 
-        <button name="availability" value="true" class="text-center submit-button submit-button-cabin" type="submit">
+        <button id="set-date" name="availability" value="true" class="text-center submit-button submit-button-cabin" type="submit">
             <span class="next-step"><?= _e('Next Step', 'gogalapagos') ?></span>
             <span class="next-step-title"><?= _e('Select Your Cabin', 'gogalapagos') ?></span>
         </button>
     </div>
 </form>
-<!-- Modal -->
+<!-- Modal MORE DAYS INFO -->
 <div class="modal fade" id="more-days-info" tabindex="-1" role="dialog" aria-labelledby="moreDaysInfo">
     <div class="modal-dialog modal-xs" role="document">
         <div class="modal-content">
@@ -496,7 +570,7 @@
                 <h4 class="modal-title" id="myModalLabel"><?= _e('13 days or more', 'gogalapagos') ?></h4>
             </div>
             <div class="modal-body text-center">
-                <?= _e('If you want to consult itineraries of 13 days or more, please fill out the following form and one of our agent will contact yoy.','gogalapagos') ?>
+                <?= _e('If you want to consult itineraries of 13 days or more, please fill out the following form and one of our agent will contact you.','gogalapagos') ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary text-center"><?= _e('Go to the form', 'gogalapagos')?></button>
@@ -504,3 +578,45 @@
         </div>
     </div>
 </div>
+<!-- Modal ERROR MESSAGE -->
+<div class="modal fade error" id="error-message" tabindex="-1" role="dialog" aria-labelledby="error-message">
+    <div class="modal-dialog modal-xs" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-chevron-left"></i></span></button>
+                <h4 class="modal-title" id="myModalLabel"><?= _e('ERROR', 'gogalapagos') ?></h4>
+            </div>
+            <div class="modal-body text-center">
+                <?= _e('Please check the selection of the cruise departure date and duration. Thank you.','gogalapagos') ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
+    
+    // RECUPERAR LAS PROMOCIONES
+    
+    $args = array(
+        'post_type'         => 'ggspecialoffer',
+        'posts_per_page'    => -1
+    );
+    $ofertas = get_posts($args);
+    
+    foreach($ofertas as $oferta){
+?>
+<!-- Modal PROMO PLACEHOLDER -->
+<div class="modal fade ggspecialoffer" id="<?= $oferta->ID ?>" tabindex="-1" role="dialog" aria-labelledby="<?= $oferta->ID ?>">
+    <div class="modal-dialog modal-xs" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-chevron-left"></i></span></button>
+                <h4 class="modal-title" id="offerTitle<?= $oferta->ID ?>"><?= $oferta->post_title ?></h4>
+            </div>
+            <div class="modal-body text-center">
+                <p><?= esc_html($oferta->post_excerpt) ?></p>
+                <img style="margin: 0 auto;" class="img-responsive" src="<?= get_the_post_thumbnail_url( $oferta->ID, 'medium' ) ?>" alt="<?= $oferta->post_title ?>">
+            </div>
+        </div>
+    </div>
+</div>
+<?php } // Fin bucle modales para ofertas ?>

@@ -14,6 +14,11 @@ var datesShown = false;
 var adults = 2;
 var children = 0;
 var total_pax = 0;
+var finicio = $('input[name=date-start]').val();
+var ffin = $('input[name=date-end]').val();
+var salidas = '';
+var promociones = '';
+var fecha_barco, duracion_barco;
 // FUNCIONES
 function fechasMostrarOcultar(padre){
     if (datesShown){
@@ -68,6 +73,27 @@ function validarTotalPax(){
     }
     return total_pax;
 }
+function recuperarFechasSalidas(fini, ffin){
+    $.ajax({
+        url         : 'http://10.100.1.48:8080/gogalapagos.com/getjson/?token=rogbV19gAJo33sS9RVdb_xyn_6bCkUWR',
+        data        : {
+            
+        },
+        dataType    : 'json',
+        beforeSend  : function(){
+            mostrarMascara();
+        },
+        error       : function(response){
+            console.error('Error de AJAX', response);
+        },
+        success     : function(response, textStatus, jQxhr){
+            salidas = response;
+        }
+    }).done( function(){
+        quitarMascara();
+    });
+    return salidas;
+}
 // INICIALIZACIONES
 $('.input-daterange').datepicker({
     startView: 2,
@@ -78,29 +104,22 @@ $('.input-daterange').datepicker({
 
 /* READY */
 $(document).ready( function(){
+  
     console.log('App started!');
+    recuperarFechasSalidas(finicio, ffin);
+    promociones = $('.ggspecialoffer');
+    
 })
 
 /* EVENTOS */
-// BUSCAR FECHAS
+// BUSCAR FECHAS EN CLICK
 $('#search-dates').click( function(){
-    $.ajax({
-        url         : 'http://10.100.1.48:8080/gogalapagos.com/getjson/?token=rogbV19gAJo33sS9RVdb_xyn_6bCkUWR',
-        data        : {
-            
-        },
-        dataType    : 'json',
-        beforeSend  : function(){
-            mostrarMascara();
-        },
-        error       : function(){
-            console.error('Error de AJAX');
-        },
-        success     : function(data){
-            console.info(data);
-        }
+    var inicio = $('input[name=date-start]').val();
+    var fin = $('input[name=date-end]').val();
+    recuperarFechasSalidas(inicio, fin);
+    $.each(salidas, function(index, value){
+       console.log(index); 
     });
-    quitarMascara();
 })
 // MOSTRAR MAS FILTROS
 $('#more-filters').click( function(){
@@ -116,7 +135,7 @@ $('#more-filters').click( function(){
         }
     });
 })
-// CALCULAR LOS PAX
+// CALCULAR LOS PAX ADULTOS
 $('.counter-adults').click( function(){
     adults = $('#adults-counter');
     var valor = adults.val();
@@ -129,6 +148,7 @@ $('.counter-adults').click( function(){
     }
     validarTotalPax();
 })
+// CALCULAR LOS PAX NIÑOS
 $('.counter-children').click( function(){
     children = $('#children-counter');
     var valor = children.val();
@@ -158,16 +178,9 @@ $('.departure-placeholder').click( function(){
     mostrarMascara();
 
     var departure_promo = $(this).data('promo');
-
-    var promo_name = '';
-    switch (departure_promo){
-        case 'CUP001':
-            promo_name = 'Free Cabin Upgrade';
-            break;
-        case 'TKF001':
-            promo_name = 'Free Domestic Round-trip air ticket';
-            break;
-    }
+    var titulo_modal = $('#' + departure_promo).find('.modal-title').text();
+    var promo_link = '';
+    
     $('.duration-box').addClass('hidden');
     $('.cabins-box').addClass('hidden');
     $('.promo-name').html('');
@@ -175,12 +188,19 @@ $('.departure-placeholder').click( function(){
 
     $('.departure-placeholder').removeClass('selected');
     $(this).addClass('selected');
+    
+    fecha_barco = $(this).parents('.ship-container').data('shipcode');
 
-    $('#input-ship').val($(this).parents('.ship-container').data('shipcode'));
+    $('#input-ship').val(fecha_barco);
     $('#input-departure').val($(this).data('departure'));
     $('#input-promo').val($(this).data('promo'));
+    
+    promo_link = '<strong>Offer available on this date</strong><br />';
+    promo_link += '<a href="#" data-toggle="modal" data-target="#' + departure_promo + '">';
+    promo_link += titulo_modal;
+    promo_link += '</a>';
 
-    $(this).parents('.ship-container').find('.promo-name').html(promo_name);
+    $(this).parents('.ship-container').find('.promo-name').html(promo_link);
     if (departure_promo === undefined){
         $('#input-promo').val('false');
         $('#promo-name').html('')
@@ -199,8 +219,20 @@ $('.duration-placeholder').click( function(){
 
     $('.duration-placeholder').removeClass('open');
     $(this).addClass('open');
-    $('#input-ship').val($(this).parents('.ship-container').data('shipcode'));
+    
+    duracion_barco = $(this).parents('.ship-container').data('shipcode');
+    
+    $('#input-ship').val(duracion_barco);
     $('#input-duration').val($(this).data('duration'));
+})
+$('#set-date').click( function(e){
+    e.preventDefault();
+    if(fecha_barco === duracion_barco){
+        //console.log('enviar');
+        $('#set-date-form').submit();
+    }else{
+        $('#error-message').modal('show');
+    }
 })
 
 
