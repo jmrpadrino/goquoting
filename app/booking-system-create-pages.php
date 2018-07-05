@@ -99,7 +99,7 @@ function ggCreateCheckAvailabilityFile(){
     ob_start();
     echo "<?php /* Template Name: Booking System Page */ ?>";
     echo "<?php the_post(); ?>";
-    echo file_get_contents( WP_PLUGIN_URL . RUTA_PLUGIN_BOOKING . 'app/views/booking-header.php' );
+    echo file_get_contents( RUTA_PLUGIN_BOOKING . 'app/views/booking-header.php' );
     ?>
     <div class="booking-page-main-container">
     <?php
@@ -111,7 +111,7 @@ function ggCreateCheckAvailabilityFile(){
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="<?= WP_PLUGIN_URL . RUTA_PLUGIN_BOOKING; ?>app/js/goquoting.js"></script>
+    <script src="<?= RUTA_PLUGIN_BOOKING; ?>app/js/goquoting.js"></script>
 </body>
 </html>
     <?php

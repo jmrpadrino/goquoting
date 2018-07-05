@@ -19,7 +19,9 @@ if ( ! function_exists( 'add_filter' ) ) {
 }
 /* DEFINICIONES */
 
-define('RUTA_PLUGIN_BOOKING', '/goquoting/');
+//define('RUTA_PLUGIN_BOOKING', '/goquoting/');
+define('RUTA_PLUGIN_BOOKING', plugin_dir_url( __FILE__ ));
+define('META_PREFIX', 'gg_');
 
 /* LIBRERIAS */
 // Dependencias

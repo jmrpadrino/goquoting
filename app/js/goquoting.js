@@ -111,7 +111,7 @@ $(document).ready( function(){
     
 })
 
-/* EVENTOS */
+/* EVENTOS  PARA DISPONIBILIDAD */
 // BUSCAR FECHAS EN CLICK
 $('#search-dates').click( function(){
     var inicio = $('input[name=date-start]').val();
@@ -174,6 +174,7 @@ $('.see-all-dates').click( function(){
 });
 // SELECCIONAR LA FECHA
 $('.departure-placeholder').click( function(){
+    $('#error-message').hide();
 
     mostrarMascara();
 
@@ -211,8 +212,8 @@ $('.departure-placeholder').click( function(){
 })
 // SELECCIONAR DURACION
 $('.duration-placeholder').click( function(){
-
-    console.warn('seleciono duracion');
+    
+    $('#error-message').hide();
 
     $('.cabins-box').addClass('hidden');
     $(this).parents('.ship-container').find('.cabins-box').removeClass('hidden');
@@ -229,11 +230,13 @@ $('#set-date').click( function(e){
     e.preventDefault();
     if(fecha_barco === duracion_barco){
         //console.log('enviar');
+        $('#error-message').hide();
         $('#set-date-form').submit();
     }else{
-        $('#error-message').modal('show');
+        $('#error-message').slideDown();
     }
 })
 
+/*  EVENTOS PARA ACOMODACION */
 
 
