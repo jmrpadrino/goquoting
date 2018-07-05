@@ -26,6 +26,9 @@
         justify-content: space-between;
         min-height: 36px;
     }
+    .cabin-list-status.hiddencabinbox{
+        color: lightgray;
+    }
     .cabin-box{
         padding: 0 18px;
     }
@@ -53,6 +56,31 @@
     .add-cabin-btn{
         margin: 12px auto;
         display: block;
+    }
+    .shoping-status{
+        position: relative;
+    }
+    .shoping-status:after{
+        content: '';
+        width: 8px;
+        height: 8px;
+        display: block;
+        position: absolute;
+        top: 0;
+        right: -4px;
+        border-radius: 10px;        
+        background: red;
+    }
+    .shoping-status.accommodate:after{
+        background: orange;
+    }
+    .shoping-status.done:after{
+        background: #00ff00;
+    }
+    .summary-cruise-list{
+        list-style: none;
+        margin: 0;
+        padding: 0;
     }
 </style>
 <div class="main-sumary">
@@ -88,7 +116,7 @@
     <input type="hidden" name="duration" value="<?= $_POST['duration'] ?>">
     <input type="hidden" name="adults" value="<?= $_POST['adults'] ?>">
     <input type="hidden" name="children" value="<?= $_POST['children'] ?>">
-    <input type="hidden" name="cabins" value="{}">
+    <input type="hidden" name="cabins-selected" value="[]">
 
     <?php 
         $cabinas = obtenerCabinasPorBarco( obtenerDatoBarcoPorCodigoDispo($_POST['ship'], 'ID') );
@@ -98,38 +126,42 @@
         <?php
             $pending = _x('Pending Assignment', 'gogalapagos');
             $gest_word = _x('guests', 'gogalapagos');
-            echo '<div>' . $pending . ' <strong>' . $total_pax . '</strong> ' .$gest_word . '</div>';
+            echo '<div>' . $pending . ' <strong id="pending-pax">' . $total_pax . '</strong> ' .$gest_word . '</div>';
         ?>
-        <div><i class="fas fa-shopping-cart"></i></div>
+        <div id="shoping-status" class="shoping-status"><i class="fas fa-shopping-cart"></i></div>
     </div>
     <div class="inside-box little-box">
-        <div><i class="fas fa-plus"></i></div>
+        <div id="show-cabins-list-filter"><i class="fas fa-plus"></i></div>
         <div><?= _e('Show all cabin categories') ?></div>
-        <div><i class="fas fa-check-square"></i></div>
+        <div id="filter-status"><i class="fas fa-check-square"></i></div>
     </div>
-    <div id="cabins-list-placeholder" class="inside-box little-box" style="/*display: none;*/">
+    <div id="cabins-list-placeholder" class="inside-box little-box" style="display: none;">
         <ul id="cabins-list" class="cabins-list">
             <?php
                 foreach ($cabinas as $cabina){
                     echo '<li class="cabin-list-item">';
-                    echo '<div class="cabins-list-title '. $cabina->post_name .'" >' . $cabina->post_title . '</div>';
-                    echo '<div><i class="fas fa-check-square"></i></div>';
+                    echo '<div class="cabin-list-title '. $cabina->post_name .'" >' . $cabina->post_title . '</div>';
+                    echo '<div class="cabin-list-status" data-cabinbox="' . $cabina->ID . '"><i class="fas fa-check-square"></i></div>';
                     echo '</li>';
                 }
             ?>
         </ul>
     </div>
-    <?php foreach ($cabinas as $cabina){ ?>
-    <div class="cabin-box">
+    <?php 
+        foreach ($cabinas as $cabina){ 
+            // Cabina codigo dispo
+            $cabina_dispo_code = get_post_meta( $cabina->ID, META_PREFIX . 'dispo_ID', true);
+    ?>
+    <div id="<?= $cabina->ID ?>" class="cabin-box" data-dispocode="<?= $cabina_dispo_code ?>">
         <div class="cabin-box-thumbnail-placeholder">
             <img class="img-responsive" src="<?= get_the_post_thumbnail_url($cabina->ID) ?>" >
         </div>
         <div class="inside-box">
             <div class="pull-right text-right price-box">
-                <p>$ 2.346</p>
+                <p class="cabin-price">$ <span class="price">2.346</span></p>
                 <p><?= _e('per adult', 'gogalapagos') ?></p>
             </div>
-            <h2><?= $cabina->post_title ?></h2>
+            <h2 class="cabin-name"><?= $cabina->post_title ?></h2>
             <?php
                 $caracteristicas = get_post_meta($cabina->ID, META_PREFIX . 'cabin_featurelist', false);                
                 if ( count($caracteristicas[0]) > 0){
@@ -141,16 +173,47 @@
                 }
             ?>
             <h3 class="text-center"><?= _e('Accommodations for this cabin', 'gogalapagos') ?></h3>
-            <select class="form-control" name="accommodation-for-<?= $cabina->ID ?>">
-                <option><?= _e('Select Accommodation') ?></option>
-                <option value="1">2 ADULTS</option>
-                <option value="2">1 ADULT, 1 CHILD</option>
-                <option value="3">2 ADULTS, 1 CHILD</option>
-                <option value="4">3 ADULTS</option>
-                <option value="5">3 ADULTS, 1 CHILD</option>
+            <select class="form-control accommodation-items" name="accommodation-for-<?= $cabina->ID ?>">
+                <option value="0" data-peopleincabin="0"><?= _e('Select Accommodation') ?></option>
+                <option value="1" data-peopleincabin="2">2 ADULTS</option>
+                <option value="2" data-peopleincabin="2">1 ADULT, 1 CHILD</option>
+                <option value="3" data-peopleincabin="3">2 ADULTS, 1 CHILD</option>
+                <option value="4" data-peopleincabin="3">3 ADULTS</option>
+                <option value="5" data-peopleincabin="4">3 ADULTS, 1 CHILD</option>
             </select>
-            <button class="btn btn-default add-cabin-btn" type="button"><?= _e('Add Cabin') ?></button>
+            <div class="row info-accommodation" style="display: none;">
+                <div class="col-xs-12">
+                    <p class="text-info"><?= _e('Please choose the accommodation to add this cabin. Thank you.', 'gogalapagos') ?></p>
+                </div>
+            </div>
+            <button class="btn btn-default add-cabin-btn" type="button" data-dispocode="<?= $cabina_dispo_code ?>" data-addcabin="<?= $cabina->ID ?>"><?= _e('Add Cabin') ?></button>
         </div>
     </div>
     <?php } ?>
 </form>
+<!-- Modal -->
+<div class="modal fade" id="cabinSumary" tabindex="-1" role="dialog" aria-labelledby="cabinSumary">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-chevron-left"></i></span></button>
+                <h4 class="modal-title text-center" id="myModalLabel"><?= _e('Summary', 'gogalapagos') ?></h4>
+            </div>
+            <div class="modal-body">
+                <ul class="summary-cruise-list">
+                    <li><strong><?= _e('Date', 'gogalapagos') ?></strong> <?= $_POST['departure'] ?></li>
+                    <li><strong><?= _e('Ship', 'gogalapagos') ?></strong> <?= obtenerDatoBarcoPorCodigoDispo($_POST['ship'], 'post_title') ?></li>
+                    <li><strong><?= _e('Itinerary', 'gogalapagos') ?></strong> </li>
+                    <li><strong><?= _e('Duration', 'gogalapagos') ?></strong> <?= $_POST['duration'] . ' - ' . $_POST['duration'] - 1 ?></li>
+                </ul>
+                <div id="sumary-content">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><?= _e('Add another cabin', 'gogalapagos') ?></button>
+                <button type="button" class="btn btn-warning pull-right"><?= _e('Book now', 'gogalapagos') ?></button>
+            </div>
+        </div>
+    </div>
+</div>

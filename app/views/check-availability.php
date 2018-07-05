@@ -220,19 +220,6 @@
     .offer-search-filter-checkbox{
         display: none;
     }
-    /*--- MODALES ---*/
-    .modal-header{
-        background: darkorange;        
-        border-radius: 4px 4px 0px 0px;
-    }
-    .modal.error .modal-header{
-        background: darkred;        
-    }
-    .modal-header *{
-        color: white;
-        opacity: 1;
-    }
-    /*---------------*/
 </style>
 <form id="set-date-form" method="post" action="<?= home_url('accommodation') ?>/">
     <div class="container">
