@@ -20,6 +20,7 @@ var salidas = '';
 var promociones = '';
 var fecha_barco, duracion_barco;
 var cabinas_seleccionadas = [];
+var panel = '';
 // FUNCIONES
 function fechasMostrarOcultar(padre){
     if (datesShown){
@@ -103,19 +104,18 @@ function mostrarSumario(){
     $('#cabinSumary').modal('toggle');
 }
 function llenarListaCabinasSumario(){
-    var panel = '';
     
     $.each(cabinas_seleccionadas, function(index, value){
 
-        panel = '<div class="panel panel-default">';
+        panel = '<div class="panel panel-default" id="panel-'+index+'">';
         panel += '<div class="panel-heading" role="tab" id="heading-' + index + '">';
-        //panel += '<h4 class="">';
         panel += '<a role="button" data-toggle="collapse" data-parent="#accordion-' + index + '" href="#collapse-' + index + '" aria-expanded="true" aria-controls="collapse-' + index + '">';
         panel += '<span class="fas fa-chevron-down"></span> ';
         panel += value.nombreCabina;
         panel += '</a>';
-        //panel += '</h4>';
-        panel += '<span id="cabin-item-list-' + index + '" class="fas fa-times pull-right"></span>';
+        panel += '<button id="cabin-item-list-' + index + '" type="button" class="pull-right cabin-item-list-remove-btn" data-removethiselement="' + index + '">';
+        panel += '<span class="fas fa-times"></span>';
+        panel += '</button>';
         panel += '<span class="pull-right">$ ' + value.precioCabina + '</span>';
         panel += '</div>';
         panel += '<div id="collapse-' + index + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-' + index + '">';
@@ -125,9 +125,40 @@ function llenarListaCabinasSumario(){
         panel += '</div>';
         panel += '</div>';        
 
-        console.log(value);
+        //console.warn(index, value);
     })
     
+    $('#sumary-content .panel-group').append(panel);
+}
+function redibujarListaCabinasSumario(arreglo_cabinas){
+    
+    $('#sumary-content .panel-group').html('');
+    panel = '';
+    //if(arreglo_cabinas.length > 0){
+        $.each(arreglo_cabinas, function(index2, value2){
+            
+            panel += '<div class="panel panel-default" id="panel-'+index2+'">';
+            panel += '<div class="panel-heading" role="tab" id="heading-' + index2 + '">';
+            panel += '<a role="button" data-toggle="collapse" data-parent="#accordion-' + index2 + '" href="#collapse-' + index2 + '" aria-expanded="true" aria-controls="collapse-' + index2 + '">';
+            panel += '<span class="fas fa-chevron-down"></span> ';
+            panel += value2.nombreCabina;
+            panel += '</a>';
+            panel += '<button id="cabin-item-list-' + index2 + '" type="button" class="pull-right cabin-item-list-remove-btn" data-removethiselement="' + index2 + '">';
+            panel += '<span class="fas fa-times"></span>';
+            panel += '</button>';
+            panel += '<span class="pull-right">$ ' + value2.precioCabina + '</span>';
+            panel += '</div>';
+            panel += '<div id="collapse-' + index2 + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-' + index2 + '">';
+            panel += '<div class="panel-body">';
+            panel += '<strong>' + value2.acomodacionTexto + '</strong>';
+            panel += '</div>';
+            panel += '</div>';
+            panel += '</div>';
+
+            //console.warn(index2, value2, panel);
+        });
+    //}
+    //console.log(panel);
     $('#sumary-content .panel-group').append(panel);
 }
 function cabinasLlenas(){
@@ -139,25 +170,34 @@ function cabinasPendiente(){
     $('.shoping-status').removeClass('done');
 }
 function calcularPaxPorAcomodar(){
-    var pendind_pax = $('#pending-pax');
-    var personas_por_acomodar = parseInt(pendind_pax.text() ); 
+    adults = parseInt( $('input[name=adults]').val() );
+    children = parseInt( $('input[name=children]').val() );
+    var pending_pax = $('#pending-pax');
+    var pax_por_acomodar = adults + children;
     var personas_en_cabina = 0;
-    adults = $('input[name=adults]').val();
-    children = $('input[name=children]').val();
     
     $.each(cabinas_seleccionadas, function(index, value){
-        console.warn(value.personasEnCabina);
+        //console.warn(value.personasEnCabina);
         personas_en_cabina += value.personasEnCabina;
     })
-    if ((personas_por_acomodar - personas_en_cabina) <= 0){
+    
+    console.log(personas_en_cabina, pax_por_acomodar);
+    
+    if (pax_por_acomodar != personas_en_cabina){
         cabinasLlenas();
-        pendind_pax.text('0');
+        $('.pending-text').hide();
+        $('#add-another-cabin-btn').hide();
+        $('.checkout-btn-placeholder').show();
+        pending_pax.text('0');
     }else{
-        pendind_pax.text(personas_por_acomodar - personas_en_cabina);
+        pending_pax.text(personas_por_acomodar - personas_en_cabina);
         cabinasPendiente();
+        $('#add-another-cabin-btn').show();
+        $('.checkout-btn-placeholder').hide();
+        $('.pending-text').show();
     }
     //pendind_pax.text();
-    console.log( personas_por_acomodar - personas_en_cabina );
+    //console.log( personas_por_acomodar - personas_en_cabina );
 }
 // INICIALIZACIONES
 $('.input-daterange').datepicker({
@@ -173,7 +213,6 @@ $(document).ready( function(){
     console.log('App started!');
     recuperarFechasSalidas(finicio, ffin);
     promociones = $('.ggspecialoffer');
-    
     
 })
 
@@ -304,6 +343,16 @@ $('#set-date').click( function(e){
 })
 
 /*  EVENTOS PARA ACOMODACION */
+
+// MOSTRAR SUMARIO
+$('#shoping-status').click( function(){
+    $('#cabinSumary').modal('toggle');
+})
+// MOSTRAR CARACTERISTICAS CABINAS
+$('.cabin-name').click( function(){
+    var featured_id = $(this).data('cabinid');
+    $('#featured-' + featured_id).slideToggle(200);
+})
 // MOSTRAR LISTADO FILTRO CABINAS
 $('#show-cabins-list-filter').click( function(){
     var elemento = $(this).find('.fas');
@@ -354,14 +403,31 @@ $('.add-cabin-btn').click( function(){
         
         $('input[name=cabins-selected]').val( JSON.stringify(cabinas_seleccionadas) );
         
-        //console.log($('input[name=cabins-selected]').val());
+        //console.info(cabinas_seleccionadas);
         
         calcularPaxPorAcomodar();
         
         mostrarSumario();        
     }
 })
-// ELIMINAR CABINA
 
+// ELIMINAR CABINA
+$(document).on('click', '.cabin-item-list-remove-btn', function(){
+    
+    if (cabinas_seleccionadas.length > 1){
+        console.log('tiene varios', cabinas_seleccionadas.length);
+        cabinas_seleccionadas.splice($(this).data('removethiselement'), 1);
+    }else{
+        console.log('tiene ', cabinas_seleccionadas.length);
+        cabinas_seleccionadas.shift(0);
+    }
+    $('#panel-' + $(this).data('removethiselement')).remove();
+    
+    //console.log($(this).data('removethiselement'));
+    
+    redibujarListaCabinasSumario(cabinas_seleccionadas);
+    
+    calcularPaxPorAcomodar();
+})
 
 

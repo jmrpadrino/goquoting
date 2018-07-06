@@ -126,8 +126,11 @@
         <?php
             $pending = _x('Pending Assignment', 'gogalapagos');
             $gest_word = _x('guests', 'gogalapagos');
-            echo '<div>' . $pending . ' <strong id="pending-pax">' . $total_pax . '</strong> ' .$gest_word . '</div>';
+            echo '<div class="pending-text">' . $pending . ' <strong id="pending-pax">' . $total_pax . '</strong> ' .$gest_word . '</div>';
         ?>
+        <div class="checkout-btn-placeholder" style="display: none;">
+            <button type="submit" class="btn btn-warning"><?= _e('Proceed to checkout', 'gogalapagos') ?></button>
+        </div>
         <div id="shoping-status" class="shoping-status"><i class="fas fa-shopping-cart"></i></div>
     </div>
     <div class="inside-box little-box">
@@ -161,11 +164,11 @@
                 <p class="cabin-price">$ <span class="price">2.346</span></p>
                 <p><?= _e('per adult', 'gogalapagos') ?></p>
             </div>
-            <h2 class="cabin-name"><?= $cabina->post_title ?></h2>
+            <h2 class="cabin-name" data-cabinid="<?= $cabina->ID ?>"><?= $cabina->post_title ?></h2>
             <?php
                 $caracteristicas = get_post_meta($cabina->ID, META_PREFIX . 'cabin_featurelist', false);                
                 if ( count($caracteristicas[0]) > 0){
-                    echo '<ul>';
+                    echo '<ul id="featured-'. $cabina->ID .'" style="display: none;">';
                     foreach($caracteristicas[0] as $catacteristica){
                         echo '<li>' . $catacteristica . '</li>';
                     }
@@ -207,11 +210,11 @@
                     <li><strong><?= _e('Duration', 'gogalapagos') ?></strong> <?= $_POST['duration'] . ' - ' . $_POST['duration'] - 1 ?></li>
                 </ul>
                 <div id="sumary-content">
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"></div>
+                    <div class="panel-group" id="cabins-selected-accordion" role="tablist" aria-multiselectable="true"></div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><?= _e('Add another cabin', 'gogalapagos') ?></button>
+                <button id="add-another-cabin-btn" type="button" class="btn btn-default pull-left" data-dismiss="modal"><?= _e('Add another cabin', 'gogalapagos') ?></button>
                 <button type="button" class="btn btn-warning pull-right"><?= _e('Book now', 'gogalapagos') ?></button>
             </div>
         </div>
