@@ -14,10 +14,10 @@ function goquotingAccommodation(){
     include 'views/accommodation.php';
 }
 function goquotingTravelersDetails(){
-    include 'views/check-availability.php';
+    include 'views/travelers-details.php';
 }
 function goquotingExtras(){
-    include 'views/check-availability.php';
+    include 'views/travelers-extras.php';
 }
 function goquotingCheckout(){
     include 'views/check-availability.php';

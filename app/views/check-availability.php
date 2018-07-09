@@ -15,27 +15,6 @@
     .ships-container{
         padding-bottom: 80px;
     }
-    .submit-button{
-        display: block;
-        margin: 36px auto;
-        margin-top: 8px;
-        border: none;
-        border-radius: 2px;
-        background: darkorange;
-        clear: both;
-        text-align: left;
-        color: white;
-        line-height: 1;
-        font-size: 12px;
-        padding: 14px 17px;
-    }
-    .submit-button span{
-        display: block;
-        text-transform: uppercase;
-    }
-    .submit-button .next-step-title{
-        font-size: 16px;
-    }
     /*---------------*/
 
     /* CHECK AVAILABILITY VIEW */

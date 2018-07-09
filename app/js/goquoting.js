@@ -76,6 +76,8 @@ function validarTotalPax(){
     return total_pax;
 }
 function recuperarFechasSalidas(fini, ffin){
+    salidas = '';
+    /*
     $.ajax({
         url         : 'http://10.100.1.48:8080/gogalapagos.com/getjson/?token=rogbV19gAJo33sS9RVdb_xyn_6bCkUWR',
         data        : {
@@ -94,6 +96,7 @@ function recuperarFechasSalidas(fini, ffin){
     }).done( function(){
         quitarMascara();
     });
+    */
     return salidas;
 }
 function mostrarErrorAcomodacion(padre){
@@ -190,7 +193,7 @@ function calcularPaxPorAcomodar(){
         $('.checkout-btn-placeholder').show();
         pending_pax.text('0');
     }else{
-        pending_pax.text(personas_por_acomodar - personas_en_cabina);
+        pending_pax.text(pax_por_acomodar - personas_en_cabina);
         cabinasPendiente();
         $('#add-another-cabin-btn').show();
         $('.checkout-btn-placeholder').hide();
