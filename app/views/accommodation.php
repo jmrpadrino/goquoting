@@ -109,7 +109,7 @@
         </div>            
     </div>
 </div>
-<form id="accommodation-form" role="form" method="post" action="<?= home_url('traveler-details') ?>/">
+<form id="accommodation-form" role="form" method="post" action="<?= home_url('traveler-details') ?>/" enctype='application/json'>
     <input type="hidden" name="ship" value="<?= $_POST['ship'] ?>">
     <input type="hidden" name="departure" value="<?= $_POST['departure'] ?>">
     <input type="hidden" name="promo" value="<?= $_POST['promo'] ?>">

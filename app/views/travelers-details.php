@@ -1,10 +1,17 @@
 <?php
 include 'booking-functions.php';
 
+    $total_pax = $_POST['adults'] +  $_POST['children'];
+    $cabinas = str_replace('\\', '', $_POST['cabins-selected']);
+    $cabinas = str_replace('"', '\'', $cabinas);
+    $cabinas = str_replace('[', '', $cabinas);
+    $cabinas = str_replace(']', '', $cabinas);
+
 //    echo '<pre>';
-//    var_dump($_POST);
+//    var_dump($_POST['cabins-selected']);
+//    //var_dump($cabinas);
+//    //echo json_decode($cabinas);
 //    echo '</pre>';
-$total_pax = $_POST['adults'] +  $_POST['children'];
 /*
     * META_PREFIX
     */
@@ -77,14 +84,14 @@ $total_pax = $_POST['adults'] +  $_POST['children'];
         </div>            
     </div>
 </div>
-<form id="accommodation-form" role="form" method="post" action="<?= home_url('extras') ?>/">
+<form id="accommodation-form" role="form" method="post" action="<?= home_url('extras') ?>/" enctype='application/json'>
     <input type="hidden" name="ship" value="<?= $_POST['ship'] ?>">
     <input type="hidden" name="departure" value="<?= $_POST['departure'] ?>">
     <input type="hidden" name="promo" value="<?= $_POST['promo'] ?>">
     <input type="hidden" name="duration" value="<?= $_POST['duration'] ?>">
     <input type="hidden" name="adults" value="<?= $_POST['adults'] ?>">
     <input type="hidden" name="children" value="<?= $_POST['children'] ?>">
-    <input type="hidden" name="cabins-selected" value="<?= $_POST['cabins-selected'] ?>">
+    <input type="hidden" name="cabins-selected" value="<?= $cabinas ?>">
     <div class="container">
         <div class="row">
             <!-- Nav tabs -->

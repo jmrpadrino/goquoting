@@ -186,7 +186,7 @@ function calcularPaxPorAcomodar(){
     
     console.log(personas_en_cabina, pax_por_acomodar);
     
-    if (pax_por_acomodar != personas_en_cabina){
+    if (pax_por_acomodar == personas_en_cabina){
         cabinasLlenas();
         $('.pending-text').hide();
         $('#add-another-cabin-btn').hide();
@@ -394,12 +394,12 @@ $('.add-cabin-btn').click( function(){
         
         //agregar cabinas al arreglo
         cabina = {
-            acomodacionTexto    : $('select[name=accommodation-for-'+elemento.data('addcabin')+'] option:selected').text(),
-            codigoCabina        : elemento.data('dispocode'),
-            idCabina            : elemento.data('addcabin'),
-            nombreCabina        : elemento.parents('#'+elemento.data('addcabin')).find('.cabin-name').text(),
-            precioCabina        : elemento.parents('#'+elemento.data('addcabin')).find('.price').text(),
-            personasEnCabina    : $('select[name=accommodation-for-'+elemento.data('addcabin')+'] option:selected').data('peopleincabin')
+            "acomodacionTexto"    :   $('select[name=accommodation-for-'+elemento.data('addcabin')+'] option:selected').text(),
+            "codigoCabina"        :   elemento.data('dispocode'),
+            "idCabina"            :   elemento.data('addcabin'),
+            "nombreCabina"        :   elemento.parents('#'+elemento.data('addcabin')).find('.cabin-name').text(),
+            "precioCabina"        :   elemento.parents('#'+elemento.data('addcabin')).find('.price').text(),
+            "personasEnCabina"    :   $('select[name=accommodation-for-'+elemento.data('addcabin')+'] option:selected').data('peopleincabin')
         }
         $('select[name=accommodation-for-'+elemento.data('addcabin')+']').val(0);
         cabinas_seleccionadas.push(cabina);
