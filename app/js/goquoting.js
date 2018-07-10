@@ -184,8 +184,6 @@ function calcularPaxPorAcomodar(){
         personas_en_cabina += value.personasEnCabina;
     })
     
-    console.log(personas_en_cabina, pax_por_acomodar);
-    
     if (pax_por_acomodar == personas_en_cabina){
         cabinasLlenas();
         $('.pending-text').hide();
@@ -402,11 +400,11 @@ $('.add-cabin-btn').click( function(){
             "personasEnCabina"    :   $('select[name=accommodation-for-'+elemento.data('addcabin')+'] option:selected').data('peopleincabin')
         }
         $('select[name=accommodation-for-'+elemento.data('addcabin')+']').val(0);
+        
+        
         cabinas_seleccionadas.push(cabina);
         
         $('input[name=cabins-selected]').val( JSON.stringify(cabinas_seleccionadas) );
-        
-        //console.info(cabinas_seleccionadas);
         
         calcularPaxPorAcomodar();
         
@@ -431,6 +429,11 @@ $(document).on('click', '.cabin-item-list-remove-btn', function(){
     redibujarListaCabinasSumario(cabinas_seleccionadas);
     
     calcularPaxPorAcomodar();
+})
+
+// ENVIAR ACOMODACION DESDE MODAL
+$('#submit-accommodation').click( function(){
+    $('#accommodation-form').submit();
 })
 
 

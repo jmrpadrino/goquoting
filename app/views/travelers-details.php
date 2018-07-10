@@ -4,14 +4,13 @@ include 'booking-functions.php';
     $total_pax = $_POST['adults'] +  $_POST['children'];
     $cabinas = str_replace('\\', '', $_POST['cabins-selected']);
     $cabinas = str_replace('"', '\'', $cabinas);
-    $cabinas = str_replace('[', '', $cabinas);
-    $cabinas = str_replace(']', '', $cabinas);
+//    $cabinas = str_replace('[', '', $cabinas);
+//    $cabinas = str_replace(']', '', $cabinas);
 
-//    echo '<pre>';
-//    var_dump($_POST['cabins-selected']);
+    echo '<pre>';
 //    //var_dump($cabinas);
 //    //echo json_decode($cabinas);
-//    echo '</pre>';
+    echo '</pre>';
 /*
     * META_PREFIX
     */
@@ -84,7 +83,7 @@ include 'booking-functions.php';
         </div>            
     </div>
 </div>
-<form id="accommodation-form" role="form" method="post" action="<?= home_url('extras') ?>/" enctype='application/json'>
+<form id="accommodation-form" role="form" method="post" action="<?= home_url('extras') ?>/">
     <input type="hidden" name="ship" value="<?= $_POST['ship'] ?>">
     <input type="hidden" name="departure" value="<?= $_POST['departure'] ?>">
     <input type="hidden" name="promo" value="<?= $_POST['promo'] ?>">
@@ -524,3 +523,7 @@ include 'booking-functions.php';
         </div>
     </div>
 </form>
+<script>
+    var cabinas_seleccionadas = <?= $cabinas ?>;
+    console.log(cabinas_seleccionadas);
+</script>

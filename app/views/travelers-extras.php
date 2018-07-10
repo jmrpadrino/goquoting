@@ -256,3 +256,79 @@
     */
 
 ?>
+<style>
+    <?php echo file_get_contents( RUTA_PLUGIN_BOOKING . 'app/css/booking-system-common-styles.css', true ); ?>
+    /* ACCOMMODATION VIEW */
+    .booking-details-tabs{
+        padding: 8px 0;
+        max-width: 100%;
+        min-height: 41px;
+        margin: 8px 0;
+        margin-top: 0px;
+        white-space: nowrap;
+        overflow: auto;
+    }
+    .booking-details-tab{
+        display: inline;
+        min-height: 36px;
+        padding: 8px 10px;
+        background: #eee;
+        border-bottom: 3px solid transparent;
+    }
+    .booking-details-tab a{
+        color: black;
+        text-decoration: none;
+    }
+    .booking-details-tab.active{
+        background: #fff;
+        border-bottom: 3px solid #ff8900;
+    }
+    .booking-details-tab.active a{
+        color: #ff8900;
+    }
+    .tab-content > div{
+        display: none;
+    }
+    .tab-content div.active{
+        display: block;
+    }
+    .birth-date .form-control{
+        display: inline-block;
+        max-width: 32.3333%;
+    }
+</style>
+<div class="main-sumary">
+    <div class="main-sumary-item">
+        <a href="<?= home_url('check-availability')?>/">
+            <span class="fas fa-arrow-left"></span>
+        </a>
+    </div>
+    <div class="main-sumary-item">
+        <span>Cruises</span>
+    </div>
+    <div class="main-sumary-item">
+        <span><?= date('d M Y', strtotime($_POST['departure'])) ?></span>
+    </div>
+    <div class="main-sumary-item">
+        <span><?= obtenerDatoBarcoPorCodigoDispo($_POST['ship'], 'post_title') ?></span>
+    </div>
+</div>
+<div class="cart-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h1 class="cart-title">4. <?= _e('Extras', 'gogalapagos') ?></h1>
+                <p class="cart-subtitle"><?= _e('Aditional Packages or your trip') ?></p>
+            </div>
+        </div>            
+    </div>
+</div>
+<form id="accommodation-form" role="form" method="post" action="<?= home_url('extras') ?>/">
+    <input type="hidden" name="ship" value="<?= $_POST['ship'] ?>">
+    <input type="hidden" name="departure" value="<?= $_POST['departure'] ?>">
+    <input type="hidden" name="promo" value="<?= $_POST['promo'] ?>">
+    <input type="hidden" name="duration" value="<?= $_POST['duration'] ?>">
+    <input type="hidden" name="adults" value="<?= $_POST['adults'] ?>">
+    <input type="hidden" name="children" value="<?= $_POST['children'] ?>">
+    <input type="hidden" name="cabins-selected" value="<?= $cabinas ?>">
+</form>

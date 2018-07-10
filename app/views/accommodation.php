@@ -116,7 +116,7 @@
     <input type="hidden" name="duration" value="<?= $_POST['duration'] ?>">
     <input type="hidden" name="adults" value="<?= $_POST['adults'] ?>">
     <input type="hidden" name="children" value="<?= $_POST['children'] ?>">
-    <input type="hidden" name="cabins-selected" value="[]">
+    <input type="hidden" name="cabins-selected" value="">
 
     <?php 
         $cabinas = obtenerCabinasPorBarco( obtenerDatoBarcoPorCodigoDispo($_POST['ship'], 'ID') );
@@ -178,11 +178,12 @@
             <h3 class="text-center"><?= _e('Accommodations for this cabin', 'gogalapagos') ?></h3>
             <select class="form-control accommodation-items" name="accommodation-for-<?= $cabina->ID ?>">
                 <option value="0" data-peopleincabin="0"><?= _e('Select Accommodation') ?></option>
+                <option value="1" data-peopleincabin="1">1 ADULT</option>
                 <option value="1" data-peopleincabin="2">2 ADULTS</option>
-                <option value="2" data-peopleincabin="2">1 ADULT, 1 CHILD</option>
-                <option value="3" data-peopleincabin="3">2 ADULTS, 1 CHILD</option>
+                <option value="2" data-peopleincabin="2">1 ADULT &amp; 1 CHILD</option>
+                <option value="3" data-peopleincabin="3">2 ADULTS &amp; 1 CHILD</option>
                 <option value="4" data-peopleincabin="3">3 ADULTS</option>
-                <option value="5" data-peopleincabin="4">3 ADULTS, 1 CHILD</option>
+                <option value="5" data-peopleincabin="4">3 ADULTS &amp; 1 CHILD</option>
             </select>
             <div class="row info-accommodation" style="display: none;">
                 <div class="col-xs-12">
@@ -215,7 +216,7 @@
             </div>
             <div class="modal-footer">
                 <button id="add-another-cabin-btn" type="button" class="btn btn-default pull-left" data-dismiss="modal"><?= _e('Add another cabin', 'gogalapagos') ?></button>
-                <button type="button" class="btn btn-warning pull-right"><?= _e('Book now', 'gogalapagos') ?></button>
+                <button id="submit-accommodation" type="button" class="btn btn-warning pull-right"><?= _e('Book now', 'gogalapagos') ?></button>
             </div>
         </div>
     </div>
