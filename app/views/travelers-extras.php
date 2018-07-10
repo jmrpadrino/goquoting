@@ -1,9 +1,12 @@
 <?php 
     include 'booking-functions.php';
     $cabinas = str_replace('\\', '', $_POST['cabins-selected']);
-    echo '<pre>';
-    echo json_encode($cabinas);
-    echo '</pre>';
+//    echo '<pre>';
+//    echo json_encode($cabinas);
+//    echo '</pre>';
+//    echo '<pre>';
+//    print_r($_POST);
+//    echo '</pre>';
     $total_pax = $_POST['adults'] +  $_POST['children'];
 
     /*
@@ -258,43 +261,65 @@
 ?>
 <style>
     <?php echo file_get_contents( RUTA_PLUGIN_BOOKING . 'app/css/booking-system-common-styles.css', true ); ?>
-    /* ACCOMMODATION VIEW */
-    .booking-details-tabs{
-        padding: 8px 0;
-        max-width: 100%;
-        min-height: 41px;
-        margin: 8px 0;
-        margin-top: 0px;
-        white-space: nowrap;
-        overflow: auto;
+    /* EXTRAS VIEW */
+    .square-box{
+        position: relative;
+        border-radius: 6px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        min-width: 48px;
+        min-height: 48px;
+        background: dimgray;
+        margin-bottom: 10px;
     }
-    .booking-details-tab{
-        display: inline;
-        min-height: 36px;
-        padding: 8px 10px;
-        background: #eee;
-        border-bottom: 3px solid transparent;
+    /* duration */
+    .duration-list{
+        display: flex;
+        justify-content: space-between;
     }
-    .booking-details-tab a{
-        color: black;
-        text-decoration: none;
+    .pack-placeholder-date{
+        font-size: 24px;
+        line-height: 24px;
+        background: #1f1f1f;
+        margin: 0px;
     }
-    .booking-details-tab.active{
-        background: #fff;
-        border-bottom: 3px solid #ff8900;
+    .pack-placeholder.open .pack-placeholder-date{
+        background: #1f1f1f;
+        background: darkorange;
+        box-shadow: 0px 2px 8px rgba(105, 105, 105, 0.3);
     }
-    .booking-details-tab.active a{
-        color: #ff8900;
+    .days-word{
+        font-size: 12px;
+        line-height: 1;
     }
-    .tab-content > div{
+    .pack-placeholder-info-box{
         display: none;
+        margin: 0 auto;
+        margin-top: -5px;
+        width: 44px;
+        height: 32px;
+        background: darkorange;
+        align-items: center;
+        justify-content: space-around;
+        border-radius: 6px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        transition: top ease-in .2s;
+        padding-top: 5px;
+        color: white;
+        cursor: pointer;
     }
-    .tab-content div.active{
+    .pack-placeholder.open+.pack-placeholder-info-box{
+        display: flex;
+    }
+    .btn-skip-extra{
+        margin: 18px auto;
         display: block;
-    }
-    .birth-date .form-control{
-        display: inline-block;
-        max-width: 32.3333%;
+        border-radius: 0px;
+        border: 1px solid #848484;
     }
 </style>
 <div class="main-sumary">
@@ -323,7 +348,7 @@
         </div>            
     </div>
 </div>
-<form id="accommodation-form" role="form" method="post" action="<?= home_url('extras') ?>/">
+<form id="extrax-form" role="form" method="post" action="<?= home_url('checkout') ?>/">
     <input type="hidden" name="ship" value="<?= $_POST['ship'] ?>">
     <input type="hidden" name="departure" value="<?= $_POST['departure'] ?>">
     <input type="hidden" name="promo" value="<?= $_POST['promo'] ?>">
@@ -331,4 +356,115 @@
     <input type="hidden" name="adults" value="<?= $_POST['adults'] ?>">
     <input type="hidden" name="children" value="<?= $_POST['children'] ?>">
     <input type="hidden" name="cabins-selected" value="<?= $cabinas ?>">
+    <input type="hidden" name="extras-selected" value="[]">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="submit" class="btn btn-default btn-skip-extra"><?= _e('Skip this Step') ?></button>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Nav tabs -->
+            <ul class="booking-details-tabs" role="tablist">
+                <?php for($i = 1; $i <= $_POST['adults']; $i++){ ?>
+                <li role="presentation" class="booking-details-tab <?= $i == 1 ? 'active' : '' ?>"><a href="#pax-extra-<?= $i ?>" aria-controls="pax-extra-<?= $i ?>" role="tab" data-toggle="tab"><?php printf( _e('Traveler', 'gogalalagps') . ' %s', $i) ?></a><?php /*
+                        $i == 1 ? printf('<span class="main-contact-text">' . _e('Main Contact', 'gogalapagos') . '</span>') : '';
+                    */ ?></li>
+                <?php } ?>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="tab-content">
+                    <?php for($i = 1; $i <= $_POST['adults']; $i++){ ?>
+                    <div id="pax-extra-<?= $i ?>" class=" <?= $i > 1 ? 'fade' : '' ?> <?= $i == 1 ? 'active' : '' ?>">
+                        <div class="inside-box">
+                            <h3><?= _e('Select your drinks packages', 'gogalapagos')?></h3>
+                            <ul class="list-inline duration-list">
+                                <?php for($z = 1; $z <= 4; $z++){ ?>
+                                <li>
+                                    <div class="pack-placeholder" data-packcode="<?= $z ?>">
+                                        <div class="square-box pack-placeholder-date">
+                                            <div class="days-word"><?= _e('Pack', 'gogalapagos') ?></div>
+                                            <span><?= $z ?></span>
+                                        </div>
+                                    </div>
+                                    <div class="pack-placeholder-info-box">
+                                        <i class="fa fa-info-circle"></i>
+                                    </div>
+                                </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                        <div class="inside-box">
+                            <h3><?= _e('Choose your internet package', 'gogalapagos')?></h3>
+                            <ul class="list-inline duration-list">
+                                <?php
+                                    $duraciones = 1;
+                                    if ($_POST['duration'] > 4){
+                                        $duraciones = 2;
+                                    }
+                                ?>
+                                <?php for($z = 1; $z <= $duraciones; $z++){ ?>
+                                <li>
+                                    <div class="pack-placeholder" data-packcode="<?= $z ?>">
+                                        <div class="square-box pack-placeholder-date">
+                                            <div class="days-word"><?= _e('Pack', 'gogalapagos') ?></div>
+                                            <span><?= $z ?></span>
+                                        </div>
+                                    </div>
+                                    <div class="pack-placeholder-info-box">
+                                        <i class="fa fa-info-circle"></i>
+                                    </div>
+                                </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                        <div class="inside-box">
+                            <h3><?= _e('Additional Activities', 'gogalapagos')?></h3>
+                            <ul class="list-inline duration-list">
+                                <li>
+                                    
+                                </li>
+                            </ul>
+                        </div>
+                        <button type="button" class="pull-left"><i class="fas fa-shopping-cart"></i></button>
+                        <button id="set-date" name="availability" value="true" class="text-center submit-button submit-button-extras pull-right" type="submit">
+                            <span class="next-step"><?= _e('Next Step', 'gogalapagos') ?></span>
+                            <span class="next-step-title"><?= _e('Confirmation & Payment', 'gogalapagos') ?></span>
+                        </button>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
+<?php for($z = 1; $z <= 4; $z++){ ?>
+<!-- Modal -->
+<div class="modal fade" id="info-extra-<?= $z ?>" tabindex="-1" role="dialog" aria-labelledby="cabinSumary">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-chevron-left"></i></span></button>
+                <h4 class="modal-title text-center" id="myModalLabel"><?= _e('Summary', 'gogalapagos') ?></h4>
+            </div>
+            <div class="modal-body">
+                <ul class="summary-cruise-list">
+                    <li><strong><?= _e('Date', 'gogalapagos') ?></strong> <?= $_POST['departure'] ?></li>
+                    <li><strong><?= _e('Ship', 'gogalapagos') ?></strong> <?= obtenerDatoBarcoPorCodigoDispo($_POST['ship'], 'post_title') ?></li>
+                    <li><strong><?= _e('Itinerary', 'gogalapagos') ?></strong> </li>
+                    <li><strong><?= _e('Duration', 'gogalapagos') ?></strong> <?= $_POST['duration'] . ' - ' . $_POST['duration'] - 1 ?></li>
+                </ul>
+                <div id="sumary-content">
+                    <div class="panel-group" id="cabins-selected-accordion" role="tablist" aria-multiselectable="true"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="add-another-cabin-btn" type="button" class="btn btn-default pull-left" data-dismiss="modal"><?= _e('Add another cabin', 'gogalapagos') ?></button>
+                <button id="submit-accommodation" type="button" class="btn btn-warning pull-right"><?= _e('Book now', 'gogalapagos') ?></button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php } ?>

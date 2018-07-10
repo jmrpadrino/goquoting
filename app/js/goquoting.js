@@ -436,4 +436,17 @@ $('#submit-accommodation').click( function(){
     $('#accommodation-form').submit();
 })
 
+/* EVENTOS PARA EXTRAS */
+// SELECCIONAR PACK
+$('.pack-placeholder').click( function(){
+
+    $(this).toggleClass('open');
+    $(this).toggleClass('selected');
+    
+})
+// VER INFORMACION DEL PACK
+$('.pack-placeholder-info-box').click(function(){
+    console.log()
+})
+
 
