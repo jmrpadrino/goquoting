@@ -321,6 +321,38 @@
         border-radius: 0px;
         border: 1px solid #848484;
     }
+    .internet-service-box .duration-list{
+        justify-content: flex-start
+    }
+    .offer-search-filter-placeholder label{
+        transform: translateY(-6px);
+    }
+    .offer-search-filter-placeholder span{
+        display: inline-flex;
+        border: 1px solid #ccc;
+        width: 34px;
+        height: 34px;
+        margin-left: 12px;
+        padding: 5px;
+        align-content: center;
+        justify-content: center;
+        background: white;
+    }
+    .offer-search-filter-placeholder span:before{
+        content: '';
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: darkorange;
+        display: none;
+        
+    }
+    .offer-search-filter-placeholder input[name=kayak-service]:checked + span:before{
+        display:block;
+    }
+    .offer-search-filter-checkbox{
+        display: none;
+    }
 </style>
 <div class="main-sumary">
     <div class="main-sumary-item">
@@ -396,7 +428,7 @@
                                 <?php } ?>
                             </ul>
                         </div>
-                        <div class="inside-box">
+                        <div class="inside-box internet-service-box">
                             <h3><?= _e('Choose your internet package', 'gogalapagos')?></h3>
                             <ul class="list-inline duration-list">
                                 <?php
@@ -422,9 +454,20 @@
                         </div>
                         <div class="inside-box">
                             <h3><?= _e('Additional Activities', 'gogalapagos')?></h3>
-                            <ul class="list-inline duration-list">
+                            <ul>
                                 <li>
-                                    
+                                    <div class="offer-search-filter-placeholder additional-service-item">
+                                        <label class="offer-search-filter-label" for="kayak-service"><?= _e('Kayak') ?></label>
+                                        <input id="offer-kayat-traveler-<?= $i ?>" class="offer-search-filter-checkbox " type="checkbox" name="offer-kayat-traveler-<?= $i ?>" id="offer-search-filter">
+                                        <span></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="offer-search-filter-placeholder additional-service-item">
+                                        <label class="offer-search-filter-label" for="wetsuit-service"><?= _e('Wetsuit') ?></label>
+                                        <input id="offer-wetsuit-traveler-<?= $i ?>" class="offer-search-filter-checkbox" type="checkbox" name="offer-wetsuit-traveler-<?= $i ?>" id="offer-search-filter">
+                                        <span></span>
+                                    </div>
                                 </li>
                             </ul>
                         </div>

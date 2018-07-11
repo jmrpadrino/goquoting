@@ -25,6 +25,8 @@ define('META_PREFIX', 'gg_');
 
 /* LIBRERIAS */
 // Dependencias
+require_once('admin/booking-system-setup.php');
+require_once('admin/booking-system-admin-functions.php');
 require_once('app/booking-system-create-pages.php');
 require_once('app/booking-system-shortcodes.php');
 //require_once('app/booking-system-add-content-to-pages.php');

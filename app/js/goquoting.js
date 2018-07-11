@@ -446,7 +446,11 @@ $('.pack-placeholder').click( function(){
 })
 // VER INFORMACION DEL PACK
 $('.pack-placeholder-info-box').click(function(){
-    console.log()
+    console.log($(this));
+})
+// ACTIVAR SERCIVIO ADICIONAL
+$('.offer-search-filter-label').click(function(){
+    console.log($(this).className);
 })
 
 
