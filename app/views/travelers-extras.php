@@ -4,9 +4,9 @@
 //    echo '<pre>';
 //    echo json_encode($cabinas);
 //    echo '</pre>';
-//    echo '<pre>';
-//    print_r($_POST);
-//    echo '</pre>';
+    echo '<pre>';
+    print_r($_POST);
+    echo '</pre>';
     $total_pax = $_POST['adults'] +  $_POST['children'];
 
     /*
@@ -420,6 +420,7 @@
                                             <div class="days-word"><?= _e('Pack', 'gogalapagos') ?></div>
                                             <span><?= $z ?></span>
                                         </div>
+                                        <input type="hidden" name="service-amount-<?= $z ?>">
                                     </div>
                                     <div class="pack-placeholder-info-box">
                                         <i class="fa fa-info-circle"></i>
