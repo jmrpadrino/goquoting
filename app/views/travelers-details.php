@@ -482,7 +482,7 @@ include 'booking-functions.php';
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <button id="set-travelers-details" name="travelers-details" value="true" class="text-center submit-button submit-button-cabin" type="submit">
+                <button id="set-travelers-details" name="travelers-details" value="true" class="text-center submit-button center submit-button-cabin" type="submit">
                     <span class="next-step"><?= _e('Next Step', 'gogalapagos') ?></span>
                     <span class="next-step-title"><?= _e('Extras for your trip', 'gogalapagos') ?></span>
                 </button>

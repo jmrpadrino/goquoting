@@ -447,10 +447,11 @@ $('.pack-placeholder').click( function(){
 // VER INFORMACION DEL PACK
 $('.pack-placeholder-info-box').click(function(){
     console.log($(this));
+    $('#info-extra-' + $(this).data('packcode')).modal('show');
 })
 // ACTIVAR SERCIVIO ADICIONAL
 $('.offer-search-filter-placeholder').click(function(){
-    console.log('hola');
+    $(this).toggleClass('selected');
 })
 
 

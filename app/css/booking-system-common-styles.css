@@ -53,19 +53,57 @@ button{
     opacity: 1;
 }
 /*---------------*/
+.counter-operation{
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    width: 24px;
+    background: white;
+    height: 42px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.counter-operation.add{
+    -webkit-transform: translateX(3px) translateY(-6px);
+    transform: translateX(3px) translateY(-6px);
+    border-radius: 6px 0px 0px 6px;
+}
+.counter-operation.subtract{
+    -webkit-transform: translateX(-3px) translateY(-6px);
+    transform: translateX(-3px) translateY(-6px);
+    border-radius: 0px 6px 6px 0px;
+}
+.pax-counter{
+    border:none;
+    text-align: center;
+    font-size: 28px;
+    border-left: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+}
 .submit-button{
     display: block;
-    margin: 36px auto;
     margin-top: 8px;
     border: none;
     border-radius: 2px;
     background: darkorange;
-    clear: both;
     text-align: left;
     color: white;
     line-height: 1;
     font-size: 12px;
     padding: 14px 17px;
+}
+.submit-button.left{
+    float: left;
+}
+.submit-button.right{
+    float: right;
+}
+.submit-button.center{
+    margin: 36px auto;
 }
 .submit-button span{
     display: block;
@@ -100,6 +138,11 @@ button{
     display: block;
     background: white;
     width: 91%;
+}
+.inside-box.empty-box{
+    background: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 .little-box{
     display: -webkit-box;

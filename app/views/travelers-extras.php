@@ -1,21 +1,15 @@
 <?php 
 
-//    global $post, $wpdb, $menu, $wp_query, $page;
-//
-//    echo '<pre>';
-//    var_dump($page);
-//    echo '</pre>';
-
-
     include 'booking-functions.php';
+    $prefix = 'gg_';
     $cabinas = str_replace('\\', '', $_POST['cabins-selected']);
-//    echo '<pre>';
-//    echo json_encode($cabinas);
-//    echo '</pre>';
-    echo '<pre>';
-    //print_r($_POST);
-    echo '</pre>';
     $total_pax = $_POST['adults'] +  $_POST['children'];
+
+    $args = array(
+        'post_type' => 'ggonboardservices',
+        'posts_per_page' => -1,    
+    );
+    $onboardservices = get_posts($args);
 
     /*
     * META_PREFIX
@@ -309,7 +303,7 @@
         margin-top: -5px;
         width: 44px;
         height: 32px;
-        background: darkorange;
+        background: #be6902;
         align-items: center;
         justify-content: space-around;
         border-radius: 6px;
@@ -327,9 +321,9 @@
         margin: 18px auto;
         display: block;
         border-radius: 0px;
-        border: 1px solid #848484;
+        border: 1px solid #bbbbbb;
     }
-    .internet-service-box .duration-list{
+    .duration-list{
         justify-content: flex-start
     }
     .offer-search-filter-placeholder label{
@@ -360,7 +354,7 @@
         display: none;
         
     }
-    .offer-search-filter-placeholder input[name=kayak-service]:checked + span:before{
+    .offer-search-filter-placeholder.selected span:before{
         display:block;
     }
     .offer-search-filter-checkbox{
@@ -376,6 +370,27 @@
         align-items: center;
         justify-content: space-between;
         margin: 18px 0;
+    }
+    .show-resume{
+        padding: 16px;
+        position: relative;
+        background: #1f1f1f;
+        color: white;
+        margin-bottom: 36px; 
+    }
+    .show-resume:after{
+        content: '';
+        display: block;
+        position: absolute;
+        right: 12px;
+        top: 14px;
+        width: 10px;
+        height: 10px;
+        background: lime;
+        border-radius: 100%;
+    }
+    .modal-footer.text-center{
+        text-align: center !important;
     }
 </style>
 <div class="main-sumary">
@@ -412,7 +427,6 @@
     <input type="hidden" name="adults" value="<?= $_POST['adults'] ?>">
     <input type="hidden" name="children" value="<?= $_POST['children'] ?>">
     <input type="hidden" name="cabins-selected" value="<?= $cabinas ?>">
-    <input type="hidden" name="extras-selected" value="[]">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
@@ -437,44 +451,58 @@
                         <div class="inside-box">
                             <h3><?= _e('Select your drinks packages', 'gogalapagos')?></h3>
                             <ul class="list-inline duration-list">
-                                <?php for($z = 1; $z <= 4; $z++){ ?>
+                                <?php 
+                                    //for($z = 1; $z <= 4; $z++){ 
+                                    $y = 1;
+                                    foreach($onboardservices as $servicio){
+                                        $categoria = get_the_terms($servicio->ID, 'onboard-service-package');
+                                        if ($categoria[0]->slug == 'drink-packages'){
+                                ?>
                                 <li>
-                                    <div class="pack-placeholder" data-packcode="<?= $z ?>">
+                                    <div class="pack-placeholder" data-packcode="<?= $servicio->ID ?>" data-pax="<?= $i ?>">
                                         <div class="square-box pack-placeholder-date">
                                             <div class="days-word"><?= _e('Pack', 'gogalapagos') ?></div>
-                                            <span><?= $z ?></span>
+                                            <span><?= $y ?></span>
                                         </div>
-                                        <input type="hidden" name="service-amount-<?= $z ?>">
+                                        <input type="hidden" name="pax-extra-<?= $i ?>-drinkspackages-amount-<?= $servicio->ID ?>" data-packcode="<?= $servicio->ID ?>" data-pax="<?= $i ?>">
                                     </div>
-                                    <div class="pack-placeholder-info-box">
+                                    <div class="pack-placeholder-info-box" data-packcode="<?= $servicio->ID ?>" data-pax="<?= $i ?>">
                                         <i class="fa fa-info-circle"></i>
                                     </div>
                                 </li>
-                                <?php } ?>
+                                <?php 
+                                        $y++; 
+                                        } //Fin si
+                                    } // fin foreach
+                                ?>
                             </ul>
                         </div>
                         <div class="inside-box internet-service-box">
                             <h3><?= _e('Choose your internet package', 'gogalapagos')?></h3>
                             <ul class="list-inline duration-list">
-                                <?php
-                                    $duraciones = 1;
-                                    if ($_POST['duration'] > 4){
-                                        $duraciones = 2;
-                                    }
+                                <?php 
+                                    //for($z = 1; $z <= 4; $z++){ 
+                                    $y = 1;
+                                    foreach($onboardservices as $servicio){
+                                        $categoria = get_the_terms($servicio->ID, 'onboard-service-package');
+                                        if ($categoria[0]->slug == 'internet-packages'){
                                 ?>
-                                <?php for($z = 1; $z <= $duraciones; $z++){ ?>
                                 <li>
                                     <div class="pack-placeholder" data-packcode="<?= $z ?>">
                                         <div class="square-box pack-placeholder-date">
                                             <div class="days-word"><?= _e('Pack', 'gogalapagos') ?></div>
-                                            <span><?= $z ?></span>
+                                            <span><?= $y ?></span>
                                         </div>
                                     </div>
                                     <div class="pack-placeholder-info-box">
                                         <i class="fa fa-info-circle"></i>
                                     </div>
                                 </li>
-                                <?php } ?>
+                                <?php 
+                                        $y++; 
+                                        } //Fin si
+                                    } // fin foreach
+                                ?>
                             </ul>
                         </div>
                         <div class="inside-box">
@@ -496,11 +524,13 @@
                                 </li>
                             </ul>
                         </div>
-                        <button type="button" class="pull-left"><i class="fas fa-shopping-cart"></i></button>
-                        <button id="set-date" name="availability" value="true" class="text-center submit-button submit-button-extras pull-right" type="submit">
-                            <span class="next-step"><?= _e('Next Step', 'gogalapagos') ?></span>
-                            <span class="next-step-title"><?= _e('Confirmation & Payment', 'gogalapagos') ?></span>
-                        </button>
+                        <div class="inside-box empty-box">
+                            <button id="shoping-status" type="button" class="submit-button left show-resume"><i class="fas fa-2x fa-shopping-cart"></i></button>
+                            <button id="set-date" name="availability" value="true" class="text-center submit-button right submit-button-extras" type="submit">
+                                <span class="next-step"><?= _e('Next Step', 'gogalapagos') ?></span>
+                                <span class="next-step-title"><?= _e('Confirmation & Payment', 'gogalapagos') ?></span>
+                            </button>
+                        </div>
                     </div>
                     <?php } ?>
                 </div>
@@ -508,9 +538,39 @@
         </div>
     </div>
 </form>
-<?php for($z = 1; $z <= 4; $z++){ ?>
+<?php 
+    foreach($onboardservices as $serviciomodal){
+?>
 <!-- Modal -->
-<div class="modal fade" id="info-extra-<?= $z ?>" tabindex="-1" role="dialog" aria-labelledby="cabinSumary">
+<div class="modal fade" id="info-extra-<?= $serviciomodal->ID ?>" tabindex="-1" role="dialog" aria-labelledby="cabinSumary">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-chevron-left"></i></span></button>
+                <h4 class="modal-title text-center" id="myModalLabel"><?= $serviciomodal->post_title ?></h4>
+            </div>
+            <div class="modal-body">
+                <h3>$ <?= get_post_meta($serviciomodal->ID, $prefix . 'onboard_service_price', true) ?></h3>
+                <div id="sumary-content"><?= $serviciomodal->post_content ?></div>
+            </div>
+            <div class="modal-footer text-center">
+                <div class="counter-controller">
+                    <div class="counter-operation counter-adults add">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <input id="adults-counter" class="pax-counter" type="number" name="adults" min="0" max="9" value="2">
+                    <div class="counter-operation counter-adults subtract">
+                        <i class="fas fa-minus"></i>
+                    </div>
+                </div>
+                <button id="add-another-cabin-btn" type="button" class="btn btn-default btn-submit center" data-dismiss="modal"><?= _e('Done', 'gogalapagos') ?></button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php } ?>
+<!-- Modal -->
+<div class="modal fade" id="cabinSumary" tabindex="-1" role="dialog" aria-labelledby="cabinSumary">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -529,10 +589,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="add-another-cabin-btn" type="button" class="btn btn-default pull-left" data-dismiss="modal"><?= _e('Add another cabin', 'gogalapagos') ?></button>
-                <button id="submit-accommodation" type="button" class="btn btn-warning pull-right"><?= _e('Book now', 'gogalapagos') ?></button>
+                <button id="add-another-cabin-btn" type="button" class="btn btn-default pull-left" data-dismiss="modal"><?= _e('Add another extra', 'gogalapagos') ?></button>
+                <button id="submit-accommodation" type="button" class="btn btn-warning pull-right"><?= _e('Confirmation', 'gogalapagos') ?></button>
             </div>
         </div>
     </div>
 </div>
-<?php } ?>

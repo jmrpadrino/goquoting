@@ -190,7 +190,7 @@
                     <p class="text-info"><?= _e('Please choose the accommodation to add this cabin. Thank you.', 'gogalapagos') ?></p>
                 </div>
             </div>
-            <button class="btn btn-default add-cabin-btn" type="button" data-dispocode="<?= $cabina_dispo_code ?>" data-addcabin="<?= $cabina->ID ?>"><?= _e('Add Cabin') ?></button>
+            <button class="btn btn-default submit-button add-cabin-btn" type="button" data-dispocode="<?= $cabina_dispo_code ?>" data-addcabin="<?= $cabina->ID ?>"><?= _e('Add Cabin') ?></button>
         </div>
     </div>
     <?php } ?>

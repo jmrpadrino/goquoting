@@ -138,29 +138,6 @@
     .datepicker-control-label{
         margin: 18px auto;
     }
-    .counter-operation{
-        display: inline-flex;
-        width: 24px;
-        background: white;
-        height: 42px;
-        justify-content: center;
-        align-items: center;
-    }
-    .counter-operation.add{
-        transform: translateX(3px) translateY(-6px);
-        border-radius: 6px 0px 0px 6px;
-    }
-    .counter-operation.subtract{
-        transform: translateX(-3px) translateY(-6px);
-        border-radius: 0px 6px 6px 0px;
-    }
-    .pax-counter{
-        border:none;
-        text-align: center;
-        font-size: 28px;
-        border-left: 1px solid #e8e8e8;
-        border-right: 1px solid #e8e8e8;
-    }
     .filter-search-placeholder button,
     .filter-search-placeholder .more-than-nine{
         display: inline-block;
@@ -473,7 +450,7 @@
                     </div>
                 </div>
             </div>
-        <button id="set-date" name="availability" value="true" class="text-center submit-button submit-button-cabin" type="submit">
+        <button id="set-date" name="availability" value="true" class="text-center submit-button center submit-button-cabin" type="submit">
             <span class="next-step"><?= _e('Next Step', 'gogalapagos') ?></span>
             <span class="next-step-title"><?= _e('Select Your Cabin', 'gogalapagos') ?></span>
         </button>
