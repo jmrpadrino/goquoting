@@ -1,11 +1,19 @@
 <?php 
+
+//    global $post, $wpdb, $menu, $wp_query, $page;
+//
+//    echo '<pre>';
+//    var_dump($page);
+//    echo '</pre>';
+
+
     include 'booking-functions.php';
     $cabinas = str_replace('\\', '', $_POST['cabins-selected']);
 //    echo '<pre>';
 //    echo json_encode($cabinas);
 //    echo '</pre>';
     echo '<pre>';
-    print_r($_POST);
+    //print_r($_POST);
     echo '</pre>';
     $total_pax = $_POST['adults'] +  $_POST['children'];
 
@@ -325,7 +333,12 @@
         justify-content: flex-start
     }
     .offer-search-filter-placeholder label{
-        transform: translateY(-6px);
+        transform: translateY(0);
+        font-size: 18px;
+    }
+    .offer-search-filter-placeholder label div{
+        font-size: 12px;
+        color: gray;
     }
     .offer-search-filter-placeholder span{
         display: inline-flex;
@@ -352,6 +365,17 @@
     }
     .offer-search-filter-checkbox{
         display: none;
+    }
+    .aditional-activities-list{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    .additional-service-item{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 18px 0;
     }
 </style>
 <div class="main-sumary">
@@ -455,10 +479,10 @@
                         </div>
                         <div class="inside-box">
                             <h3><?= _e('Additional Activities', 'gogalapagos')?></h3>
-                            <ul>
+                            <ul class="aditional-activities-list">
                                 <li>
                                     <div class="offer-search-filter-placeholder additional-service-item">
-                                        <label class="offer-search-filter-label" for="kayak-service"><?= _e('Kayak') ?></label>
+                                        <label class="offer-search-filter-label" for="kayak-service"><?= _e('Kayak') ?> <div>$ 50</div></label>
                                         <input id="offer-kayat-traveler-<?= $i ?>" class="offer-search-filter-checkbox " type="checkbox" name="offer-kayat-traveler-<?= $i ?>" id="offer-search-filter">
                                         <span></span>
                                     </div>

@@ -449,8 +449,8 @@ $('.pack-placeholder-info-box').click(function(){
     console.log($(this));
 })
 // ACTIVAR SERCIVIO ADICIONAL
-$('.offer-search-filter-label').click(function(){
-    console.log($(this).className);
+$('.offer-search-filter-placeholder').click(function(){
+    console.log('hola');
 })
 
 
