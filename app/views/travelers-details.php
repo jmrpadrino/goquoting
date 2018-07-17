@@ -18,10 +18,13 @@ include 'booking-functions.php';
 ?>
 <style>
     <?php echo file_get_contents( RUTA_PLUGIN_BOOKING . 'app/css/booking-system-common-styles.css', true ); ?>
-    /* ACCOMMODATION VIEW */
+    /* TRAVELERS DETAILS VIEW */
     .birth-date .form-control{
         display: inline-block;
         max-width: 32.3333%;
+    }
+    .main-contact-text{
+        font-size: 10px;
     }
 </style>
 <div class="main-sumary">
@@ -63,9 +66,8 @@ include 'booking-functions.php';
             <!-- Nav tabs -->
             <ul class="booking-details-tabs" role="tablist">
                 <?php for($i = 1; $i <= $total_pax; $i++){ ?>
-                <li role="presentation" class="booking-details-tab <?= $i == 1 ? 'active' : '' ?>"><a href="#pax-detail-<?= $i ?>" aria-controls="pax-detail-<?= $i ?>" role="tab" data-toggle="tab"><?php printf( _e('Traveler', 'gogalalagps') . ' %s', $i) ?></a><?php /*
-                        $i == 1 ? printf('<span class="main-contact-text">' . _e('Main Contact', 'gogalapagos') . '</span>') : '';
-                    */ ?></li>
+                <li role="presentation" class="booking-details-tab <?= $i == 1 ? 'active' : '' ?>"><a href="#pax-detail-<?= $i ?>" aria-controls="pax-detail-<?= $i ?>" role="tab" data-toggle="tab"><?php printf( _e('Traveler', 'gogalalagps') . ' %s', $i) ?> <?= $i == 1 ? '<span class="main-contact-text">' . _x('Main Contact', 'gogalapagos') . '</span>' : '';
+                    ?></a></li>
                 <?php } ?>
             </ul>
         </div>
@@ -86,7 +88,7 @@ include 'booking-functions.php';
                             </div>
                             <div class="col-xs-9">
                                 <div class="form-group">
-                                    <label>*<?= _e('First Name', 'gogalapagos')?>*</label>
+                                    <label><?= _e('First Name', 'gogalapagos')?>*</label>
                                     <input type="text" class="form-control" name="fname-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
                                 </div>
                             </div>

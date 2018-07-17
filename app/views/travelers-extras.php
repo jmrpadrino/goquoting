@@ -277,6 +277,9 @@
         background: dimgray;
         margin-bottom: 10px;
     }
+    .main-contact-text{
+        font-size: 10px;
+    }
     /* duration */
     .duration-list{
         display: flex;
@@ -392,6 +395,20 @@
     .modal-footer.text-center{
         text-align: center !important;
     }
+    .counter-controller{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        margin-bottom: 36px;
+    }
+    .counter-controller .pax-counter{
+        max-width: 36px;
+        margin: 0 36px;
+        border: none;
+        border-bottom: 1px solid black;
+        
+    }
 </style>
 <div class="main-sumary">
     <div class="main-sumary-item">
@@ -437,9 +454,8 @@
             <!-- Nav tabs -->
             <ul class="booking-details-tabs" role="tablist">
                 <?php for($i = 1; $i <= $_POST['adults']; $i++){ ?>
-                <li role="presentation" class="booking-details-tab <?= $i == 1 ? 'active' : '' ?>"><a href="#pax-extra-<?= $i ?>" aria-controls="pax-extra-<?= $i ?>" role="tab" data-toggle="tab"><?php printf( _e('Traveler', 'gogalalagps') . ' %s', $i) ?></a><?php /*
-                        $i == 1 ? printf('<span class="main-contact-text">' . _e('Main Contact', 'gogalapagos') . '</span>') : '';
-                    */ ?></li>
+                <li role="presentation" class="booking-details-tab <?= $i == 1 ? 'active' : '' ?>"><a href="#pax-extra-<?= $i ?>" aria-controls="pax-detail-<?= $i ?>" role="tab" data-toggle="tab"><?php printf( _e('Traveler', 'gogalalagps') . ' %s', $i) ?> <?= $i == 1 ? '<span class="main-contact-text">' . _x('Main Contact', 'gogalapagos') . '</span>' : '';
+                    ?></a></li>
                 <?php } ?>
             </ul>
         </div>
@@ -554,16 +570,17 @@
                 <div id="sumary-content"><?= $serviciomodal->post_content ?></div>
             </div>
             <div class="modal-footer text-center">
+                <h4><?= _e('Number of packages', 'gogalapagos') ?></h4>
                 <div class="counter-controller">
-                    <div class="counter-operation counter-adults add">
-                        <i class="fas fa-plus"></i>
-                    </div>
-                    <input id="adults-counter" class="pax-counter" type="number" name="adults" min="0" max="9" value="2">
-                    <div class="counter-operation counter-adults subtract">
+                    <div class="counter-operation counter-<?= $serviciomodal->ID ?> subtract" data-serviceid="<?= $serviciomodal->ID ?>">
                         <i class="fas fa-minus"></i>
                     </div>
+                    <input id="counter-<?= $serviciomodal->ID ?>" class="pax-counter" type="number" name="services[<?= $serviciomodal->post_name ?>]" min="0" value="0" data-serviceid="<?= $serviciomodal->ID ?>">
+                    <div class="counter-operation counter-<?= $serviciomodal->ID ?> add" data-serviceid="<?= $serviciomodal->ID ?>">
+                        <i class="fas fa-plus"></i>
+                    </div>
                 </div>
-                <button id="add-another-cabin-btn" type="button" class="btn btn-default btn-submit center" data-dismiss="modal"><?= _e('Done', 'gogalapagos') ?></button>
+                <button id="add-another-cabin-btn" type="button" class="btn btn-default submit-button center" data-dismiss="modal"><?= _e('Done', 'gogalapagos') ?></button>
             </div>
         </div>
     </div>

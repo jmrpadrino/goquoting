@@ -453,5 +453,10 @@ $('.pack-placeholder-info-box').click(function(){
 $('.offer-search-filter-placeholder').click(function(){
     $(this).toggleClass('selected');
 })
+$('.counter-operation').click(function(){
+    var operador = $(this);
+    var campo = $('#counter-' + operador.data('serviceid'));
+    console.log(campo.val());
+})
 
 
