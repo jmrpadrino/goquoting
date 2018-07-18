@@ -82,6 +82,27 @@
         margin: 0;
         padding: 0;
     }
+    .panel-default > .panel-heading{
+        background-image: none;
+        background: none;
+    }
+    .panel{
+        border-radius: 0px;
+    }
+    .panel-default{
+        border-color: transparent;
+        border-bottom: 1px solid #ddd;
+    }
+    .panel-heading a{
+        color: #2f2f2f;
+        text-decoration: none;
+    }
+    .cabin-item-list-remove-btn{
+        border: none;
+        color: red;
+        margin-left: 18px;
+        background: none;
+    }
 </style>
 <div class="main-sumary">
     <div class="main-sumary-item">

@@ -20,5 +20,5 @@ function goquotingExtras(){
     include 'views/travelers-extras.php';
 }
 function goquotingCheckout(){
-    include 'views/check-availability.php';
+    include 'views/checkout.php';
 }

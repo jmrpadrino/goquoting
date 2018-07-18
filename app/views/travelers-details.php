@@ -114,7 +114,7 @@ include 'booking-functions.php';
                             <div class="col-xs-9">
                                 <div class="form-group">
                                     <label><?= _e('Phone Number', 'gogalapagos')?>*</label>
-                                    <input type="text" class="form-control" name="phone-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <input type="phone" class="form-control" name="phone-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
                                 </div>
                             </div>
                         </div>

@@ -510,7 +510,7 @@
                                             <span><?= $y ?></span>
                                         </div>
                                     </div>
-                                    <div class="pack-placeholder-info-box">
+                                    <div class="pack-placeholder-info-box" data-packcode="<?= $servicio->ID ?>" data-pax="<?= $i ?>">
                                         <i class="fa fa-info-circle"></i>
                                     </div>
                                 </li>
@@ -544,48 +544,48 @@
                             <button id="shoping-status" type="button" class="submit-button left show-resume"><i class="fas fa-2x fa-shopping-cart"></i></button>
                             <button id="set-date" name="availability" value="true" class="text-center submit-button right submit-button-extras" type="submit">
                                 <span class="next-step"><?= _e('Next Step', 'gogalapagos') ?></span>
-                                <span class="next-step-title"><?= _e('Confirmation & Payment', 'gogalapagos') ?></span>
+                                <span class="next-step-title"><?= _e('Confirmation', 'gogalapagos') ?></span>
                             </button>
                         </div>
                     </div>
+                    <?php 
+                        foreach($onboardservices as $serviciomodal){
+                    ?>
+                    <!-- Modal -->
+                    <div class="modal fade" id="info-extra-<?= $serviciomodal->ID ?>" data-pax="<?= $i ?>" tabindex="-1" role="dialog" aria-labelledby="cabinSumary">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-chevron-left"></i></span></button>
+                                    <h4 class="modal-title text-center" id="myModalLabel"><?= $serviciomodal->post_title ?></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <h3>$ <?= get_post_meta($serviciomodal->ID, $prefix . 'onboard_service_price', true) ?></h3>
+                                    <div id="sumary-content"><?= $serviciomodal->post_content ?></div>
+                                </div>
+                                <div class="modal-footer text-center">
+                                    <h4><?= _e('Number of packages', 'gogalapagos') ?></h4>
+                                    <div class="counter-controller">
+                                        <div class="counter-operation counter-service counter-<?= $serviciomodal->ID ?> subtract" data-serviceid="<?= $serviciomodal->ID ?>">
+                                            <i class="fas fa-minus"></i>
+                                        </div>
+                                        <input id="counter-<?= $serviciomodal->ID ?>" class="pax-counter" type="number" name="services[<?= $i ?>][<?= $serviciomodal->post_name ?>]" min="0" value="0" data-serviceid="<?= $serviciomodal->ID ?>">
+                                        <div class="counter-operation counter-service counter-<?= $serviciomodal->ID ?> add" data-serviceid="<?= $serviciomodal->ID ?>">
+                                            <i class="fas fa-plus"></i>
+                                        </div>
+                                    </div>
+                                    <button id="add-another-cabin-btn" type="button" class="btn btn-default submit-button center" data-dismiss="modal"><?= _e('Done', 'gogalapagos') ?></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
                     <?php } ?>
                 </div>
             </div>
         </div>
     </div>
 </form>
-<?php 
-    foreach($onboardservices as $serviciomodal){
-?>
-<!-- Modal -->
-<div class="modal fade" id="info-extra-<?= $serviciomodal->ID ?>" tabindex="-1" role="dialog" aria-labelledby="cabinSumary">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-chevron-left"></i></span></button>
-                <h4 class="modal-title text-center" id="myModalLabel"><?= $serviciomodal->post_title ?></h4>
-            </div>
-            <div class="modal-body">
-                <h3>$ <?= get_post_meta($serviciomodal->ID, $prefix . 'onboard_service_price', true) ?></h3>
-                <div id="sumary-content"><?= $serviciomodal->post_content ?></div>
-            </div>
-            <div class="modal-footer text-center">
-                <h4><?= _e('Number of packages', 'gogalapagos') ?></h4>
-                <div class="counter-controller">
-                    <div class="counter-operation counter-<?= $serviciomodal->ID ?> subtract" data-serviceid="<?= $serviciomodal->ID ?>">
-                        <i class="fas fa-minus"></i>
-                    </div>
-                    <input id="counter-<?= $serviciomodal->ID ?>" class="pax-counter" type="number" name="services[<?= $serviciomodal->post_name ?>]" min="0" value="0" data-serviceid="<?= $serviciomodal->ID ?>">
-                    <div class="counter-operation counter-<?= $serviciomodal->ID ?> add" data-serviceid="<?= $serviciomodal->ID ?>">
-                        <i class="fas fa-plus"></i>
-                    </div>
-                </div>
-                <button id="add-another-cabin-btn" type="button" class="btn btn-default submit-button center" data-dismiss="modal"><?= _e('Done', 'gogalapagos') ?></button>
-            </div>
-        </div>
-    </div>
-</div>
-<?php } ?>
 <!-- Modal -->
 <div class="modal fade" id="cabinSumary" tabindex="-1" role="dialog" aria-labelledby="cabinSumary">
     <div class="modal-dialog" role="document">
