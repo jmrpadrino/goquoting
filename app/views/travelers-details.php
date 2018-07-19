@@ -80,7 +80,7 @@ include 'booking-functions.php';
                             <div class="col-xs-3">
                                 <div class="form-group">
                                     <label><?= $i ?> <?= _e('Title', 'gogalapagos')?>*</label>
-                                    <select class="form-control" name="title-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <select class="form-control" name="traveler[<?= $i ?>][title]" <?= $i == 1 ? 'required' : '' ?>>
                                         <option value="Mr."><?= _e('Mr.', 'gogalapagos') ?></option>
                                         <option value="Mrs."><?= _e('Mrs.', 'gogalapagos') ?></option>
                                     </select>
@@ -89,7 +89,7 @@ include 'booking-functions.php';
                             <div class="col-xs-9">
                                 <div class="form-group">
                                     <label><?= _e('First Name', 'gogalapagos')?>*</label>
-                                    <input type="text" class="form-control" name="fname-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <input type="text" class="form-control" name="traveler[<?= $i ?>][fname]" <?= $i == 1 ? 'required' : '' ?>>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@ include 'booking-functions.php';
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label><?= _e('Last Name', 'gogalapagos')?>*</label>
-                                    <input type="text" class="form-control" name="lname-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <input type="text" class="form-control" name="traveler[<?= $i ?>][lname]" <?= $i == 1 ? 'required' : '' ?>>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +105,7 @@ include 'booking-functions.php';
                             <div class="col-xs-3">
                                 <div class="form-group">
                                     <label><?= _e('Gender', 'gogalapagos')?>*</label>
-                                    <select class="form-control" name="gender-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <select class="form-control" name="traveler[<?= $i ?>][gender]" <?= $i == 1 ? 'required' : '' ?>>
                                         <option value="m"><?= _e('Male', 'gogalapagos') ?></option>
                                         <option value="f"><?= _e('Female', 'gogalapagos') ?></option>
                                     </select>
@@ -114,7 +114,7 @@ include 'booking-functions.php';
                             <div class="col-xs-9">
                                 <div class="form-group">
                                     <label><?= _e('Phone Number', 'gogalapagos')?>*</label>
-                                    <input type="phone" class="form-control" name="phone-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <input type="phone" class="form-control" name="traveler[<?= $i ?>][phone]" <?= $i == 1 ? 'required' : '' ?>>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@ include 'booking-functions.php';
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label><?= _e('E-mail Address', 'gogalapagos')?>*</label>
-                                    <input type="email" class="form-control" name="email-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <input type="email" class="form-control" name="traveler[<?= $i ?>][email]" <?= $i == 1 ? 'required' : '' ?>>
                                 </div>
                             </div>
                         </div>
@@ -131,14 +131,14 @@ include 'booking-functions.php';
                                 <div class="form-group birth-date">
                                     <label><?= _e('Birth Date', 'gogalapagos')?>*</label>
                                     <br />
-                                    <select class="form-control" name="bd-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <select class="form-control" name="traveler[<?= $i ?>][dirthdate]" <?= $i == 1 ? 'required' : '' ?>>
                                         <?php
                                             for ($d = 1; $d <= 31; $d++){
                                                 echo '<option value="' . $d . '">' . $d . '</option>';
                                             }
                                         ?>
                                     </select>
-                                    <select class="form-control" name="bm-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <select class="form-control" name="traveler[<?= $i ?>][dirthmonth]" <?= $i == 1 ? 'required' : '' ?>>
                                         <?php
                                             for ($m = 1; $m <= 12; $m++){
                                                 echo '<option value="' . $m . '">' . $m . '</option>';
@@ -150,7 +150,7 @@ include 'booking-functions.php';
                                           $startdate = strtotime ( '-100 year' , strtotime ( $date ) ) ;
                                           $startdate = date ( 'Y' , $startdate );
                                     ?>
-                                    <select class="form-control" name="by-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <select class="form-control" name="traveler[<?= $i ?>][dirthyear]" <?= $i == 1 ? 'required' : '' ?>>
                                         <?php
                                         for ($y = $startdate; $y <= $date; $y++){
                                             echo '<option value="' . $y . '">' . $y . '</option>';
@@ -164,7 +164,7 @@ include 'booking-functions.php';
                             <div class="col-xs-3">
                                 <div class="form-group">
                                     <label><?= _e('Country', 'gogalapagos')?>*</label>
-                                    <select class="form-control" name="country-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <select class="form-control" name="traveler[<?= $i ?>][country]" <?= $i == 1 ? 'required' : '' ?>>
                                         <option value="AF">Afghanistan</option>
                                         <option value="AX">Åland Islands</option>
                                         <option value="AL">Albania</option>
@@ -420,7 +420,7 @@ include 'booking-functions.php';
                             <div class="col-xs-9">
                                 <div class="form-group">
                                     <label><?= _e('City State', 'gogalapagos')?>*</label>
-                                    <input type="text" class="form-control" name="citystate-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <input type="text" class="form-control" name="traveler[<?= $i ?>][citystate]" <?= $i == 1 ? 'required' : '' ?>>
                                 </div>
                             </div>
                         </div>
@@ -428,7 +428,7 @@ include 'booking-functions.php';
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label><?= _e('Street Address', 'gogalapagos')?>*</label>
-                                    <input type="text" class="form-control" name="streetaddress-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <input type="text" class="form-control" name="traveler[<?= $i ?>][streetaddress]" <?= $i == 1 ? 'required' : '' ?>>
                                 </div>
                             </div>
                         </div>
@@ -436,13 +436,13 @@ include 'booking-functions.php';
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <label><?= _e('City', 'gogalapagos')?>*</label>
-                                    <input type="text" class="form-control" name="city-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <input type="text" class="form-control" name="traveler[<?= $i ?>][city]" <?= $i == 1 ? 'required' : '' ?>>
                                 </div>
                             </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <label><?= _e('Zip Code', 'gogalapagos')?>*</label>
-                                    <input type="text" class="form-control" name="zipcode-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <input type="text" class="form-control" name="traveler[<?= $i ?>][zipcode]" <?= $i == 1 ? 'required' : '' ?>>
                                 </div>
                             </div>
                         </div>
@@ -455,7 +455,7 @@ include 'booking-functions.php';
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label><?= _e('Diet', 'gogalapagos')?>*</label>
-                                    <select class="form-control" name="diet-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <select class="form-control" name="traveler[<?= $i ?>][diet]" <?= $i == 1 ? 'required' : '' ?>>
                                         <option value="d1"><?= _e('Diet 1', 'gogalapagos') ?></option>
                                         <option value="d2"><?= _e('Diet 2', 'gogalapagos') ?></option>
                                         <option value="d3"><?= _e('Diet 3', 'gogalapagos') ?></option>
@@ -467,7 +467,7 @@ include 'booking-functions.php';
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label><?= _e('Medical', 'gogalapagos')?>*</label>
-                                    <select class="form-control" name="medical-traveler-<?= $i ?>" <?= $i == 1 ? 'required' : '' ?>>
+                                    <select class="form-control" name="traveler[<?= $i ?>][medical]" <?= $i == 1 ? 'required' : '' ?>>
                                         <option value="m1"><?= _e('Medical 1', 'gogalapagos') ?></option>
                                         <option value="m2"><?= _e('Medical 2', 'gogalapagos') ?></option>
                                         <option value="m3"><?= _e('Medical 3', 'gogalapagos') ?></option>

@@ -18,6 +18,7 @@ var finicio = $('input[name=date-start]').val();
 var ffin = $('input[name=date-end]').val();
 var salidas = '';
 var promociones = '';
+var personas_por_acomodar = 0;
 var fecha_barco, duracion_barco;
 var cabinas_seleccionadas = [];
 var panel = '';
@@ -191,14 +192,22 @@ function calcularPaxPorAcomodar(){
         $('.checkout-btn-placeholder').show();
         pending_pax.text('0');
     }else{
-        pending_pax.text(pax_por_acomodar - personas_en_cabina);
-        cabinasPendiente();
-        $('#add-another-cabin-btn').show();
-        $('.checkout-btn-placeholder').hide();
-        $('.pending-text').show();
+        if (personas_en_cabina > pax_por_acomodar){
+            cabinasLlenas();
+            $('.pending-text').hide();
+            $('#add-another-cabin-btn').hide();
+            $('.checkout-btn-placeholder').show();
+            pending_pax.text('0');
+        }else{
+            pending_pax.text(pax_por_acomodar - personas_en_cabina);
+            cabinasPendiente();
+            $('#add-another-cabin-btn').show();
+            $('.checkout-btn-placeholder').hide();
+            $('.pending-text').show();
+        }
     }
-    //pendind_pax.text();
-    //console.log( personas_por_acomodar - personas_en_cabina );
+    pending_pax.text();
+    console.log( pax_por_acomodar - personas_en_cabina );
 }
 // INICIALIZACIONES
 $('.input-daterange').datepicker({
@@ -347,7 +356,7 @@ $('#set-date').click( function(e){
 
 // MOSTRAR SUMARIO
 $('#shoping-status').click( function(){
-    $('#cabinSumary').modal('toggle');
+    $('#cabinSumary').modal('show');
 })
 // MOSTRAR CARACTERISTICAS CABINAS
 $('.cabin-name').click( function(){
@@ -447,7 +456,7 @@ $('.pack-placeholder').click( function(){
 // VER INFORMACION DEL PACK
 $('.pack-placeholder-info-box').click(function(){
     console.log($(this));
-    $('#info-extra-' + $(this).data('packcode')).modal('show');
+    $('#info-extra-'+ $(this).data('pax') +'-' + $(this).data('packcode')).modal('show');
 })
 // ACTIVAR SERCIVIO ADICIONAL
 $('.offer-search-filter-placeholder').click(function(){
@@ -455,8 +464,19 @@ $('.offer-search-filter-placeholder').click(function(){
 })
 $('.counter-service').click(function(){
     var operador = $(this);
-    var campo = $('#counter-' + operador.data('serviceid'));
-    console.log(operador.hasClass('add'));
+    var pax = operador.data('pax');
+    var servicio = operador.data('serviceid');
+    var campo = $('#counter-'+pax+'-'+servicio);
+    var valor = campo.val();
+    
+    if( $(this).hasClass('add') ){
+        campo.val( calcularInputPax(0, valor) );
+    }else{
+        if (valor > 1){
+            campo.val( calcularInputPax(1, valor) );
+        }
+    }
+    console.log(campo.val());
 })
 
 
