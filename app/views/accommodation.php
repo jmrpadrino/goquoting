@@ -77,32 +77,6 @@
     .shoping-status.done:after{
         background: #00ff00;
     }
-    .summary-cruise-list{
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-    .panel-default > .panel-heading{
-        background-image: none;
-        background: none;
-    }
-    .panel{
-        border-radius: 0px;
-    }
-    .panel-default{
-        border-color: transparent;
-        border-bottom: 1px solid #ddd;
-    }
-    .panel-heading a{
-        color: #2f2f2f;
-        text-decoration: none;
-    }
-    .cabin-item-list-remove-btn{
-        border: none;
-        color: red;
-        margin-left: 18px;
-        background: none;
-    }
 </style>
 <div class="main-sumary">
     <div class="main-sumary-item">
@@ -137,11 +111,8 @@
     <input type="hidden" name="duration" value="<?= $_POST['duration'] ?>">
     <input type="hidden" name="adults" value="<?= $_POST['adults'] ?>">
     <input type="hidden" name="children" value="<?= $_POST['children'] ?>">
-    <input type="hidden" name="cabins-selected" value="">
-
     <?php 
         $cabinas = obtenerCabinasPorBarco( obtenerDatoBarcoPorCodigoDispo($_POST['ship'], 'ID') );
-        
     ?>
     <div class="inside-box little-box">
         <?php
@@ -150,7 +121,7 @@
             echo '<div class="pending-text">' . $pending . ' <strong id="pending-pax">' . $total_pax . '</strong> ' .$gest_word . '</div>';
         ?>
         <div class="checkout-btn-placeholder" style="display: none;">
-            <button type="submit" class="btn btn-warning"><?= _e('Proceed to checkout', 'gogalapagos') ?></button>
+            <button id="go-checkout" type="button" class="btn btn-warning"><?= _e('Proceed to checkout', 'gogalapagos') ?></button>
         </div>
         <div id="shoping-status" class="shoping-status"><i class="fas fa-shopping-cart"></i></div>
     </div>
@@ -182,7 +153,7 @@
         </div>
         <div class="inside-box">
             <div class="pull-right text-right price-box">
-                <p class="cabin-price">$ <span class="price">2.346</span></p>
+                <p class="cabin-price">$ <span class="price">2346</span></p>
                 <p><?= _e('per adult', 'gogalapagos') ?></p>
             </div>
             <h2 class="cabin-name" data-cabinid="<?= $cabina->ID ?>"><?= $cabina->post_title ?></h2>

@@ -1,16 +1,11 @@
 <?php
 include 'booking-functions.php';
 
-    $total_pax = $_POST['adults'] +  $_POST['children'];
-    $cabinas = str_replace('\\', '', $_POST['cabins-selected']);
-    $cabinas = str_replace('"', '\'', $cabinas);
-//    $cabinas = str_replace('[', '', $cabinas);
-//    $cabinas = str_replace(']', '', $cabinas);
+$total_pax = $_POST['adults'] +  $_POST['children'];
 
-    echo '<pre>';
-//    //var_dump($cabinas);
-//    //echo json_decode($cabinas);
-    echo '</pre>';
+//    echo '<pre>';
+//    var_dump($_POST);
+//    echo '</pre>';
 /*
     * META_PREFIX
     */
@@ -60,7 +55,21 @@ include 'booking-functions.php';
     <input type="hidden" name="duration" value="<?= $_POST['duration'] ?>">
     <input type="hidden" name="adults" value="<?= $_POST['adults'] ?>">
     <input type="hidden" name="children" value="<?= $_POST['children'] ?>">
-    <input type="hidden" name="cabins-selected" value="<?= $cabinas ?>">
+    <?php 
+    foreach($_POST['cabins-selected'] as $key => $cabina){
+        
+//        echo '<pre>';
+//        print_r($cabina);
+//        echo '</pre>';
+        
+        echo '<input type="hidden" name="cabins-selected['.$key.'][idCabina]" value="'.$cabina['idCabina'].'">';
+        echo '<input type="hidden" name="cabins-selected['.$key.'][codigoCabina]" value="'.$cabina['codigoCabina'].'">';
+        echo '<input type="hidden" name="cabins-selected['.$key.'][nombreCabina]" value="'.$cabina['nombreCabina'].'">';
+        echo '<input type="hidden" name="cabins-selected['.$key.'][acomodacionTexto]" value="'.$cabina['acomodacionTexto'].'">';
+        echo '<input type="hidden" name="cabins-selected['.$key.'][personasEnCabina]" value="'.$cabina['personasEnCabina'].'">';
+        echo '<input type="hidden" name="cabins-selected['.$key.'][precioCabina]" value="'.$cabina['precioCabina'].'">';
+    } 
+    ?>
     <div class="container">
         <div class="row">
             <!-- Nav tabs -->
@@ -133,9 +142,9 @@ include 'booking-functions.php';
                                     <br />
                                     <select class="form-control" name="traveler[<?= $i ?>][dirthdate]" <?= $i == 1 ? 'required' : '' ?>>
                                         <?php
-                                            for ($d = 1; $d <= 31; $d++){
-                                                echo '<option value="' . $d . '">' . $d . '</option>';
-                                            }
+    for ($d = 1; $d <= 31; $d++){
+        echo '<option value="' . $d . '">' . $d . '</option>';
+    }
                                         ?>
                                     </select>
                                     <select class="form-control" name="traveler[<?= $i ?>][dirthmonth]" <?= $i == 1 ? 'required' : '' ?>>
@@ -146,9 +155,9 @@ include 'booking-functions.php';
                                         ?>
                                     </select>
                                     <?php
-                                          $date = date('Y');
-                                          $startdate = strtotime ( '-100 year' , strtotime ( $date ) ) ;
-                                          $startdate = date ( 'Y' , $startdate );
+                                                              $date = date('Y');
+                                                              $startdate = strtotime ( '-100 year' , strtotime ( $date ) ) ;
+                                                              $startdate = date ( 'Y' , $startdate );
                                     ?>
                                     <select class="form-control" name="traveler[<?= $i ?>][dirthyear]" <?= $i == 1 ? 'required' : '' ?>>
                                         <?php

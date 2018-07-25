@@ -1,18 +1,17 @@
 <?php 
 
-    include 'booking-functions.php';
-    $prefix = 'gg_';
-    $cabinas = str_replace('\\', '', $_POST['cabins-selected']);
-    $total_pax = $_POST['adults'] +  $_POST['children'];
+include 'booking-functions.php';
+$prefix = 'gg_';
+$total_pax = $_POST['adults'] +  $_POST['children'];
 
-    $args = array(
-        'post_type' => 'ggonboardservices',
-        'posts_per_page' => -1,    
-    );
-    $onboardservices = get_posts($args);
-    echo '<pre>';
-    var_dump($_POST);
-    echo '</pre>';
+$args = array(
+    'post_type' => 'ggonboardservices',
+    'posts_per_page' => -1,    
+);
+$onboardservices = get_posts($args);
+
+//mostrarArreglo($_POST);
+
 
 ?>
 <style>
@@ -109,7 +108,7 @@
         height: 100%;
         background: darkorange;
         display: none;
-        
+
     }
     .offer-search-filter-placeholder.selected span:before{
         display:block;
@@ -161,7 +160,20 @@
         margin: 0 36px;
         border: none;
         border-bottom: 1px solid black;
-        
+    }
+    .sumary-cabins-list{
+        margin: 0px;            
+        padding: 0;
+        margin-left: 10px;
+    }
+    .sumary-cabin-title{
+        *color: black;
+        display: inline-block;
+        margin: 0px;
+        margin-bottom: 18px;
+    }
+    .sumary-cabin-features{
+        margin-left: 8px;
     }
 </style>
 <div class="main-sumary">
@@ -197,8 +209,23 @@
     <input type="hidden" name="duration" value="<?= $_POST['duration'] ?>">
     <input type="hidden" name="adults" value="<?= $_POST['adults'] ?>">
     <input type="hidden" name="children" value="<?= $_POST['children'] ?>">
-    <input type="hidden" name="cabins-selected" value="<?= $cabinas ?>">
-    <input type="hidden" name="travelers-details" value="">
+    <?php 
+    foreach($_POST['cabins-selected'] as $key => $cabina){
+        echo '<input type="hidden" name="cabins-selected['.$key.'][idCabina]" value="'.$cabina['idCabina'].'">';
+        echo '<input type="hidden" name="cabins-selected['.$key.'][codigoCabina]" value="'.$cabina['codigoCabina'].'">';
+        echo '<input type="hidden" name="cabins-selected['.$key.'][nombreCabina]" value="'.$cabina['nombreCabina'].'">';
+        echo '<input type="hidden" name="cabins-selected['.$key.'][acomodacionTexto]" value="'.$cabina['acomodacionTexto'].'">';
+        echo '<input type="hidden" name="cabins-selected['.$key.'][personasEnCabina]" value="'.$cabina['personasEnCabina'].'">';
+        echo '<input type="hidden" name="cabins-selected['.$key.'][precioCabina]" value="'.$cabina['precioCabina'].'">';
+    } 
+    ?>
+    <?php 
+    foreach($_POST['traveler'] as $key => $pax){
+        foreach($pax as $index => $value){
+            echo '<input type="hidden" name="traveler['.$key.']['.$index.']" value="'.$value.'">';
+        }
+    } 
+    ?>
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
@@ -223,11 +250,11 @@
                             <h3><?= _e('Select your drinks packages', 'gogalapagos')?></h3>
                             <ul class="list-inline duration-list">
                                 <?php 
-                                    //for($z = 1; $z <= 4; $z++){ 
-                                    $y = 1;
-                                    foreach($onboardservices as $servicio){
-                                        $categoria = get_the_terms($servicio->ID, 'onboard-service-package');
-                                        if ($categoria[0]->slug == 'drink-packages'){
+    //for($z = 1; $z <= 4; $z++){ 
+    $y = 1;
+                                                                    foreach($onboardservices as $servicio){
+                                                                        $categoria = get_the_terms($servicio->ID, 'onboard-service-package');
+                                                                        if ($categoria[0]->slug == 'drink-packages'){
                                 ?>
                                 <li>
                                     <div class="pack-placeholder" data-packcode="<?= $servicio->ID ?>" data-pax="<?= $i ?>">
@@ -242,9 +269,9 @@
                                     </div>
                                 </li>
                                 <?php 
-                                        $y++; 
-                                        } //Fin si
-                                    } // fin foreach
+                                    $y++; 
+                                                                        } //Fin si
+                                                                    } // fin foreach
                                 ?>
                             </ul>
                         </div>
@@ -254,9 +281,9 @@
                                 <?php 
                                     //for($z = 1; $z <= 4; $z++){ 
                                     $y = 1;
-                                    foreach($onboardservices as $servicio){
-                                        $categoria = get_the_terms($servicio->ID, 'onboard-service-package');
-                                        if ($categoria[0]->slug == 'internet-packages'){
+                                                                    foreach($onboardservices as $servicio){
+                                                                        $categoria = get_the_terms($servicio->ID, 'onboard-service-package');
+                                                                        if ($categoria[0]->slug == 'internet-packages'){
                                 ?>
                                 <li>
                                     <div class="pack-placeholder" data-packcode="<?= $z ?>">
@@ -270,9 +297,9 @@
                                     </div>
                                 </li>
                                 <?php 
-                                        $y++; 
-                                        } //Fin si
-                                    } // fin foreach
+                                    $y++; 
+                                                                        } //Fin si
+                                                                    } // fin foreach
                                 ?>
                             </ul>
                         </div>
@@ -304,7 +331,7 @@
                         </div>
                     </div>
                     <?php 
-                        foreach($onboardservices as $serviciomodal){
+                                    foreach($onboardservices as $serviciomodal){
                     ?>
                     <!-- Modal -->
                     <div class="modal fade" id="info-extra-<?= $i ?>-<?= $serviciomodal->ID ?>" data-pax="<?= $i ?>" tabindex="-1" role="dialog" aria-labelledby="cabinSumary">
@@ -357,11 +384,75 @@
                     <li><strong><?= _e('Duration', 'gogalapagos') ?></strong> <?= $_POST['duration'] . ' - ' . $_POST['duration'] - 1 ?></li>
                 </ul>
                 <div id="sumary-content">
-                    <div class="panel-group" id="cabins-selected-accordion" role="tablist" aria-multiselectable="true"></div>
+                    <div class="panel-group" id="cabins-selected-accordion" role="tablist" aria-multiselectable="true">
+                        <!-- LISTADO CABINAS -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#cabins" href="#cabins" aria-expanded="true" aria-controls="collapseOne"><?= _e('Selected cabins','gogalapagos') ?></a>
+                                    <span class="fas fa-chevron-down pull-right"></span>
+                                </h4>
+                            </div>
+                            <div id="cabins" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    <ol class="sumary-cabins-list">
+                                    <?php 
+                                    foreach($_POST['cabins-selected'] as $key => $value){
+                                        echo '<li>';
+                                        echo '<h2 class="sumary-cabin-title">' . $value['nombreCabina'] . '</h2>';
+                                        echo '<small class="sumary-cabin-features">' . $value['acomodacionTexto'] . '</small>';
+                                        echo '<div class="pull-right cabin-price">' . $value['precioCabina'] . '</div>';
+                                        echo '</li>';
+                                        
+                                        $precio = strval($value['precioCabina']);
+                                        
+                                        $subtotal_cabinas += (int)$precio;
+                                    }
+                                    ?>  
+                                    </ol>
+                                                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- LISTADO SERVICIOS EXTRAS -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#extras" href="#extras" aria-expanded="true" aria-controls="collapseOne"><?= _e('Extra services','gogalapagos') ?></a>
+                                    <span class="fas fa-chevron-down pull-right"></span>
+                                </h4>
+                            </div>
+                            <div id="extras" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- LISTADO SPECIAL DEALS -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#deals" href="#deals" aria-expanded="true" aria-controls="collapseOne"><?= _e('Special deals','gogalapagos') ?></a>
+                                    <span class="fas fa-chevron-down pull-right"></span>
+                                </h4>
+                            </div>
+                            <div id="deals" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    <?php
+                                        $special = get_post($_POST['promo']);
+                                        $special_price = 750;
+                                        echo '<h2 class="sumary-cabin-title">' . esc_html( $special->post_title ) . '</h2>';
+                                        echo '<div class="pull-right cabin-price">$ ' . $special_price . '</div>';
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="add-another-cabin-btn" type="button" class="btn btn-default pull-left" data-dismiss="modal"><?= _e('Add another extra', 'gogalapagos') ?></button>
+                <button id="add-another-cabin-btn" type="button" class="btn btn-default pull-left" data-dismiss="modal"><?= _e('Add more extras', 'gogalapagos') ?></button>
                 <button id="submit-accommodation" type="button" class="btn btn-warning pull-right"><?= _e('Confirmation', 'gogalapagos') ?></button>
             </div>
         </div>

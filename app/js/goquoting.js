@@ -350,6 +350,7 @@ $('#set-date').click( function(e){
     }else{
         $('#error-message').slideDown();
     }
+    $('#extrax-form').submit();
 })
 
 /*  EVENTOS PARA ACOMODACION */
@@ -401,19 +402,29 @@ $('.add-cabin-btn').click( function(){
         
         //agregar cabinas al arreglo
         cabina = {
-            "acomodacionTexto"    :   $('select[name=accommodation-for-'+elemento.data('addcabin')+'] option:selected').text(),
-            "codigoCabina"        :   elemento.data('dispocode'),
-            "idCabina"            :   elemento.data('addcabin'),
-            "nombreCabina"        :   elemento.parents('#'+elemento.data('addcabin')).find('.cabin-name').text(),
-            "precioCabina"        :   elemento.parents('#'+elemento.data('addcabin')).find('.price').text(),
-            "personasEnCabina"    :   $('select[name=accommodation-for-'+elemento.data('addcabin')+'] option:selected').data('peopleincabin')
-        }
+            acomodacionTexto    :   $('select[name=accommodation-for-'+elemento.data('addcabin')+'] option:selected').text(),
+            codigoCabina        :   elemento.data('dispocode'),
+            idCabina            :   elemento.data('addcabin'),
+            nombreCabina        :   elemento.parents('#'+elemento.data('addcabin')).find('.cabin-name').text(),
+            precioCabina        :   elemento.parents('#'+elemento.data('addcabin')).find('.price').text(),
+            personasEnCabina    :   $('select[name=accommodation-for-'+elemento.data('addcabin')+'] option:selected').data('peopleincabin')
+        };
         $('select[name=accommodation-for-'+elemento.data('addcabin')+']').val(0);
         
         
         cabinas_seleccionadas.push(cabina);
         
-        $('input[name=cabins-selected]').val( JSON.stringify(cabinas_seleccionadas) );
+//        $.each(cabinas_seleccionadas, function(index, values){
+//            console.log(values);
+//            $('input[name="cabins-selected['+index+'][acomodacionTexto]"]').val( values.acomodacionTexto );
+//            $('input[name="cabins-selected['+index+'][codigoCabina]"]').val( values.codigoCabina );
+//            $('input[name="cabins-selected['+index+'][idCabina]"]').val( values.idCabina );
+//            $('input[name="cabins-selected['+index+'][nombreCabina]"]').val( values.nombreCabina );
+//            $('input[name="cabins-selected['+index+'][personasEnCabina]"]').val( values.personasEnCabina );
+//            $('input[name="cabins-selected['+index+'][precioCabina]"]').val( values.precioCabina );
+//        });
+//        
+//        console.log($('input[name="cabins-selected[0][acomodacionTexto]"]'));
         
         calcularPaxPorAcomodar();
         
@@ -440,9 +451,23 @@ $(document).on('click', '.cabin-item-list-remove-btn', function(){
     calcularPaxPorAcomodar();
 })
 
-// ENVIAR ACOMODACION DESDE MODAL
-$('#submit-accommodation').click( function(){
+// ENVIAR ACOMODACION DESDE FORM
+$('#go-checkout').click( function(){
+    
+    $.each( cabinas_seleccionadas, function(index, value){        
+        $('<input type="hidden" name="cabins-selected['+index+'][idCabina]" value="'+value.idCabina+'">').appendTo($('#accommodation-form'));
+        $('<input type="hidden" name="cabins-selected['+index+'][codigoCabina]" value="'+value.codigoCabina+'">').appendTo($('#accommodation-form'));
+        $('<input type="hidden" name="cabins-selected['+index+'][nombreCabina]" value="'+value.nombreCabina+'">').appendTo($('#accommodation-form'));
+        $('<input type="hidden" name="cabins-selected['+index+'][acomodacionTexto]" value="'+value.acomodacionTexto+'">').appendTo($('#accommodation-form'));
+        $('<input type="hidden" name="cabins-selected['+index+'][personasEnCabina]" value="'+value.personasEnCabina+'">').appendTo($('#accommodation-form'));
+        $('<input type="hidden" name="cabins-selected['+index+'][precioCabina]" value="'+parseInt(value.precioCabina)+'">').appendTo($('#accommodation-form'));
+    })
     $('#accommodation-form').submit();
+})
+
+// ENVIAR ACOMODACION DESDE MODAL
+$('#submit-accommodation').click( function(){    
+    $('#go-checkout').trigger('click');
 })
 
 /* EVENTOS PARA EXTRAS */

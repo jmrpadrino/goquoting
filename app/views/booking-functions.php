@@ -46,4 +46,8 @@ function obtenerCabinasPorBarco($id_barco){
     
     return $cabinas;
 }
+function obtenerPromo($id_promo){    
+    $promo = get_post($id_promo);
+    return $promo;
+}
 ?>

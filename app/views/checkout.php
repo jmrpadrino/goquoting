@@ -1,13 +1,9 @@
 <?php   
     include 'booking-functions.php';
     $prefix = 'gg_';
-    $cabinas = str_replace('\\', '', $_POST['cabins-selected']);
-    $cabinas = str_replace('\'', '"', $cabinas);
-    $cabinass = json_decode($cabinas);
     echo '<pre>';
     var_dump($_POST);
     echo '</pre>';
-    //var_dump($cabinas);
 ?>
 <style>
     <?php echo file_get_contents( RUTA_PLUGIN_BOOKING . 'app/css/booking-system-common-styles.css', true ); ?>
