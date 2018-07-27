@@ -161,20 +161,6 @@ $onboardservices = get_posts($args);
         border: none;
         border-bottom: 1px solid black;
     }
-    .sumary-cabins-list{
-        margin: 0px;            
-        padding: 0;
-        margin-left: 10px;
-    }
-    .sumary-cabin-title{
-        *color: black;
-        display: inline-block;
-        margin: 0px;
-        margin-bottom: 18px;
-    }
-    .sumary-cabin-features{
-        margin-left: 8px;
-    }
 </style>
 <div class="main-sumary">
     <div class="main-sumary-item">
@@ -411,20 +397,6 @@ $onboardservices = get_posts($args);
                                     ?>  
                                     </ol>
                                                                     
-                                </div>
-                            </div>
-                        </div>
-                        <!-- LISTADO SERVICIOS EXTRAS -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                                <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#extras" href="#extras" aria-expanded="true" aria-controls="collapseOne"><?= _e('Extra services','gogalapagos') ?></a>
-                                    <span class="fas fa-chevron-down pull-right"></span>
-                                </h4>
-                            </div>
-                            <div id="extras" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                                 </div>
                             </div>
                         </div>

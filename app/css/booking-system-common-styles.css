@@ -237,3 +237,17 @@ button{
 .tab-content div.active{
     display: block;
 }
+.sumary-cabins-list{
+    margin: 0px;            
+    padding: 0;
+    margin-left: 10px;
+}
+.sumary-cabin-title{
+    *color: black;
+    display: inline-block;
+    margin: 0px;
+    margin-bottom: 18px;
+}
+.sumary-cabin-features{
+    margin-left: 8px;
+}
