@@ -1,6 +1,10 @@
 <?php
+    var_dump($_COOKIE);
 include 'booking-functions.php';
+if (isset($_GET['id']) && isset($_COOKIE['goquoting_cookie'])){
+}
 
+    die();
 $total_pax = $_POST['adults'] +  $_POST['children'];
 
 //    echo '<pre>';

@@ -2,10 +2,6 @@
 
 $prefix = 'gg_'; 
 
-
-echo md5(strtotime(date('Ymd h:i:s')));
-
-
 ?>
 <style>
 <?php echo file_get_contents( RUTA_PLUGIN_BOOKING . 'app/css/booking-system-common-styles.css', true ); ?>

@@ -1,9 +1,46 @@
 <?php 
-    include 'booking-functions.php';
-    $total_pax = $_POST['adults'] +  $_POST['children'];
-    /*
-    * META_PREFIX
-    */
+include 'booking-functions.php';
+
+global $wpdb;
+$prefix = 'gg_';
+
+if(!isset($_COOKIE['goquoting_cookie'])){
+    $cookie = md5(strtotime(date('Ymd h:i:s')));
+    //setcookie('goquoting_cookie', $cookie, time() + ( 3600 * 4)) ; // 4 horas
+    setcookie('goquoting_cookie', $cookie, time() + (365 * 24 * 60 * 60) ) ; // 1 año
+}
+
+$sql = "SELECT * FROM gg_goquoting_pedido WHERE cookie_sesion = '".$_COOKIE['goquoting_cookie']."'";
+
+$registro = $wpdb->get_results($sql);
+
+if (!$registro){
+    $wpdb->insert(
+        $prefix . 'goquoting_pedido',
+        array(
+            'cookie_sesion' => $cookie,
+            'fecha' => date('Y-m-d h:i:s'),
+            'barco' => $_POST['ship'],
+            'f_salida' => $_POST['departure'],
+            'adultos' => $_POST['adults'],
+            'ninios' => $_POST['children'],
+            'duracion' => $_POST['duration'],
+            'promo' => $_POST['promo']
+        )
+    );
+    $registro = $wpdb->get_results($sql);
+}
+
+$total_pax = $_POST['adults'] +  $_POST['children'];
+//
+echo '<pre>';
+var_dump($_COOKIE['goquoting_cookie']);
+//var_dump($registro);
+echo '</pre>';
+
+/*
+* META_PREFIX
+*/
 
 ?>
 <style>
@@ -104,7 +141,8 @@
         </div>            
     </div>
 </div>
-<form id="accommodation-form" role="form" method="post" action="<?= home_url('traveler-details') ?>/" enctype='application/json'>
+<form id="accommodation-form" role="form" method="post" action="<?= home_url('traveler-details') ?>?id=<?= $registro[0]->id ?>" enctype='application/json'>
+    <input type="hidden" name="cookie_sesion" value="<?= $cookie ?>">
     <input type="hidden" name="ship" value="<?= $_POST['ship'] ?>">
     <input type="hidden" name="departure" value="<?= $_POST['departure'] ?>">
     <input type="hidden" name="promo" value="<?= $_POST['promo'] ?>">
@@ -112,13 +150,13 @@
     <input type="hidden" name="adults" value="<?= $_POST['adults'] ?>">
     <input type="hidden" name="children" value="<?= $_POST['children'] ?>">
     <?php 
-        $cabinas = obtenerCabinasPorBarco( obtenerDatoBarcoPorCodigoDispo($_POST['ship'], 'ID') );
+    $cabinas = obtenerCabinasPorBarco( obtenerDatoBarcoPorCodigoDispo($_POST['ship'], 'ID') );
     ?>
     <div class="inside-box little-box">
         <?php
-            $pending = _x('Pending Assignment', 'gogalapagos');
-            $gest_word = _x('guests', 'gogalapagos');
-            echo '<div class="pending-text">' . $pending . ' <strong id="pending-pax">' . $total_pax . '</strong> ' .$gest_word . '</div>';
+        $pending = _x('Pending Assignment', 'gogalapagos');
+        $gest_word = _x('guests', 'gogalapagos');
+        echo '<div class="pending-text">' . $pending . ' <strong id="pending-pax">' . $total_pax . '</strong> ' .$gest_word . '</div>';
         ?>
         <div class="checkout-btn-placeholder" style="display: none;">
             <button id="go-checkout" type="button" class="btn btn-warning"><?= _e('Proceed to checkout', 'gogalapagos') ?></button>
@@ -133,19 +171,19 @@
     <div id="cabins-list-placeholder" class="inside-box little-box" style="display: none;">
         <ul id="cabins-list" class="cabins-list">
             <?php
-                foreach ($cabinas as $cabina){
-                    echo '<li class="cabin-list-item">';
-                    echo '<div class="cabin-list-title '. $cabina->post_name .'" >' . $cabina->post_title . '</div>';
-                    echo '<div class="cabin-list-status" data-cabinbox="' . $cabina->ID . '"><i class="fas fa-check-square"></i></div>';
-                    echo '</li>';
-                }
+    foreach ($cabinas as $cabina){
+        echo '<li class="cabin-list-item">';
+        echo '<div class="cabin-list-title '. $cabina->post_name .'" >' . $cabina->post_title . '</div>';
+        echo '<div class="cabin-list-status" data-cabinbox="' . $cabina->ID . '"><i class="fas fa-check-square"></i></div>';
+        echo '</li>';
+    }
             ?>
         </ul>
     </div>
     <?php 
-        foreach ($cabinas as $cabina){ 
-            // Cabina codigo dispo
-            $cabina_dispo_code = get_post_meta( $cabina->ID, META_PREFIX . 'dispo_ID', true);
+    foreach ($cabinas as $cabina){ 
+        // Cabina codigo dispo
+        $cabina_dispo_code = get_post_meta( $cabina->ID, META_PREFIX . 'dispo_ID', true);
     ?>
     <div id="<?= $cabina->ID ?>" class="cabin-box" data-dispocode="<?= $cabina_dispo_code ?>">
         <div class="cabin-box-thumbnail-placeholder">
@@ -158,14 +196,14 @@
             </div>
             <h2 class="cabin-name" data-cabinid="<?= $cabina->ID ?>"><?= $cabina->post_title ?></h2>
             <?php
-                $caracteristicas = get_post_meta($cabina->ID, META_PREFIX . 'cabin_featurelist', false);                
-                if ( count($caracteristicas[0]) > 0){
-                    echo '<ul id="featured-'. $cabina->ID .'" style="display: none;">';
-                    foreach($caracteristicas[0] as $catacteristica){
-                        echo '<li>' . $catacteristica . '</li>';
-                    }
-                    echo '</ul>';
-                }
+        $caracteristicas = get_post_meta($cabina->ID, META_PREFIX . 'cabin_featurelist', false);                
+        if ( count($caracteristicas[0]) > 0){
+            echo '<ul id="featured-'. $cabina->ID .'" style="display: none;">';
+            foreach($caracteristicas[0] as $catacteristica){
+                echo '<li>' . $catacteristica . '</li>';
+            }
+            echo '</ul>';
+        }
             ?>
             <h3 class="text-center"><?= _e('Accommodations for this cabin', 'gogalapagos') ?></h3>
             <select class="form-control accommodation-items" name="accommodation-for-<?= $cabina->ID ?>">
