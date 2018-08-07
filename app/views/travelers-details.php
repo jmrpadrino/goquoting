@@ -1,18 +1,34 @@
 <?php
-    var_dump($_COOKIE);
-include 'booking-functions.php';
-if (isset($_GET['id']) && isset($_COOKIE['goquoting_cookie'])){
+if (!isset($_GET['id']) && !isset($_COOKIE['goquoting_cookie'])){
+    wp_redirect( home_url('check-availability'), 302 );
+    exit;
 }
+include 'booking-functions.php';
 
-    die();
+global $wpdb;
+$prefix = 'gg_';
+
 $total_pax = $_POST['adults'] +  $_POST['children'];
 
-//    echo '<pre>';
-//    var_dump($_POST);
-//    echo '</pre>';
-/*
-    * META_PREFIX
-    */
+$sql = "SELECT * FROM gg_goquoting_detalle_cabina WHERE id_pedido = '".$_GET['id']."'";
+$registro = $wpdb->get_results($sql);
+
+if (!$registro){
+    
+    foreach ($_POST['cabins-selected'] as $cabin){
+        echo $cabin['idCabina'];
+        $wpdb->insert(
+            $prefix . 'goquoting_detalle_cabina',
+            array(
+                'id_pedido' => $_GET['id'],
+                'cabina' => $cabin['codigoCabina'],
+                'acomodacion' => $cabin['acomodacionTexto'],
+                'tarifa' => $cabin['precioCabina'],
+            )
+        );
+    }
+    $registro = $wpdb->get_results($sql);
+}
 
 ?>
 <style>
@@ -52,7 +68,7 @@ $total_pax = $_POST['adults'] +  $_POST['children'];
         </div>            
     </div>
 </div>
-<form id="accommodation-form" role="form" method="post" action="<?= home_url('extras') ?>/">
+<form id="accommodation-form" role="form" method="post" action="<?= home_url('extras') ?>?id=<?= $_GET['id'] ?>">
     <input type="hidden" name="ship" value="<?= $_POST['ship'] ?>">
     <input type="hidden" name="departure" value="<?= $_POST['departure'] ?>">
     <input type="hidden" name="promo" value="<?= $_POST['promo'] ?>">

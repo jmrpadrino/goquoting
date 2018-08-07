@@ -13,7 +13,7 @@ function dataStructureConfiguration(){
     $tablepedido_detalle_pasajero = $wpdb->prefix . 'goquoting_detalle_pasajero';
     $tablepedido_detalle_extras = $wpdb->prefix . 'goquoting_detalle_extras';
     
-    if ( $wpdb->get_var('SHOW TABLES LIKE ' . $tablepedido) != $tablepedido ){
+    if ( $wpdb->get_var("SHOW TABLES LIKE '" . $tablepedido . "'") != $tablepedido ){
         // TABLA CABECERA PEDIDO
         $sql_ppal = 'CREATE TABLE `' . $tablepedido . '` (
         `id` BIGINT(20) UNSIGNED AUTO_INCREMENT,
@@ -79,4 +79,64 @@ function dataStructureConfiguration(){
     }
 }
 add_action('plugins_loaded', 'dataStructureConfiguration');
+// Register Custom Post Type
+function goquoting_pedidos() {
+
+	$labels = array(
+		'name'                  => _x( 'Pedidos', 'Post Type General Name', 'gogalapagos' ),
+		'singular_name'         => _x( 'Pedido', 'Post Type Singular Name', 'gogalapagos' ),
+		'menu_name'             => __( 'Pedidos', 'gogalapagos' ),
+		'name_admin_bar'        => __( 'Pedido', 'gogalapagos' ),
+		'archives'              => __( 'Item Archives', 'gogalapagos' ),
+		'attributes'            => __( 'Item Attributes', 'gogalapagos' ),
+		'parent_item_colon'     => __( 'Parent Item:', 'gogalapagos' ),
+		'all_items'             => __( 'All Items', 'gogalapagos' ),
+		'add_new_item'          => __( 'Add New Item', 'gogalapagos' ),
+		'add_new'               => __( 'Add New', 'gogalapagos' ),
+		'new_item'              => __( 'New Item', 'gogalapagos' ),
+		'edit_item'             => __( 'Edit Item', 'gogalapagos' ),
+		'update_item'           => __( 'Update Item', 'gogalapagos' ),
+		'view_item'             => __( 'View Item', 'gogalapagos' ),
+		'view_items'            => __( 'View Items', 'gogalapagos' ),
+		'search_items'          => __( 'Search Item', 'gogalapagos' ),
+		'not_found'             => __( 'Not found', 'gogalapagos' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', 'gogalapagos' ),
+		'featured_image'        => __( 'Featured Image', 'gogalapagos' ),
+		'set_featured_image'    => __( 'Set featured image', 'gogalapagos' ),
+		'remove_featured_image' => __( 'Remove featured image', 'gogalapagos' ),
+		'use_featured_image'    => __( 'Use as featured image', 'gogalapagos' ),
+		'insert_into_item'      => __( 'Insert into item', 'gogalapagos' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this item', 'gogalapagos' ),
+		'items_list'            => __( 'Items list', 'gogalapagos' ),
+		'items_list_navigation' => __( 'Items list navigation', 'gogalapagos' ),
+		'filter_items_list'     => __( 'Filter items list', 'gogalapagos' ),
+	);
+	$args = array(
+		'label'                 => __( 'Pedido', 'gogalapagos' ),
+		'description'           => __( 'Pedidos Web', 'gogalapagos' ),
+		'labels'                => $labels,
+		'supports'              => array( 'title' ),
+		'hierarchical'          => false,
+		'public'                => false,
+		'show_ui'               => false,
+		'show_in_menu'          => true,
+		'menu_position'         => 5,
+		'menu_icon'             => 'dashicons-cart',
+		'show_in_admin_bar'     => false,
+		'show_in_nav_menus'     => false,
+		'can_export'            => true,
+		'has_archive'           => false,
+		'exclude_from_search'   => true,
+		'publicly_queryable'    => false,
+		'query_var'             => 'web-sales',
+		'rewrite'               => false,
+		'capability_type'       => 'post',
+		'show_in_rest'          => true,
+		'rest_base'             => 'web-sales',
+		'rest_controller_class' => 'WP_REST_web_sales_Controller',
+	);
+	register_post_type( 'pedidos', $args );
+
+}
+add_action( 'init', 'goquoting_pedidos', 0 );
 ?>

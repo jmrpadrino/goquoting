@@ -1,8 +1,60 @@
 <?php 
-
+if (!isset($_GET['id']) && !isset($_COOKIE['goquoting_cookie'])){
+    wp_redirect( home_url('check-availability'), 302 );
+    exit;
+}
 include 'booking-functions.php';
+
+global $wpdb;
 $prefix = 'gg_';
+
 $total_pax = $_POST['adults'] +  $_POST['children'];
+
+$sql = "SELECT * FROM gg_goquoting_detalle_pasajero WHERE id_pedido = '".$_GET['id']."'";
+$registro = $wpdb->get_results($sql);
+
+if (!$registro){
+    $ti = 0;
+    foreach ($_POST['traveler'] as $traveler){
+        $ppal = 0;
+        if($ti == 0){
+            $ppal = 1;
+        }
+        if 
+        (
+            !empty($traveler['fname']) ||
+            !empty($traveler['lname'])
+        ){
+        
+            $wpdb->insert(
+                $prefix . 'goquoting_detalle_pasajero',
+                array(
+                    'id_pedido' => $_GET['id'],
+                    'principal' => $ppal,
+                    'titulo' => $traveler['title'],
+                    'nombre' => $traveler['fname'],
+                    'apellido' => $traveler['lname'],
+                    'genero' => $traveler['gender'],
+                    'telefono' => $traveler['phone'],
+                    'email' => $traveler['email'],
+                    'dia' => $traveler['dirthdate'],
+                    'mes' => $traveler['dirthmonth'],
+                    'anio' => $traveler['dirthyear'],
+                    'pais' => $traveler['country'],
+                    'provincia' => $traveler['citystate'],
+                    'calle' => $traveler['streetaddress'],
+                    'ciudad' => $traveler['city'],
+                    'codigo_postal' => $traveler['zipcode'],
+                    'dieta' => $traveler['diet'],
+                    'cond_medica' => $traveler['medical'],
+                )
+            );
+        }
+        $ti++;
+    }
+    $registro = $wpdb->get_results($sql);
+}
+
 
 $args = array(
     'post_type' => 'ggonboardservices',
@@ -10,7 +62,12 @@ $args = array(
 );
 $onboardservices = get_posts($args);
 
-//mostrarArreglo($_POST);
+//mostrarArreglo($onboardservices);
+//$slugs = get_the_terms($onboardservices[0]->ID, 'onboard-service-package');
+//echo '<pre>';
+//var_dump( $slugs[0] );
+//echo '</pre>';
+//die();
 
 
 ?>
@@ -188,7 +245,7 @@ $onboardservices = get_posts($args);
         </div>            
     </div>
 </div>
-<form id="extrax-form" role="form" method="post" action="<?= home_url('checkout') ?>/">
+<form id="extrax-form" role="form" method="post" action="<?= home_url('checkout') ?>?id=<?= $_GET['id'] ?>">
     <input type="hidden" name="ship" value="<?= $_POST['ship'] ?>">
     <input type="hidden" name="departure" value="<?= $_POST['departure'] ?>">
     <input type="hidden" name="promo" value="<?= $_POST['promo'] ?>">
@@ -237,10 +294,10 @@ $onboardservices = get_posts($args);
                             <ul class="list-inline duration-list">
                                 <?php 
     //for($z = 1; $z <= 4; $z++){ 
-    $y = 1;
-                                                                    foreach($onboardservices as $servicio){
-                                                                        $categoria = get_the_terms($servicio->ID, 'onboard-service-package');
-                                                                        if ($categoria[0]->slug == 'drink-packages'){
+                                $y = 1;
+                                foreach($onboardservices as $servicio){
+                                    $categoria = get_the_terms($servicio->ID, 'onboard-service-package');
+                                    if ($categoria[0]->slug == 'drink-packages'){
                                 ?>
                                 <li>
                                     <div class="pack-placeholder" data-packcode="<?= $servicio->ID ?>" data-pax="<?= $i ?>">
@@ -256,8 +313,8 @@ $onboardservices = get_posts($args);
                                 </li>
                                 <?php 
                                     $y++; 
-                                                                        } //Fin si
-                                                                    } // fin foreach
+                                    } //Fin si
+                                } // fin foreach
                                 ?>
                             </ul>
                         </div>
@@ -267,9 +324,9 @@ $onboardservices = get_posts($args);
                                 <?php 
                                     //for($z = 1; $z <= 4; $z++){ 
                                     $y = 1;
-                                                                    foreach($onboardservices as $servicio){
-                                                                        $categoria = get_the_terms($servicio->ID, 'onboard-service-package');
-                                                                        if ($categoria[0]->slug == 'internet-packages'){
+                                    foreach($onboardservices as $servicio){
+                                        $categoria = get_the_terms($servicio->ID, 'onboard-service-package');
+                                        if ($categoria[0]->slug == 'internet-packages'){
                                 ?>
                                 <li>
                                     <div class="pack-placeholder" data-packcode="<?= $z ?>">
@@ -283,9 +340,9 @@ $onboardservices = get_posts($args);
                                     </div>
                                 </li>
                                 <?php 
-                                    $y++; 
-                                                                        } //Fin si
-                                                                    } // fin foreach
+                                        $y++; 
+                                        } //Fin si
+                                    } // fin foreach
                                 ?>
                             </ul>
                         </div>

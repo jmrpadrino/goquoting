@@ -7,12 +7,15 @@ $prefix = 'gg_';
 if(!isset($_COOKIE['goquoting_cookie'])){
     $cookie = md5(strtotime(date('Ymd h:i:s')));
     //setcookie('goquoting_cookie', $cookie, time() + ( 3600 * 4)) ; // 4 horas
-    setcookie('goquoting_cookie', $cookie, time() + (365 * 24 * 60 * 60) ) ; // 1 año
+    setcookie('goquoting_cookie', $cookie, time() + (365 * 24 * 60 * 60), COOKIEPATH, COOKIE_DOMAIN  ) ; // 1 año
+}else{
+    $cookie = $_COOKIE['goquoting_cookie'];
 }
 
-$sql = "SELECT * FROM gg_goquoting_pedido WHERE cookie_sesion = '".$_COOKIE['goquoting_cookie']."'";
+$sql = "SELECT * FROM gg_goquoting_pedido WHERE cookie_sesion = '".$cookie."'";
 
 $registro = $wpdb->get_results($sql);
+
 
 if (!$registro){
     $wpdb->insert(
@@ -28,19 +31,9 @@ if (!$registro){
             'promo' => $_POST['promo']
         )
     );
-    $registro = $wpdb->get_results($sql);
 }
-
+$registro = $wpdb->get_results($sql);    
 $total_pax = $_POST['adults'] +  $_POST['children'];
-//
-echo '<pre>';
-var_dump($_COOKIE['goquoting_cookie']);
-//var_dump($registro);
-echo '</pre>';
-
-/*
-* META_PREFIX
-*/
 
 ?>
 <style>

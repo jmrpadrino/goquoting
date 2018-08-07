@@ -6,6 +6,7 @@ add_shortcode('goquoting-accommodation', 'goquotingAccommodation');
 add_shortcode('goquoting-travelers-details', 'goquotingTravelersDetails');
 add_shortcode('goquoting-extras', 'goquotingExtras');
 add_shortcode('gogabooking-checkout', 'goquotingCheckout');
+add_shortcode('gogabooking-thankyou', 'goquotingThanks');
 
 function goquotingCheckAvailability(){
     include 'views/check-availability.php';
@@ -21,4 +22,8 @@ function goquotingExtras(){
 }
 function goquotingCheckout(){
     include 'views/checkout.php';
+}
+function goquotingThanks(){
+    include 'views/thank-you.php';
+    flush_rewrite_rules();
 }
