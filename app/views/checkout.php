@@ -1,11 +1,8 @@
 <?php
+include PATH_PLUGIN_BOOKING . '/app/functions/booking-functions.php';
 if (!isset($_GET['id']) && !isset($_COOKIE['goquoting_cookie'])){
-    wp_redirect( home_url('check-availability'), 302 );
-    exit;
+    empezarProceso();
 }
-global $wpdb;
-include 'booking-functions.php';
-$prefix = 'gg_';
 
 $total_pax = $_POST['adults'] +  $_POST['children'];
 
@@ -18,9 +15,6 @@ $extras = $wpdb->get_results($sqlext);
 if ($pasajeros && !$extras){
     $travelers = 1;
     foreach ($pasajeros as $pasajero){
-        echo '<pre>';
-        var_dump($_POST['services'][$travelers]);
-        echo '</pre>';
         
         foreach($_POST['services'][$travelers] as $key => $cantidad){
             if($cantidad != 0){
@@ -93,6 +87,7 @@ $registros = $wpdb->get_results($sqlext);
     </div>
 </div>
 <form id="extrax-form" role="form" method="post" action="<?= home_url('thank-you') ?>/">
+    <input type="hidden" name="quote" value="<?= $_GET['id'] ?>">
     <input type="hidden" name="ship" value="<?= $_POST['ship'] ?>">
     <input type="hidden" name="departure" value="<?= $_POST['departure'] ?>">
     <input type="hidden" name="promo" value="<?= $_POST['promo'] ?>">

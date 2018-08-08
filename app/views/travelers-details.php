@@ -1,12 +1,8 @@
 <?php
+include PATH_PLUGIN_BOOKING . '/app/functions/booking-functions.php';
 if (!isset($_GET['id']) && !isset($_COOKIE['goquoting_cookie'])){
-    wp_redirect( home_url('check-availability'), 302 );
-    exit;
+    empezarProceso();
 }
-include 'booking-functions.php';
-
-global $wpdb;
-$prefix = 'gg_';
 
 $total_pax = $_POST['adults'] +  $_POST['children'];
 
@@ -16,7 +12,6 @@ $registro = $wpdb->get_results($sql);
 if (!$registro){
     
     foreach ($_POST['cabins-selected'] as $cabin){
-        echo $cabin['idCabina'];
         $wpdb->insert(
             $prefix . 'goquoting_detalle_cabina',
             array(

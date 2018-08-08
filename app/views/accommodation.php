@@ -1,16 +1,7 @@
 <?php 
-include 'booking-functions.php';
+include PATH_PLUGIN_BOOKING . '/app/functions/booking-functions.php';
 
-global $wpdb;
-$prefix = 'gg_';
-
-if(!isset($_COOKIE['goquoting_cookie'])){
-    $cookie = md5(strtotime(date('Ymd h:i:s')));
-    //setcookie('goquoting_cookie', $cookie, time() + ( 3600 * 4)) ; // 4 horas
-    setcookie('goquoting_cookie', $cookie, time() + (365 * 24 * 60 * 60), COOKIEPATH, COOKIE_DOMAIN  ) ; // 1 año
-}else{
-    $cookie = $_COOKIE['goquoting_cookie'];
-}
+$cookie = crearCookie();
 
 $sql = "SELECT * FROM gg_goquoting_pedido WHERE cookie_sesion = '".$cookie."'";
 

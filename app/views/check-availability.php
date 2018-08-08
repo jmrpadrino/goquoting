@@ -199,7 +199,7 @@ $prefix = 'gg_';
             <div class="col-xs-12">
                 <div class="row">
                     <div class="col-xs-10 col-xs-offset-1 text-center datepicker-control">
-                        <label for="dtp_input2" class="col-md-2 datepicker-control-label">Select dates</label>
+                        <label for="dtp_input2" class="col-md-2 datepicker-control-label"><?= _e('Select dates', 'gogalapagos') ?></label>
                         <div class="input-daterange input-group" id="datepicker">
                             <input type="text" class="input-sm form-control" name="date-start" value="<?= date('Y-m-d', strtotime("+7 days"))?>" />
                             <span class="input-group-addon"><?= _e('to','gogalapagos') ?></span>

@@ -21,6 +21,7 @@ if ( ! function_exists( 'add_filter' ) ) {
 
 //define('RUTA_PLUGIN_BOOKING', '/goquoting/');
 define('RUTA_PLUGIN_BOOKING', plugin_dir_url( __FILE__ ));
+define('PATH_PLUGIN_BOOKING', plugin_dir_path( __FILE__ ));
 define('META_PREFIX', 'gg_');
 
 

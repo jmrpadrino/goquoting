@@ -1,7 +1,5 @@
 <?php 
-unset($_COOKIE['goquoting_cookie']);
-
-$pagorealizado = false;
+include PATH_PLUGIN_BOOKING . '/app/functions/booking-functions.php';
 ?>
 <style>
     <?php echo file_get_contents( RUTA_PLUGIN_BOOKING . 'app/css/booking-system-common-styles.css', true ); ?>
@@ -23,8 +21,26 @@ $pagorealizado = false;
     .error .fa{
         color: #F26463;
     }
+    .submit-button{
+        text-transform: uppercase;
+        text-align: center;
+        max-width: 100px;
+        margin: 36px auto;
+        display: block;
+    }
 </style>
-<?php if($pagorealizado){?>
+<?php 
+
+//    echo '<pre>';
+//    print_r($_POST);
+//    echo '</pre>';
+    $pagorealizado = true;
+    if($pagorealizado){
+        echo realizarPedido($_POST['quote']);
+        die();
+        //eliminarCookie();
+        
+?>
 <div class="message-box success">
     <div class="container">
         <div class="row">
@@ -36,7 +52,7 @@ $pagorealizado = false;
             <div class="col-xs-12 text-center">
                 <h1><?= _e('Thank you for your booking!', 'gogalapagos')?></h1>
                 <p><?= _e('A confirmation email  will be sent to you shortly', 'gogalapagos') ?></p>
-                
+                <a href="<?= home_url('check-availability') ?>" class="btn submit-button"><?= _e('New Quote') ?></a>
             </div>
         </div>
     </div>

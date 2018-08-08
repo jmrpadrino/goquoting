@@ -83,10 +83,10 @@ add_action('plugins_loaded', 'dataStructureConfiguration');
 function goquoting_pedidos() {
 
 	$labels = array(
-		'name'                  => _x( 'Pedidos', 'Post Type General Name', 'gogalapagos' ),
-		'singular_name'         => _x( 'Pedido', 'Post Type Singular Name', 'gogalapagos' ),
-		'menu_name'             => __( 'Pedidos', 'gogalapagos' ),
-		'name_admin_bar'        => __( 'Pedido', 'gogalapagos' ),
+		'name'                  => _x( 'Quotes', 'Post Type General Name', 'gogalapagos' ),
+		'singular_name'         => _x( 'Quote', 'Post Type Singular Name', 'gogalapagos' ),
+		'menu_name'             => __( 'Quotes', 'gogalapagos' ),
+		'name_admin_bar'        => __( 'Quote', 'gogalapagos' ),
 		'archives'              => __( 'Item Archives', 'gogalapagos' ),
 		'attributes'            => __( 'Item Attributes', 'gogalapagos' ),
 		'parent_item_colon'     => __( 'Parent Item:', 'gogalapagos' ),
@@ -112,13 +112,13 @@ function goquoting_pedidos() {
 		'filter_items_list'     => __( 'Filter items list', 'gogalapagos' ),
 	);
 	$args = array(
-		'label'                 => __( 'Pedido', 'gogalapagos' ),
-		'description'           => __( 'Pedidos Web', 'gogalapagos' ),
+		'label'                 => __( 'Quote', 'gogalapagos' ),
+		'description'           => __( 'Web Quotes', 'gogalapagos' ),
 		'labels'                => $labels,
 		'supports'              => array( 'title' ),
 		'hierarchical'          => false,
-		'public'                => false,
-		'show_ui'               => false,
+		'public'                => true, // cambiar a false
+		'show_ui'               => true, // cambiar a false
 		'show_in_menu'          => true,
 		'menu_position'         => 5,
 		'menu_icon'             => 'dashicons-cart',
@@ -131,11 +131,14 @@ function goquoting_pedidos() {
 		'query_var'             => 'web-sales',
 		'rewrite'               => false,
 		'capability_type'       => 'post',
+        'capabilities' => array(
+            'create_posts' => 'do_not_allow',
+        ),
 		'show_in_rest'          => true,
 		'rest_base'             => 'web-sales',
 		'rest_controller_class' => 'WP_REST_web_sales_Controller',
 	);
-	register_post_type( 'pedidos', $args );
+	register_post_type( 'gquote', $args );
 
 }
 add_action( 'init', 'goquoting_pedidos', 0 );
