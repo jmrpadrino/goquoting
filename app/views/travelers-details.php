@@ -1,5 +1,6 @@
 <?php
 include PATH_PLUGIN_BOOKING . '/app/functions/booking-functions.php';
+$prefix = 'gg_';
 if (!isset($_GET['id']) && !isset($_COOKIE['goquoting_cookie'])){
     empezarProceso();
 }

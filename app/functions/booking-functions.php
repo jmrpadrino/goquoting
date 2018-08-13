@@ -1,13 +1,13 @@
 <?php
 global $wpdb;
-$prefix = 'gg_';
+
 
 // USO DE COOKIES
 // CREAR COOKIE
 function crearCookie(){
     if(!isset($_COOKIE['goquoting_cookie'])){
         $cookie = md5(strtotime(date('Ymd h:i:s')));
-        setcookie('goquoting_cookie', $cookie, time() + (365 * 24 * 60 * 60), COOKIEPATH, COOKIE_DOMAIN, is_ssl() ) ; // 1 año
+        setcookie('goquoting_cookie', $cookie, time() + (365 * 24 * 60 * 60), COOKIEPATH, COOKIE_DOMAIN) ; // 1 año
     }else{
         $cookie = $_COOKIE['goquoting_cookie'];
     }
@@ -27,53 +27,51 @@ function empezarProceso(){
 
 // USO DE PEDIDOS
 // CREAR PEDIDO
-function realizarPedido($id){
+function realizarPedido($pedidoTemporal){
     
-    return $id;
-    die();
+    $pedido = crearPedidoEnWordpress($pedidoTemporal);    
     
-    $pedido = crearPedidoEnWordpress($id);
-    
-    if ( $pedido ){
-        echo '<pre>';
-        print_r( $pedido );
-        echo '</pre>';
-        //eliminarRegistrTemporal($id);
-    }
 }
-function crearPedidoEnWordpress($arrayPedido){
+function crearPedidoEnWordpress($pedidoTemporal){
     
     // validar si existe el post en wordpress
-    $pedido_wordpress = get_post($pedido);
+    $args = array(
+        'post_type' => 'gquote',
+        'meta_key' => 'quote_ID',
+        'meta_value' => $pedidoTemporal['quote']
+    );
+    $pedido = new WP_Query( $args );
     
-    if($pedido_wordpress){
+    
+    if($pedido->post_count > 0){
         return true;
     }else{
     
-        $contenido_cabina = array(
-            'post_content' => '',
-            'post_title' => $element->nombre,
+        $pedido = array(
+            'post_title' => '@'. date('Y-m-d h:i:s') . ' QN' . $pedidoTemporal['quote'] . ' ' . $pedidoTemporal['ship'] . ' ADT' . $pedidoTemporal['adults'] .' CHD' . $pedidoTemporal['children'],
             'post_status' => 'publish',
             'post_type' => 'gquote',
             'meta_input' => array(
-                $prefix . 'quote_status' => $element->id,
-                $prefix . 'quote_ship' => $element->id,
-                $prefix . 'quote_departure' => $element->anio_id,
-                $prefix . 'quote_promo' => $element->anio,
-                $prefix . 'quote_duration' => $element->codigo,
-                $prefix . 'quote_adults' => $element->codigo,
-                $prefix . 'quote_children' => $element->barco_id,
-                $prefix . 'quote_cabins' => $element->color,
-                $prefix . 'quote_traveler' => $element->color,
-                $prefix . 'quote_billing_country' => $element->color,
-                $prefix . 'quote_billing_address' => $element->color,
-                $prefix . 'quote_billing_city' => $element->color,
-                $prefix . 'quote_billing_state' => $element->color,
-                $prefix . 'quote_billing_zipcode' => $element->color,
+                $prefix . 'quote_ID' => $pedidoTemporal['quote'],
+                $prefix . 'quote_status' => '0',
+                $prefix . 'quote_ship' => $pedidoTemporal['ship'],
+                $prefix . 'quote_departure' => $pedidoTemporal['departure'],
+                $prefix . 'quote_promo' => $pedidoTemporal['promo'],
+                $prefix . 'quote_duration' => $pedidoTemporal['duration'],
+                $prefix . 'quote_adults' => $pedidoTemporal['adults'],
+                $prefix . 'quote_children' => $pedidoTemporal['children'],
+                $prefix . 'quote_cabins' => $pedidoTemporal['cabins-selected'],
+                $prefix . 'quote_traveler' => $pedidoTemporal['traveler'],
+                $prefix . 'quote_extras' => $pedidoTemporal['traveler'],
+                $prefix . 'quote_billing_country' => $pedidoTemporal['billing-country'],
+                $prefix . 'quote_billing_address' => $pedidoTemporal['billing-address'],
+                $prefix . 'quote_billing_city' => $pedidoTemporal['billing-city'],
+                $prefix . 'quote_billing_state' => $pedidoTemporal['billing-state'],
+                $prefix . 'quote_billing_zipcode' => $pedidoTemporal['billing-zipcode'],
             )
         );
-        return $contenido_cabina;
-        //wp_insert_post( $contenido_cabina );
+        wp_insert_post( $pedido );
+        return $pedido;
     }
 }
 

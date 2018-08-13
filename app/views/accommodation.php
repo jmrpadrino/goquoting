@@ -1,6 +1,6 @@
 <?php 
 include PATH_PLUGIN_BOOKING . '/app/functions/booking-functions.php';
-
+$prefix = 'gg_';
 $cookie = crearCookie();
 
 $sql = "SELECT * FROM gg_goquoting_pedido WHERE cookie_sesion = '".$cookie."'";

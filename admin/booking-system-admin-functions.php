@@ -20,7 +20,7 @@ function pedidos_columnas( $defaults )
 
 function pedidos_columnas_contenido($column_name, $post_ID){
     if ($column_name == 'quoting_status') {
-        $cabin_eligos_id = get_post_meta( $post_ID, $prefix . 'cabin_eligos_id', TRUE );        
+        echo ($cabin_eligos_id = get_post_meta( $post_ID, 'quote_status', TRUE )) == 0 ? '<p class="bg-info text-center">FOLLOW</p>' : '<p class="bg-primary text-center">CONFIRMED</p>';        
     }
 }
 

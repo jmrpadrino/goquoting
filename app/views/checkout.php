@@ -1,5 +1,6 @@
 <?php
 include PATH_PLUGIN_BOOKING . '/app/functions/booking-functions.php';
+$prefix = 'gg_';
 if (!isset($_GET['id']) && !isset($_COOKIE['goquoting_cookie'])){
     empezarProceso();
 }
@@ -103,8 +104,6 @@ $registros = $wpdb->get_results($sqlext);
         echo '<input type="hidden" name="cabins-selected['.$key.'][personasEnCabina]" value="'.$cabina['personasEnCabina'].'">';
         echo '<input type="hidden" name="cabins-selected['.$key.'][precioCabina]" value="'.$cabina['precioCabina'].'">';
     } 
-    ?>
-    <?php 
     foreach($_POST['traveler'] as $key => $pax){
         foreach($pax as $index => $value){
             echo '<input type="hidden" name="traveler['.$key.']['.$index.']" value="'.$value.'">';

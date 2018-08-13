@@ -1,7 +1,5 @@
 <?php 
-
 $prefix = 'gg_'; 
-
 ?>
 <style>
 <?php echo file_get_contents( RUTA_PLUGIN_BOOKING . 'app/css/booking-system-common-styles.css', true ); ?>

@@ -1,5 +1,6 @@
 <?php 
 include PATH_PLUGIN_BOOKING . '/app/functions/booking-functions.php';
+$prefix = 'gg_';
 ?>
 <style>
     <?php echo file_get_contents( RUTA_PLUGIN_BOOKING . 'app/css/booking-system-common-styles.css', true ); ?>
@@ -36,10 +37,8 @@ include PATH_PLUGIN_BOOKING . '/app/functions/booking-functions.php';
 //    echo '</pre>';
     $pagorealizado = true;
     if($pagorealizado){
-        echo realizarPedido($_POST['quote']);
-        die();
-        //eliminarCookie();
-        
+        echo realizarPedido($_POST);
+        eliminarCookie();
 ?>
 <div class="message-box success">
     <div class="container">
