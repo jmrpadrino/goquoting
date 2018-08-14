@@ -190,12 +190,14 @@ function calcularPaxPorAcomodar(){
         $('.pending-text').hide();
         $('#add-another-cabin-btn').hide();
         $('.checkout-btn-placeholder').show();
+        $('#submit-accommodation').show();
         pending_pax.text('0');
     }else{
         if (personas_en_cabina > pax_por_acomodar){
             cabinasLlenas();
             $('.pending-text').hide();
             $('#add-another-cabin-btn').hide();
+            $('#submit-accommodation').hide();
             $('.checkout-btn-placeholder').show();
             pending_pax.text('0');
         }else{
@@ -203,6 +205,7 @@ function calcularPaxPorAcomodar(){
             cabinasPendiente();
             $('#add-another-cabin-btn').show();
             $('.checkout-btn-placeholder').hide();
+            $('#submit-accommodation').hide();
             $('.pending-text').show();
         }
     }

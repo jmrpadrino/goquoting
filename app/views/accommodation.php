@@ -230,7 +230,7 @@ $total_pax = $_POST['adults'] +  $_POST['children'];
             </div>
             <div class="modal-footer">
                 <button id="add-another-cabin-btn" type="button" class="btn btn-default pull-left" data-dismiss="modal"><?= _e('Add another cabin', 'gogalapagos') ?></button>
-                <button id="submit-accommodation" type="button" class="btn btn-warning pull-right"><?= _e('Book now', 'gogalapagos') ?></button>
+                <button id="submit-accommodation" type="button" class="btn btn-warning pull-right" style="display: none;"><?= _e('Book now', 'gogalapagos') ?></button>
             </div>
         </div>
     </div>

@@ -37,8 +37,10 @@ $prefix = 'gg_';
 //    echo '</pre>';
     $pagorealizado = true;
     if($pagorealizado){
-        echo realizarPedido($_POST);
-        eliminarCookie();
+        realizarPedido($_POST);
+        // ELIMINAR COOKIE
+        unset($_COOKIE['goquoting_cookie']);
+        setcookie('goquoting_cookie', '', time() - ( 15 * 60 ) , COOKIEPATH, COOKIE_DOMAIN);
 ?>
 <div class="message-box success">
     <div class="container">

@@ -32,7 +32,7 @@ require_once('app/booking-system-shortcodes.php');
 
 //require_once('app/booking-system-add-content-to-pages.php');
 
-add_action('wp_enqueue_scripts', 'gg_quote_style_and_scripts', 11);
+//add_action('wp_enqueue_scripts', 'gg_quote_style_and_scripts', 11);
 
 function gg_quote_style_and_scripts(){
     
