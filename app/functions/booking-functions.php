@@ -27,7 +27,7 @@ function empezarProceso(){
 
 // USO DE PEDIDOS
 // CREAR PEDIDO
-function realizarPedido($pedidoTemporal){
+function realizarPedido($pedidoTemporal){    
     
     $pedido = crearPedidoEnWordpress($pedidoTemporal);    
     
@@ -62,7 +62,7 @@ function crearPedidoEnWordpress($pedidoTemporal){
                 $prefix . 'quote_children' => $pedidoTemporal['children'],
                 $prefix . 'quote_cabins' => $pedidoTemporal['cabins-selected'],
                 $prefix . 'quote_traveler' => $pedidoTemporal['traveler'],
-                $prefix . 'quote_extras' => $pedidoTemporal['traveler'],
+                $prefix . 'quote_extras' => $pedidoTemporal['services'],
                 $prefix . 'quote_billing_country' => $pedidoTemporal['billing-country'],
                 $prefix . 'quote_billing_address' => $pedidoTemporal['billing-address'],
                 $prefix . 'quote_billing_city' => $pedidoTemporal['billing-city'],

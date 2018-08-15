@@ -180,18 +180,20 @@ function calcularPaxPorAcomodar(){
     var pax_por_acomodar = adults + children;
     var personas_en_cabina = 0;
     
+    
     $.each(cabinas_seleccionadas, function(index, value){
         //console.warn(value.personasEnCabina);
         personas_en_cabina += value.personasEnCabina;
     })
-    
-    if (pax_por_acomodar == personas_en_cabina){
+    console.log('holaxxx');
+    if (pax_por_acomodar <= personas_en_cabina || pax_por_acomodar == personas_en_cabina){
         cabinasLlenas();
         $('.pending-text').hide();
         $('#add-another-cabin-btn').hide();
         $('.checkout-btn-placeholder').show();
         $('#submit-accommodation').show();
         pending_pax.text('0');
+        console.log('aqui');
     }else{
         if (personas_en_cabina > pax_por_acomodar){
             cabinasLlenas();
@@ -200,6 +202,7 @@ function calcularPaxPorAcomodar(){
             $('#submit-accommodation').hide();
             $('.checkout-btn-placeholder').show();
             pending_pax.text('0');
+            console.log('aqui mayor');
         }else{
             pending_pax.text(pax_por_acomodar - personas_en_cabina);
             cabinasPendiente();
@@ -207,6 +210,7 @@ function calcularPaxPorAcomodar(){
             $('.checkout-btn-placeholder').hide();
             $('#submit-accommodation').hide();
             $('.pending-text').show();
+            console.log('aqui menor');
         }
     }
     pending_pax.text();
@@ -489,6 +493,19 @@ $('.pack-placeholder-info-box').click(function(){
 // ACTIVAR SERCIVIO ADICIONAL
 $('.offer-search-filter-placeholder').click(function(){
     $(this).toggleClass('selected');
+    if ($(this).hasClass('selected') && $(this).hasClass('set-billing-info')){
+        $('select[name=billing-country] option[value=' + $('input[name=traveler\\[1\\]\\[country\\]]').val() + ']').prop('selected', true);
+        $('input[name=billing-address]').val($('input[name=traveler\\[1\\]\\[streetaddress\\]]').val());
+        $('input[name=billing-city]').val($('input[name=traveler\\[1\\]\\[city\\]]').val());
+        $('input[name=billing-state]').val($('input[name=traveler\\[1\\]\\[citystate\\]]').val());
+        $('input[name=billing-zipcode]').val($('input[name=traveler\\[1\\]\\[zipcode\\]]').val());
+    }else{
+        $('select[name=billing-country]').val(0);
+        $('input[name=billing-address]').val('');
+        $('input[name=billing-city]').val('');
+        $('input[name=billing-state]').val('');
+        $('input[name=billing-zipcode]').val('');
+    }
 })
 $('.counter-service').click(function(){
     var operador = $(this);

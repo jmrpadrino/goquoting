@@ -1,5 +1,8 @@
 <?php 
 $prefix = 'gg_'; 
+// ELIMINAR COOKIE
+unset($_COOKIE['goquoting_cookie']);
+setcookie('goquoting_cookie', '', time() - ( 15 * 60 ) , COOKIEPATH, COOKIE_DOMAIN);
 ?>
 <style>
 <?php echo file_get_contents( RUTA_PLUGIN_BOOKING . 'app/css/booking-system-common-styles.css', true ); ?>
@@ -16,6 +19,9 @@ $prefix = 'gg_';
     }
     .ships-container{
         padding-bottom: 80px;
+        width: 100%;
+        max-width: 1180px;
+        margin: 0 auto;
     }
     /*---------------*/
 
@@ -26,6 +32,11 @@ $prefix = 'gg_';
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;
+    }
+    @media screen and (min-width: 768px){
+        .ship-thumbnail{
+            max-height: 320px;
+        }   
     }
     .ship-thumbnail img{
         height: 100%;
@@ -132,6 +143,9 @@ $prefix = 'gg_';
     .duration-placeholder.open .durarion-placeholder-info-box{
         display: flex;
     }
+    .see-all-dates,.hide-all-dates{
+        cursor: pointer;
+    }
     /*---------------*/
     /*--- PAX COUNTER ---*/
     .datepicker-control{
@@ -178,6 +192,19 @@ $prefix = 'gg_';
     .offer-search-filter-checkbox{
         display: none;
     }
+    /*--- SHIP CONTAINERS ---*/
+    @media screen and (min-width: 768px){
+        .ship-container{
+            max-width: 50%; 
+            float: left;
+            padding: 10px;
+            margin-top: 18px;
+        }
+        .ship-thumbnail{
+            border-radius: 10px 10px 0 0;
+        }
+    }
+    /*-----------------------*/
 </style>
 <form id="set-date-form" method="post" action="<?= home_url('accommodation') ?>/">
     <div class="container">
@@ -196,8 +223,12 @@ $prefix = 'gg_';
         <div class="row top-filters">
             <div class="col-xs-12">
                 <div class="row">
-                    <div class="col-xs-10 col-xs-offset-1 text-center datepicker-control">
+                    <div class="col-xs-12 text-center">
                         <label for="dtp_input2" class="col-md-2 datepicker-control-label"><?= _e('Select dates', 'gogalapagos') ?></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1 text-center datepicker-control">
                         <div class="input-daterange input-group" id="datepicker">
                             <input type="text" class="input-sm form-control" name="date-start" value="<?= date('Y-m-d', strtotime("+7 days"))?>" />
                             <span class="input-group-addon"><?= _e('to','gogalapagos') ?></span>
@@ -284,178 +315,180 @@ $prefix = 'gg_';
     <input id="input-promo" type="hidden" name="promo" value="">
     <input id="input-duration" type="hidden" name="duration" value="">
     <div class="ships-container">
-            <?php foreach ($barcos as $barco){ ?>
-            <?php 
-                $args = array(
-                    'post_type' => 'ggcabins',
-                    'posts_per_page' => -1,
-                    'meta_query' => array(
-                        array(
-                            'key'     => $prefix . 'cabin_ship_id',
-                            'value'   => $barco->ID,
-                            'compare' => 'LIKE',
-                        ),
+        <?php foreach ($barcos as $barco){ ?>
+        <?php 
+            $args = array(
+                'post_type' => 'ggcabins',
+                'posts_per_page' => -1,
+                'meta_query' => array(
+                    array(
+                        'key'     => $prefix . 'cabin_ship_id',
+                        'value'   => $barco->ID,
+                        'compare' => 'LIKE',
                     ),
-                );
-                $cabinas = get_posts($args);
-            ?>
+                ),
+            );
+            $cabinas = get_posts($args);
+        ?>
         <div id="bar<?= $barco->ID ?>" class="ship-container" data-shipcode="<?= get_post_meta($barco->ID, $prefix . 'dispo_ID', true) ?>">
             <div class="ship-thumbnail">
                 <img src="<?= get_post_meta($barco->ID, $prefix . 'ship_wiki_image', true) ?>" class="img-responsive" alt="<?= $barco->post_title ?>">
             </div>
-            <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="inside-box ship-departure-dates">
-                                <h2 class="ship-title"><?= $barco->post_title ?></h2>
-                                <h3><?= _e('Departure Dates', 'gogalapagos') ?></h3>
-                                <p class="text-right"><span class="see-all-dates"><?= _e('See all Dates', 'gogalapagos') ?></span><span class="hide-all-dates text-right hidden"><?= _e('Hide Dates', 'gogalapagos') ?></span></p>
-                                <ul class="list-inline ship-departure-dates-list">
-                                    <li>
-                                        <div class="square-box departure-placeholder" data-departure="2018-06-05" data-promo="1207">
-                                            <div class="departure-placeholder-month"><?= _e('Jun', 'gogalapagos') ?></div>
-                                            <div class="departure-placeholder-date">5</div>
-                                            <div class="departure-placeholder-promo"><i class="fa fa-star"></i></div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="inside-box ship-departure-dates">
+                        <h2 class="ship-title"><?= $barco->post_title ?></h2>
+                        <h3><?= _e('Departure Dates', 'gogalapagos') ?></h3>
+                        <p class="text-right"><span class="see-all-dates"><?= _e('See all Dates', 'gogalapagos') ?></span><span class="hide-all-dates text-right hidden"><?= _e('Hide Dates', 'gogalapagos') ?></span></p>
+                        <ul class="list-inline ship-departure-dates-list">
+                            <li>
+                                <div class="square-box departure-placeholder" data-departure="2018-06-05" data-promo="1207">
+                                    <div class="departure-placeholder-month"><?= _e('Jun', 'gogalapagos') ?></div>
+                                    <div class="departure-placeholder-date">5</div>
+                                    <div class="departure-placeholder-promo"><i class="fa fa-star"></i></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="square-box departure-placeholder" data-departure="2018-06-12" data-promo="1207">
+                                    <div class="departure-placeholder-month"><?= _e('Jun', 'gogalapagos') ?></div>
+                                    <div class="departure-placeholder-date">12</div>
+                                    <div class="departure-placeholder-promo"><i class="fa fa-star"></i></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="square-box departure-placeholder" data-departure="2018-06-18">
+                                    <div class="departure-placeholder-month"><?= _e('Jun', 'gogalapagos') ?></div>
+                                    <div class="departure-placeholder-date">18</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="square-box departure-placeholder" data-departure="2018-06-25">
+                                    <div class="departure-placeholder-month"><?= _e('Jun', 'gogalapagos') ?></div>
+                                    <div class="departure-placeholder-date">25</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="square-box departure-placeholder" data-departure="2018-06-30" data-promo="1218">
+                                    <div class="departure-placeholder-month"><?= _e('Jun', 'gogalapagos') ?></div>
+                                    <div class="departure-placeholder-date">30</div>
+                                    <div class="departure-placeholder-promo"><i class="fa fa-star"></i></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="square-box departure-placeholder" data-departure="2018-07-02" data-promo="1207">
+                                    <div class="departure-placeholder-month"><?= _e('Jul', 'gogalapagos') ?></div>
+                                    <div class="departure-placeholder-date">2</div>
+                                    <div class="departure-placeholder-promo"><i class="fa fa-star"></i></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="square-box departure-placeholder" data-departure="2018-07-08">
+                                    <div class="departure-placeholder-month"><?= _e('Jul', 'gogalapagos') ?></div>
+                                    <div class="departure-placeholder-date">8</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="square-box departure-placeholder" data-departure="2018-07-16" data-promo="1218">
+                                    <div class="departure-placeholder-month"><?= _e('Jul', 'gogalapagos') ?></div>
+                                    <div class="departure-placeholder-date">16</div>
+                                    <div class="departure-placeholder-promo"><i class="fa fa-star"></i></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="square-box departure-placeholder" data-departure="2018-07-23">
+                                    <div class="departure-placeholder-month"><?= _e('Jul', 'gogalapagos') ?></div>
+                                    <div class="departure-placeholder-date">23</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="square-box departure-placeholder" data-departure="2018-07-30">
+                                    <div class="departure-placeholder-month"><?= _e('Apr', 'gogalapagos') ?></div>
+                                    <div class="departure-placeholder-date">30</div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div id="promo-name" class="promo-name"></div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="inside-box duration-box hidden">
+                        <h3><?= _e('Cruise Length', 'gogalapagos')?></h3>
+                        <ul class="list-inline duration-list">
+                            <li>
+                                <div class="duration-placeholder" data-duration="4">
+                                    <div class="square-box duration-placeholder-date">
+                                        <span>4</span>
+                                        <div class="days-word"><?= _e('Days', 'gogalapagos') ?></div>
+                                    </div>
+                                    <div class="durarion-placeholder-info-box">
+                                        <i class="fa fa-info-circle"></i>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="duration-placeholder" data-duration="8">
+                                    <div class="square-box duration-placeholder-date">
+                                        <span>8</span>
+                                        <div class="days-word"><?= _e('Days', 'gogalapagos') ?></div>
+                                    </div>
+                                    <div class="durarion-placeholder-info-box">
+                                        <i class="fa fa-info-circle"></i>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="duration-placeholder" data-duration="12">
+                                    <div class="square-box duration-placeholder-date">
+                                        <span>12</span>
+                                        <div class="days-word"><?= _e('Days', 'gogalapagos') ?></div>
+                                    </div>
+                                    <div class="durarion-placeholder-info-box">
+                                        <i class="fa fa-info-circle"></i>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#more-days-info">
+                                    <div id="more-days-btn" class="duration-placeholder">
+                                        <div class="square-box duration-placeholder-date">
+                                            <i class="fas fa-plus"></i>
                                         </div>
-                                    </li>
-                                    <li>
-                                        <div class="square-box departure-placeholder" data-departure="2018-06-12" data-promo="1207">
-                                            <div class="departure-placeholder-month"><?= _e('Jun', 'gogalapagos') ?></div>
-                                            <div class="departure-placeholder-date">12</div>
-                                            <div class="departure-placeholder-promo"><i class="fa fa-star"></i></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="square-box departure-placeholder" data-departure="2018-06-18">
-                                            <div class="departure-placeholder-month"><?= _e('Jun', 'gogalapagos') ?></div>
-                                            <div class="departure-placeholder-date">18</div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="square-box departure-placeholder" data-departure="2018-06-25">
-                                            <div class="departure-placeholder-month"><?= _e('Jun', 'gogalapagos') ?></div>
-                                            <div class="departure-placeholder-date">25</div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="square-box departure-placeholder" data-departure="2018-06-30" data-promo="1218">
-                                            <div class="departure-placeholder-month"><?= _e('Jun', 'gogalapagos') ?></div>
-                                            <div class="departure-placeholder-date">30</div>
-                                            <div class="departure-placeholder-promo"><i class="fa fa-star"></i></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="square-box departure-placeholder" data-departure="2018-07-02" data-promo="1207">
-                                            <div class="departure-placeholder-month"><?= _e('Jul', 'gogalapagos') ?></div>
-                                            <div class="departure-placeholder-date">2</div>
-                                            <div class="departure-placeholder-promo"><i class="fa fa-star"></i></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="square-box departure-placeholder" data-departure="2018-07-08">
-                                            <div class="departure-placeholder-month"><?= _e('Jul', 'gogalapagos') ?></div>
-                                            <div class="departure-placeholder-date">8</div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="square-box departure-placeholder" data-departure="2018-07-16" data-promo="1218">
-                                            <div class="departure-placeholder-month"><?= _e('Jul', 'gogalapagos') ?></div>
-                                            <div class="departure-placeholder-date">16</div>
-                                            <div class="departure-placeholder-promo"><i class="fa fa-star"></i></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="square-box departure-placeholder" data-departure="2018-07-23">
-                                            <div class="departure-placeholder-month"><?= _e('Jul', 'gogalapagos') ?></div>
-                                            <div class="departure-placeholder-date">23</div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="square-box departure-placeholder" data-departure="2018-07-30">
-                                            <div class="departure-placeholder-month"><?= _e('Apr', 'gogalapagos') ?></div>
-                                            <div class="departure-placeholder-date">30</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <div id="promo-name" class="promo-name"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="inside-box duration-box hidden">
-                                <h3><?= _e('Duration', 'gogalapagos')?></h3>
-                                <ul class="list-inline duration-list">
-                                    <li>
-                                        <div class="duration-placeholder" data-duration="4">
-                                            <div class="square-box duration-placeholder-date">
-                                                <span>4</span>
-                                                <div class="days-word"><?= _e('Days', 'gogalapagos') ?></div>
-                                            </div>
-                                            <div class="durarion-placeholder-info-box">
-                                                <i class="fa fa-info-circle"></i>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="duration-placeholder" data-duration="8">
-                                            <div class="square-box duration-placeholder-date">
-                                                <span>8</span>
-                                                <div class="days-word"><?= _e('Days', 'gogalapagos') ?></div>
-                                            </div>
-                                            <div class="durarion-placeholder-info-box">
-                                                <i class="fa fa-info-circle"></i>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="duration-placeholder" data-duration="12">
-                                            <div class="square-box duration-placeholder-date">
-                                                <span>12</span>
-                                                <div class="days-word"><?= _e('Days', 'gogalapagos') ?></div>
-                                            </div>
-                                            <div class="durarion-placeholder-info-box">
-                                                <i class="fa fa-info-circle"></i>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-toggle="modal" data-target="#more-days-info">
-                                            <div id="more-days-btn" class="duration-placeholder">
-                                                <div class="square-box duration-placeholder-date">
-                                                    <i class="fas fa-plus"></i>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="inside-box cabins-box hidden">                
-                                <h3><?= _e('Cabins available on this date', 'gogalapagos') ?></h3>
-                                <ul class="cabins-available-list">
-                                    <?php foreach( $cabinas as $cabina ){ ?>
-                                    <li class="cabin-list-item"><span class="pull-left cabin-list-name"><?= $cabina->post_title ?></span> <span class="pull-right cabin-list-price">$ 3250</span></li>
-                                    <?php } ?>
-                                </ul>
-                            </div>
-                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="inside-box cabins-box hidden">                
+                        <h3><?= _e('Cabins available on this date', 'gogalapagos') ?></h3>
+                        <ul class="cabins-available-list">
+                            <?php foreach( $cabinas as $cabina ){ ?>
+                            <li class="cabin-list-item"><span class="pull-left cabin-list-name"><?= $cabina->post_title ?></span> <span class="pull-right cabin-list-price">$ 3250</span></li>
+                            <?php } ?>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <?php } // FIN bucle barcos ?>
-            <div id="error-message" class="container" style="display: none;">
-                <div class="row">
-                    <div class="col-xs-10 col-xs-offset-1 text-center text-danger">
-                        <div id="message-placeholder" class="message-placeholder">
-                           <p><strong><?= _e('Please check the selection of the cruise departure date and duration. Thank you.','gogalapagos') ?></strong></p>
-                        </div>
+        </div>
+        <?php } // FIN bucle barcos ?>
+        <div id="error-message" class="container" style="display: none;">
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-1 text-center text-danger">
+                    <div id="message-placeholder" class="message-placeholder">
+                       <p><strong><?= _e('Please check the selection of the cruise departure date and duration. Thank you.','gogalapagos') ?></strong></p>
                     </div>
                 </div>
             </div>
-        <button id="set-date" name="availability" value="true" class="text-center submit-button center submit-button-cabin" type="submit">
-            <span class="next-step"><?= _e('Next Step', 'gogalapagos') ?></span>
-            <span class="next-step-title"><?= _e('Select Your Cabin', 'gogalapagos') ?></span>
-        </button>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button id="set-date" name="availability" value="true" class="text-center submit-button center submit-button-cabin" type="submit">
+                    <span class="next-step"><?= _e('Next Step', 'gogalapagos') ?></span>
+                    <span class="next-step-title"><?= _e('Select Your Cabin', 'gogalapagos') ?></span>
+                </button>
+            </div>
+        </div>
     </div>
 </form>
 <!-- Modal MORE DAYS INFO -->

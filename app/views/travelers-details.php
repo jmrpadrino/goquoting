@@ -517,7 +517,3 @@ if (!$registro){
         </div>
     </div>
 </form>
-<script>
-    var cabinas_seleccionadas = <?= $cabinas ?>;
-    console.log(cabinas_seleccionadas);
-</script>

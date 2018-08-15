@@ -52,6 +52,7 @@ $total_pax = $_POST['adults'] +  $_POST['children'];
     }
     .cabin-box{
         padding: 0 18px;
+        margin-bottom: 18px;
     }
     .cabin-box-thumbnail-placeholder{
         border-radius: 6px 6px 0px 0px;
@@ -61,6 +62,18 @@ $total_pax = $_POST['adults'] +  $_POST['children'];
         margin-top: -18px;
         z-index: 999;
         position: relative;
+    }
+    @media screen and (min-width: 768px){
+        .cabin-box{
+            max-width: 20%;
+            float: left;            
+            min-height: 420px;
+            margin-bottom: 36px;
+            padding-top: 18px;
+        }
+        .cabin-box:last-child{
+            min-height: auto;
+        }
     }
     .price-box{
         margin-top: 9px;

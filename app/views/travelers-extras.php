@@ -215,6 +215,14 @@ $onboardservices = get_posts($args);
         border: none;
         border-bottom: 1px solid black;
     }
+    @media screen and (min-width: 768px){
+        .extras-view .inside-box{
+            width: 30%;
+            margin: 10px;
+            float: left;
+            min-height: 220px;
+        }
+    }
 </style>
 <div class="main-sumary">
     <div class="main-sumary-item">
@@ -283,7 +291,7 @@ $onboardservices = get_posts($args);
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <div class="tab-content">
+                <div class="tab-content extras-view">
                     <?php for($i = 1; $i <= $_POST['adults']; $i++){ ?>
                     <div id="pax-extra-<?= $i ?>" class=" <?= $i > 1 ? 'fade' : '' ?> <?= $i == 1 ? 'active' : '' ?>">
                         <div class="inside-box">

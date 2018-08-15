@@ -50,6 +50,11 @@ $registros = $wpdb->get_results($sqlext);
         text-align: left;
         padding: 10px 0;
     }
+    @media screen and (min-width: 768px){
+        .car-body{
+            padding-bottom: 100px;
+        }
+    }
     .checkout-title{
         color: #191919;
     }
@@ -69,7 +74,41 @@ $registros = $wpdb->get_results($sqlext);
     #request-quote{
         background: dimgray;
         color: white;
-    }    
+    }
+    .offer-search-filter-placeholder label{
+        transform: translateY(0);
+        font-size: 18px;
+    }
+    .offer-search-filter-placeholder label div{
+        font-size: 12px;
+        color: gray;
+    }
+    .offer-search-filter-placeholder span{
+        display: inline-flex;
+        border: 1px solid #ccc;
+        width: 34px;
+        height: 34px;
+        margin-left: 12px;
+        padding: 5px;
+        align-content: center;
+        justify-content: center;
+        background: white;
+    }
+    .offer-search-filter-placeholder span:before{
+        content: '';
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: darkorange;
+        display: none;
+
+    }
+    .offer-search-filter-placeholder.selected span:before{
+        display:block;
+    }
+    .offer-search-filter-checkbox{
+        display: none;
+    }
 </style>
 <div class="main-sumary">
     <div class="main-sumary-item">
@@ -108,7 +147,12 @@ $registros = $wpdb->get_results($sqlext);
         foreach($pax as $index => $value){
             echo '<input type="hidden" name="traveler['.$key.']['.$index.']" value="'.$value.'">';
         }
-    } 
+    }
+    foreach($_POST['services'] as $key => $pax){
+        foreach($pax as $index => $value){
+            echo '<input type="hidden" name="services['.$key.']['.$index.']" value="'.$value.'">';
+        }
+    }
     ?>
     <div class="cart-header">
         <div class="container">
@@ -216,10 +260,18 @@ $registros = $wpdb->get_results($sqlext);
                         <div class="col-xs-12">
                             <h2 class="checkout-title text-center"><?= _e('Billing Information', 'gogalapagos') ?></h2>
                         </div>
+                        <div class="col-xs-12 text-right">
+                            <div class="offer-search-filter-placeholder set-billing-info">
+                                <label class="offer-search-filter-label" for="offer-kayat-traveler"><?= _e('Same as billing ') ?></label>
+                                <input class="offer-search-filter-checkbox " type="checkbox" name="offer-kayat-traveler" id="same-billing">
+                                <span></span>
+                            </div>
+                        </div>
                         <div class="col-xs-12">
                             <div class="form-group">
                                 <label><?= _e('Country', 'gogalapagos')?>*</label>
                                 <select class="form-control" name="billing-country"required>
+                                    <option value="0"><?= _e('Select Country', 'gogalapagos')?></option>
                                     <option value="AF">Afghanistan</option>
                                     <option value="AX">Åland Islands</option>
                                     <option value="AL">Albania</option>
@@ -552,7 +604,7 @@ $registros = $wpdb->get_results($sqlext);
                                 <div class="col-xs-4">
                                     <div class="form-group">
                                         <label><?= _e('CCV', 'gogalapagos')?>*</label>
-                                        <input type="number" max-length="3" class="form-control" name="billing-zipcode" required>
+                                        <input type="password" max-length="3" class="form-control" name="ccv-number" required>
                                     </div>
                                 </div>  
                             </div>
@@ -569,7 +621,7 @@ $registros = $wpdb->get_results($sqlext);
     <div class="cart-footer-placeholder">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-12 col-md-6 col-md-offset-6">
                     <button id="submit-payment" type="submit" class="btn submit-button pull-left btn-warning"><?= _e('Pay now', 'gogalapagos') ?></button><button id="request-quote" class="submit-button pull-right"><?= _e('Request a Quote') ?></button>
                 </div>
             </div>

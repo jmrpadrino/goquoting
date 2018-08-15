@@ -6,11 +6,11 @@ $prefix = 'gg_';
     <?php echo file_get_contents( RUTA_PLUGIN_BOOKING . 'app/css/booking-system-common-styles.css', true ); ?>
     /* THANK YOU VIEW */
     .message-box{
-        margin: 18px;
-        margin-top: 48px;
         background: white;
         border-radius: 6px;
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);        
+        max-width: 380px;
+        margin: 48px auto;
     }
     .fa{
         font-size: 80px;
@@ -42,19 +42,17 @@ $prefix = 'gg_';
         unset($_COOKIE['goquoting_cookie']);
         setcookie('goquoting_cookie', '', time() - ( 15 * 60 ) , COOKIEPATH, COOKIE_DOMAIN);
 ?>
-<div class="message-box success">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 text-center">
-                <i class="fa fa-3x fa-check text-success text-center"></i>
-            </div>
+<div class="message-box success">    
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <i class="fa fa-3x fa-check text-success text-center"></i>
         </div>
-        <div class="row">
-            <div class="col-xs-12 text-center">
-                <h1><?= _e('Thank you for your booking!', 'gogalapagos')?></h1>
-                <p><?= _e('A confirmation email  will be sent to you shortly', 'gogalapagos') ?></p>
-                <a href="<?= home_url('check-availability') ?>" class="btn submit-button"><?= _e('New Quote') ?></a>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <h1><?= _e('Thank you for your booking!', 'gogalapagos')?></h1>
+            <p><?= _e('A confirmation email  will be sent to you shortly', 'gogalapagos') ?></p>
+            <a href="<?= home_url('check-availability') ?>" class="btn submit-button"><?= _e('New Quote') ?></a>
         </div>
     </div>
 </div>
