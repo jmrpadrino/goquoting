@@ -65,7 +65,7 @@ $total_pax = $_POST['adults'] +  $_POST['children'];
     }
     @media screen and (min-width: 768px){
         .cabin-box{
-            max-width: 20%;
+            max-width: 33.3333333333%;
             float: left;            
             min-height: 420px;
             margin-bottom: 36px;

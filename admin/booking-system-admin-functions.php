@@ -31,6 +31,7 @@ function gquote_get_bootstrap(){
     global $post_type;
     if( 'gquote' == $post_type ){
         wp_enqueue_style( 'gquote-bootstrap-style', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' );
+        wp_enqueue_script( 'gquote-bootstrap-script', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' );
     }
 }
 add_action( 'admin_head', 'gquote_get_bootstrap' );
@@ -164,24 +165,58 @@ function gquote_register_meta_boxes_callback($post){
                 <div>
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-                        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-                        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+                        <?php
+                            $tab = 0;
+                            foreach ($travelers[0] as $pax){
+                                echo '<li role="presentation" class="';
+                                echo ($tab == 0) ? 'active' : '';
+                                $number = $tab + 1;
+                                echo '"><a href="#pax-'. $tab .'" aria-controls="pax-'. $tab .'" role="tab" data-toggle="tab">Pax '. $number .'</a></li>';    
+                                $tab++;
+                            }
+                        ?>
                     </ul>
 
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="home">...</div>
-                        <div role="tabpanel" class="tab-pane" id="profile">...</div>
-                        <div role="tabpanel" class="tab-pane" id="messages">...</div>
-                        <div role="tabpanel" class="tab-pane" id="settings">...</div>
+                        <?php
+                            $tab = 0;
+                            foreach ($travelers[0] as $pax){
+                                echo '<div role="tabpanel" class="tab-pane ';
+                                echo ($tab == 0) ? 'active' : 'fade';
+                                $number = $tab + 1;
+                                echo '" id="pax-'. $tab .'">';    
+                                // IMPRIMIR EL ARRAY DEL PAX
+                    ?>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h4 style="margin: 0; margin: 16px 0;"><?= _e('Personal Information', 'gogalapagos')?></h4>
+                                <ul>
+                                    <li><strong>Title</strong> <?= $pax['title'] ?></li>
+                                    <li><strong>Full Name</strong> <?= $pax['fname'] ?> <?= $pax['lname'] ?></li>
+                                    <li><strong>Gender</strong> <?= ($pax['gender'] == 'm') ? 'Male' : ' Female' ?></li>
+                                    <li><strong>Birth Date</strong> <?= $pax['dirthdate'] ?>/<?= $pax['dirthmonth'] ?>/<?= $pax['dirthyear'] ?></li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-3">
+                                <h4 style="margin: 0; margin: 16px 0;"><?= _e('Contact Information', 'gogalapagos')?></h4>
+                            </div>
+                            <div class="col-sm-3">
+                                <h4 style="margin: 0; margin: 16px 0;"><?= _e('Additional Information', 'gogalapagos')?></h4>
+                            </div>
+                        </div>
+                    <?php
+                                //-------------------------//
+                                echo '</div>';
+                                $tab++;
+                            }
+                        ?>
                     </div>
                 </div>
                 <?php
-                    echo '<pre>';
-                    var_dump($travelers[0]);
-                    echo '</pre>';
+//                    echo '<pre>';
+//                    var_dump($travelers[0]);
+//                    echo '</pre>';
                 ?>
             </div>
         </div>

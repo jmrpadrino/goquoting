@@ -1,6 +1,6 @@
 <?php
 // VALIDAR SI LA PAGINA DEL COTIZADOR ESTA CREADA SINO CREARLA
-add_action( 'plugins_loaded', 'gg_create_quote_pages', 10 );
+add_action( 'wp_loaded', 'gg_create_quote_pages', 10 );
 function gg_create_quote_pages() {
     
     $quote_page = get_page_by_path('check-availability');
@@ -125,11 +125,11 @@ function ggCreateCheckAvailabilityFile(){
     </div>
     <!-- FIN main content page -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<!-- Latest compiled and minified JavaScript -->
+    <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="<?= RUTA_PLUGIN_BOOKING; ?>app/js/goquoting.js"></script>
-</body>
-</html>
+    </body>
+    </html>
     <?php
     $page_content = ob_get_clean();
 
