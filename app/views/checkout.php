@@ -7,10 +7,10 @@ if (!isset($_GET['id']) && !isset($_COOKIE['goquoting_cookie'])){
 
 $total_pax = $_POST['adults'] +  $_POST['children'];
 
-$sqlpax = "SELECT * FROM gg_goquoting_detalle_pasajero WHERE id_pedido = " . $_GET['id'];
+$sqlpax = "SELECT * FROM ".$wpdb->prefix."goquoting_detalle_pasajero WHERE id_pedido = " . $_GET['id'];
 $pasajeros = $wpdb->get_results($sqlpax);
 
-$sqlext = "SELECT * FROM gg_goquoting_detalle_extras WHERE id_pedido = " . $_GET['id'];
+$sqlext = "SELECT * FROM ".$wpdb->prefix."goquoting_detalle_extras WHERE id_pedido = " . $_GET['id'];
 $extras = $wpdb->get_results($sqlext);
 
 if ($pasajeros && !$extras){

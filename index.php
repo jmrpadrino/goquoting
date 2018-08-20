@@ -12,42 +12,26 @@ Version: 1.0
 Author URI: https://choclomedia.com
 */
 
+/**
+ * VALIDACION por si accede directamente a los archivos del plugin
+ */ 
 if ( ! function_exists( 'add_filter' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
 }
-/* DEFINICIONES */
 
-//define('RUTA_PLUGIN_BOOKING', '/goquoting/');
+/**
+ * Definiciones
+ */ 
 define('RUTA_PLUGIN_BOOKING', plugin_dir_url( __FILE__ ));
 define('PATH_PLUGIN_BOOKING', plugin_dir_path( __FILE__ ));
 define('META_PREFIX', 'gg_');
 
-
+/**
+ * Agregar archivos requeridos
+ */ 
 require_once('admin/booking-system-setup.php');
 require_once('admin/booking-system-admin-functions.php');
 require_once('app/booking-system-create-pages.php');
 require_once('app/booking-system-shortcodes.php');
-
-//require_once('app/booking-system-add-content-to-pages.php');
-
-//add_action('wp_enqueue_scripts', 'gg_quote_style_and_scripts', 11);
-
-function gg_quote_style_and_scripts(){
-    
-    echo '<pre>';
-    echo basename( get_page_template() );
-    echo '</pre>';
-    
-    wp_enqueue_style( 'gogalapagos-booking',  URLPLUGINGOGALAPAGOS .'css/gogalapagos-booking.css', array(), $ver, 'screen' );
-    wp_register_script( 'goga_ajax_booking', URLPLUGINGOGALAPAGOS .'/js/gogalapagos-booking.js', array ( 'jquery' ), $ver, true);
-    wp_enqueue_script( 'goga_ajax_booking', URLPLUGINGOGALAPAGOS .'js/gogalapagos-booking.js', array ( 'jquery' ), $ver, true);
-    wp_localize_script( 'goga_ajax', 'goga_booking', array( 'booking_plugin_url' => URLPLUGINGOGALAPAGOS ));
-}
-
-//add_action('admin_enqueue_scripts', 'gg_quote_style_and_scripts', 11);
-
-//
-
-/* FUNCIONES */

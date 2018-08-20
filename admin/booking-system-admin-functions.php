@@ -2,6 +2,32 @@
 
 global $post;
 
+add_action( 'admin_menu', 'add_gquote_menu_bubble' );
+function add_gquote_menu_bubble() {
+    global $menu;
+
+    $args = array(
+        'post_type' => 'gquote',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            'relation' => 'AND',
+            array(
+                'key' => 'quote_status',
+                'value' => 0
+            )
+        )
+    );
+    $quotes = get_posts($args);
+    if ( $quotes ) {
+        foreach ( $menu as $key => $value ) {
+            if ( $menu[$key][2] == 'edit.php?post_type=gquote' ) {
+                $menu[$key][0] .= ' <span class="gquote-not">' . count($quotes) . '</span>';
+                return;
+            }
+        }
+    }
+}
+
 add_action( 'admin_init' , 'inicializa_columnas' );
 function inicializa_columnas(){
     add_filter('manage_posts_columns', 'pedidos_columnas');
@@ -23,7 +49,7 @@ function pedidos_columnas( $defaults )
 
 function pedidos_columnas_contenido($column_name, $post_ID){
     if ($column_name == 'quoting_status') {
-        echo ($cabin_eligos_id = get_post_meta( $post_ID, 'quote_status', TRUE )) == 0 ? '<p class="bg-info text-center">FOLLOW</p>' : '<p class="bg-primary text-center">CONFIRMED</p>';        
+        echo ($cabin_eligos_id = get_post_meta( $post_ID, 'quote_status', TRUE )) == 0 ? '<p class="bg-warning text-center">FOLLOW</p>' : '<p class="bg-primary text-center">CONFIRMED</p>';        
     }
 }
 
@@ -33,11 +59,30 @@ function gquote_get_bootstrap(){
         wp_enqueue_style( 'gquote-bootstrap-style', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' );
         wp_enqueue_script( 'gquote-bootstrap-script', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' );
     }
+    ?>
+    <style>
+        #adminmenu .gquote-not{
+            display: inline-block;
+            vertical-align: top;
+            margin: 1px 0 0 2px;
+            padding: 0 5px;
+            min-width: 7px;
+            height: 17px;
+            border-radius: 11px;
+            background-color: orange;
+            color: #000;
+            font-size: 9px;
+            line-height: 17px;
+            text-align: center;
+            z-index: 26;
+        }
+    </style>
+    <?php
 }
 add_action( 'admin_head', 'gquote_get_bootstrap' );
 
 function gquote_register_meta_boxes_callback($post){
-    
+
     $countries = array
         (
         'AF' => 'Afghanistan',
@@ -286,7 +331,7 @@ function gquote_register_meta_boxes_callback($post){
         'ZM' => 'Zambia',
         'ZW' => 'Zimbabwe',
     );
-    
+
     $prefix = 'gg_';
     $cabinas = get_post_meta($post->ID, 'quote_cabins', false); 
     $cabinas = array_shift($cabinas);
@@ -311,7 +356,7 @@ function gquote_register_meta_boxes_callback($post){
             <h4><?= _e('Quote status', 'gogalapagos')?></h4>
             <select id="quote_status" name="quote_status">
                 <?php 
-            $status = get_post_meta($post->ID, 'quote_status', true);
+                    $status = get_post_meta($post->ID, 'quote_status', true);
                 ?>
                 <option value="0" <?= ($status == 0) ? 'selected' : '' ?>>Follow</option>
                 <option value="1" <?= ($status == 1) ? 'selected' : '' ?>>Confirmed</option>
@@ -388,21 +433,21 @@ function gquote_register_meta_boxes_callback($post){
                             <tbody>
                                 <?php
                                     $items = 0;
-                                    $extrassubtotal = 0;
-                                    foreach($extrasArray as $extras){
-                                        foreach($extras as $extra => $cantidad){
-                                            if($cantidad > 0){
-                                                $onboardservice = goGetPostBySlug($extra);
-                                                $onboard_price = get_post_meta($onboardservice[$items]->ID, $prefix . 'onboard_service_price', true);
-                                                echo '<tr>';
-                                                echo '<td>' . esc_html($onboardservice[$items]->post_title) . '</td>';
-                                                echo '<td>' . $cantidad . '</td>';
-                                                echo '<td>' . $onboard_price * $cantidad . '</td>';
-                                                echo '</tr>';
-                                            }
-                                        }
-                                        $items++;
-                                    }
+    $extrassubtotal = 0;
+    foreach($extrasArray as $extras){
+        foreach($extras as $extra => $cantidad){
+            if($cantidad > 0){
+                $onboardservice = goGetPostBySlug($extra);
+                $onboard_price = get_post_meta($onboardservice[$items]->ID, $prefix . 'onboard_service_price', true);
+                echo '<tr>';
+                echo '<td>' . esc_html($onboardservice[$items]->post_title) . '</td>';
+                echo '<td>' . $cantidad . '</td>';
+                echo '<td>' . $onboard_price * $cantidad . '</td>';
+                echo '</tr>';
+            }
+        }
+        $items++;
+    }
                                 ?>
                             </tbody>
                         </table>
@@ -418,26 +463,26 @@ function gquote_register_meta_boxes_callback($post){
                         <ul class="nav nav-tabs" role="tablist">
                             <?php
                                     $tab = 0;
-                                    foreach ($travelers[0] as $pax){
-                                        echo '<li role="presentation" class="';
-                                        echo ($tab == 0) ? 'active' : '';
-                                        $number = $tab + 1;
-                                        echo '"><a href="#pax-'. $tab .'" aria-controls="pax-'. $tab .'" role="tab" data-toggle="tab">Pax '. $number .'</a></li>';    
-                                        $tab++;
-                                    }
+    foreach ($travelers[0] as $pax){
+        echo '<li role="presentation" class="';
+        echo ($tab == 0) ? 'active' : '';
+        $number = $tab + 1;
+        echo '"><a href="#pax-'. $tab .'" aria-controls="pax-'. $tab .'" role="tab" data-toggle="tab">Pax '. $number .'</a></li>';    
+        $tab++;
+    }
                             ?>
                         </ul>
 
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <?php
-                                $tab = 0;
-                                foreach ($travelers[0] as $pax){
-                                    echo '<div role="tabpanel" class="tab-pane ';
-                                    echo ($tab == 0) ? 'active' : 'fade';
-                                    $number = $tab + 1;
-                                    echo '" id="pax-'. $tab .'">';    
-                                    // IMPRIMIR EL ARRAY DEL PAX
+    $tab = 0;
+    foreach ($travelers[0] as $pax){
+        echo '<div role="tabpanel" class="tab-pane ';
+        echo ($tab == 0) ? 'active' : 'fade';
+        $number = $tab + 1;
+        echo '" id="pax-'. $tab .'">';    
+        // IMPRIMIR EL ARRAY DEL PAX
                             ?>
                             <div class="row">
                                 <div class="col-sm-3">
@@ -477,8 +522,8 @@ function gquote_register_meta_boxes_callback($post){
                             <?php
                                 //-------------------------//
                                 echo '</div>';
-                                $tab++;
-                            }
+        $tab++;
+    }
                             ?>
                         </div>
                     </div>
@@ -506,9 +551,9 @@ function gquote_register_meta_boxes_callback($post){
         vistaPrint += divToPrint.innerHTML;
         vistaPrint += '</body>';
         vistaPrint += '</html>';
-        
+
         console.log(vistaPrint);
-        
+
         newWin.document.open();
         newWin.document.write(vistaPrint);
         //newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');

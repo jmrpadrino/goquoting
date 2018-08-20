@@ -7,7 +7,7 @@ if (!isset($_GET['id']) && !isset($_COOKIE['goquoting_cookie'])){
 
 $total_pax = $_POST['adults'] +  $_POST['children'];
 
-$sql = "SELECT * FROM gg_goquoting_detalle_pasajero WHERE id_pedido = '".$_GET['id']."'";
+$sql = "SELECT * FROM ".$wpdb->prefix."goquoting_detalle_pasajero WHERE id_pedido = '".$_GET['id']."'";
 $registro = $wpdb->get_results($sql);
 
 if (!$registro){

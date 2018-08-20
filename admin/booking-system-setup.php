@@ -1,7 +1,16 @@
 <?php
-/*
+/**
  * Este archivo contiene los codigo para generar los metaboxes para cada CPT
  */
+
+
+
+
+/**
+ * dataStructureConfiguration: acción que se ejecuta cuando los 
+ * plugins se cargan. Se crean las tablas para almacenar tamporalmente
+ * los datos del trayecto del pedido del usuario.
+ */ 
 function dataStructureConfiguration(){
     
     global $wpdb;
@@ -82,7 +91,14 @@ function dataStructureConfiguration(){
     }
 }
 add_action('plugins_loaded', 'dataStructureConfiguration');
-// Register Custom Post Type
+
+
+ 
+/**
+ * goquoting_pedidos: se registra el custom post type para pedidos.
+ * en este se agregan parametros para que NO se puedan agregar o eliminar
+ * pedidos desde el administrador de WordPress.
+ */ 
 function goquoting_pedidos() {
 
 	$labels = array(
@@ -136,9 +152,7 @@ function goquoting_pedidos() {
 		'capability_type'       => 'post',
         'capabilities' => array(
             'create_posts' => 'do_not_allow',
-            'delete_post' => 'do_not_allow',
-            'read_post' => 'do_not_allow',
-            'edit_post' => 'do_not_allow',
+            'delete_published_posts' => 'do_not_allow',
         ),
         'map_meta_cap' => true,
 		'show_in_rest'          => true,
