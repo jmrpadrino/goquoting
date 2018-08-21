@@ -20,7 +20,7 @@ if ($pasajeros && !$extras){
         foreach($_POST['services'][$travelers] as $key => $cantidad){
             if($cantidad != 0){
                 $wpdb->insert(
-                    $prefix . 'goquoting_detalle_extras',
+                    $wpdb->prefix . 'goquoting_detalle_extras',
                     array(
                         'id_pedido' => $_GET['id'],
                         'id_pasajero' => $pasajero->id,

@@ -14,7 +14,7 @@ if (!$registro){
     
     foreach ($_POST['cabins-selected'] as $cabin){
         $wpdb->insert(
-            $prefix . 'goquoting_detalle_cabina',
+            $wpdb->prefix . 'goquoting_detalle_cabina',
             array(
                 'id_pedido' => $_GET['id'],
                 'cabina' => $cabin['codigoCabina'],

@@ -24,7 +24,7 @@ if (!$registro){
         ){
         
             $wpdb->insert(
-                $prefix . 'goquoting_detalle_pasajero',
+                $wpdb->prefix . 'goquoting_detalle_pasajero',
                 array(
                     'id_pedido' => $_GET['id'],
                     'principal' => $ppal,

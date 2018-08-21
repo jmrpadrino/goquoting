@@ -10,7 +10,7 @@ $registro = $wpdb->get_results($sql);
 
 if (!$registro){
     $wpdb->insert(
-        $prefix . 'goquoting_pedido',
+        $wpdb->prefix . 'goquoting_pedido',
         array(
             'cookie_sesion' => $cookie,
             'fecha' => date('Y-m-d h:i:s'),

@@ -216,15 +216,12 @@ setcookie('goquoting_cookie', '', time() - ( 15 * 60 ) , COOKIEPATH, COOKIE_DOMA
                 'order' => 'DESC'
             );
             $barcos = get_posts($args);
-            //        echo '<pre>';
-            //        var_dump($barcos);
-            //        echo '</pre>';
         ?>
         <div class="row top-filters">
             <div class="col-xs-12">
                 <div class="row">
                     <div class="col-xs-12 text-center">
-                        <label for="dtp_input2" class="col-md-2 datepicker-control-label"><?= _e('Select dates', 'gogalapagos') ?></label>
+                        <label for="dtp_input2" class="datepicker-control-label"><?= _e('Select dates', 'gogalapagos') ?></label>
                     </div>
                 </div>
                 <div class="row">
@@ -270,7 +267,7 @@ setcookie('goquoting_cookie', '', time() - ( 15 * 60 ) , COOKIEPATH, COOKIE_DOMA
                     <div class="col-xs-10 col-xs-offset-1 text-right filter-search-placeholder">
                         <a id="more-than-nine" class="btn btn-warning more-than-nine hidden" href="<?= home_url() ?>"><?= _e('Are you more than 9?') ?></a>
                         <button class="btn btn-default" id="more-filters" type="button"><i class="fas fa-sliders-h"></i></button>
-                        <button class="btn btn-warning" id="search-dates" type="button"><?= _e('Search', 'gogalapagos') ?></button> 
+                        <button class="btn submit-button" id="search-dates" type="button"><?= _e('Search', 'gogalapagos') ?></button> 
                     </div>
                     <div class="col-xs-10 col-xs-offset-1">
                         <div id="filter-controls-placeholder" class="filter-controls-placeholder" style="display: none;">
