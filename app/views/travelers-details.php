@@ -88,16 +88,18 @@ if (!$registro){
     ?>
     <div class="container">
         <div class="row">
-            <!-- Nav tabs -->
-            <ul class="booking-details-tabs" role="tablist">
-                <?php for($i = 1; $i <= $total_pax; $i++){ ?>
-                <li role="presentation" class="booking-details-tab <?= $i == 1 ? 'active' : '' ?>"><a href="#pax-detail-<?= $i ?>" aria-controls="pax-detail-<?= $i ?>" role="tab" data-toggle="tab"><?php printf( _e('Traveler', 'gogalalagps') . ' %s', $i) ?> <?= $i == 1 ? '<span class="main-contact-text">' . _x('Main Contact', 'gogalapagos') . '</span>' : '';
-                    ?></a></li>
-                <?php } ?>
-            </ul>
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                <!-- Nav tabs -->
+                <ul class="booking-details-tabs" role="tablist">
+                    <?php for($i = 1; $i <= $total_pax; $i++){ ?>
+                    <li role="presentation" class="booking-details-tab <?= $i == 1 ? 'active' : '' ?>"><a href="#pax-detail-<?= $i ?>" aria-controls="pax-detail-<?= $i ?>" role="tab" data-toggle="tab"><?php printf( _e('Traveler', 'gogalalagps') . ' %s', $i) ?> <?= $i == 1 ? '<span class="main-contact-text">' . _x('Main Contact', 'gogalapagos') . '</span>' : '';
+                        ?></a></li>
+                    <?php } ?>
+                </ul>
+            </div>
         </div>
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3">
                 <div class="tab-content">
                     <?php for($i = 1; $i <= $total_pax; $i++){ ?>
                     <div id="pax-detail-<?= $i ?>" class=" <?= $i == 1 ? 'active' : '' ?>">
@@ -158,22 +160,22 @@ if (!$registro){
                                     <br />
                                     <select class="form-control" name="traveler[<?= $i ?>][dirthdate]" <?= $i == 1 ? 'required' : '' ?>>
                                         <?php
-    for ($d = 1; $d <= 31; $d++){
-        echo '<option value="' . $d . '">' . $d . '</option>';
-    }
+                                            for ($d = 1; $d <= 31; $d++){
+                                                echo '<option value="' . $d . '">' . $d . '</option>';
+                                            }
                                         ?>
                                     </select>
                                     <select class="form-control" name="traveler[<?= $i ?>][dirthmonth]" <?= $i == 1 ? 'required' : '' ?>>
                                         <?php
-                                            for ($m = 1; $m <= 12; $m++){
-                                                echo '<option value="' . $m . '">' . $m . '</option>';
+                                            for ($m = 0; $m <= 11; $m++){
+                                                echo '<option value="' . $m . '">' . devolverMes($m) . '</option>';
                                             }
                                         ?>
                                     </select>
                                     <?php
-                                                              $date = date('Y');
-                                                              $startdate = strtotime ( '-100 year' , strtotime ( $date ) ) ;
-                                                              $startdate = date ( 'Y' , $startdate );
+                                          $date = date('Y');
+                                          $startdate = strtotime ( '-100 year' , strtotime ( $date ) ) ;
+                                          $startdate = date ( 'Y' , $startdate );
                                     ?>
                                     <select class="form-control" name="traveler[<?= $i ?>][dirthyear]" <?= $i == 1 ? 'required' : '' ?>>
                                         <?php
@@ -479,8 +481,9 @@ if (!$registro){
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label><?= _e('Diet', 'gogalapagos')?>*</label>
-                                    <select class="form-control" name="traveler[<?= $i ?>][diet]" <?= $i == 1 ? 'required' : '' ?>>
+                                    <label><?= _e('Diet', 'gogalapagos')?></label>
+                                    <select class="form-control" name="traveler[<?= $i ?>][diet]">
+                                        <option value="d0"><?= _e('Select Diet Requirements', 'gogalapagos') ?></option>
                                         <option value="d1"><?= _e('Diet 1', 'gogalapagos') ?></option>
                                         <option value="d2"><?= _e('Diet 2', 'gogalapagos') ?></option>
                                         <option value="d3"><?= _e('Diet 3', 'gogalapagos') ?></option>
@@ -491,8 +494,9 @@ if (!$registro){
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label><?= _e('Medical', 'gogalapagos')?>*</label>
-                                    <select class="form-control" name="traveler[<?= $i ?>][medical]" <?= $i == 1 ? 'required' : '' ?>>
+                                    <label><?= _e('Medical', 'gogalapagos')?></label>
+                                    <select class="form-control" name="traveler[<?= $i ?>][medical]">
+                                        <option value="m0"><?= _e('Select Medical Condition', 'gogalapagos') ?></option>
                                         <option value="m1"><?= _e('Medical 1', 'gogalapagos') ?></option>
                                         <option value="m2"><?= _e('Medical 2', 'gogalapagos') ?></option>
                                         <option value="m3"><?= _e('Medical 3', 'gogalapagos') ?></option>

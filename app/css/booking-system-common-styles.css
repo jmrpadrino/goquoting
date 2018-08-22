@@ -43,17 +43,30 @@ button{
 .no-padding{
     padding: 0px;
 }
+.form-control{
+    background: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
 /*--- MODALES ---*/
 .modal-header{
-    background: darkorange;        
+    background: #ebe7e7;        
     border-radius: 4px 4px 0px 0px;
 }
 .modal.error .modal-header{
     background: darkred;        
 }
 .modal-header *{
-    color: white;
+    color: #4a4a4a;
     opacity: 1;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.modal-body{
+    overflow: auto;
+}
+.modal-footer{
+    border: none;
 }
 .summary-cruise-list{
     list-style: none;
@@ -69,7 +82,8 @@ button{
 }
 .panel-default{
     border-color: transparent;
-    border-bottom: 1px solid #ddd;
+    -webkit-box-shadow: 0px 0px 14px #c7c7c7;
+    box-shadow: 0px 0px 14px #c7c7c7;
 }
 .panel-heading a{
     color: #2f2f2f;
@@ -80,6 +94,13 @@ button{
     color: red;
     margin-left: 18px;
     background: none;
+}
+.btn-add-cabin,.btn-add-cabin:hover{
+    background: #434343;
+    color: white;
+}
+.summary-cruise-list{
+    margin-bottom: 18px;
 }
 /*---------------*/
 .counter-operation{
@@ -197,6 +218,8 @@ button{
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    max-width: 450px;
+    margin: 0 auto;
 }
 .main-sumary-item{
     padding: 5px 10px;

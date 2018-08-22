@@ -58,7 +58,7 @@ function crearPedidoEnWordpress($pedidoTemporal){
             'post_type' => 'gquote',
             'meta_input' => array(
                 $prefix . 'quote_ID' => $pedidoTemporal['quote'],
-                $prefix . 'quote_status' => '0',
+                $prefix . 'quote_status' => $pedidoTemporal['go-request'],
                 $prefix . 'quote_ship' => $pedidoTemporal['ship'],
                 $prefix . 'quote_departure' => $pedidoTemporal['departure'],
                 $prefix . 'quote_promo' => $pedidoTemporal['promo'],
@@ -132,6 +132,25 @@ function mostrarArreglo($arreglo){
     print_r($arreglo);
     echo '</pre>';
 }
+// DEVOLVER MES EN LETRAS
+function devolverMes($mesIndex){
+    $meses = array(
+        0 => _x('January'),
+        1 => _x('February'),
+        2 => _x('March'),
+        3 => _x('April'),
+        4 => _x('May'),
+        5 => _x('June'),
+        6 => _x('July'),
+        7 => _x('August'),
+        8 => _x('September'),
+        9 => _x('October'),
+        10 => _x('November'),
+        11 => _x('December')
+    );
+    return $meses[$mesIndex];
+}
+
 function enviarAgradecimiento($pedidoTemporal){
         ob_start();
 ?>
@@ -146,13 +165,13 @@ function enviarAgradecimiento($pedidoTemporal){
     </tr>
     <tr>
         <td>
-            <h2><?= _e('Quoting Information', '')?></h2>
+            <h2><?= _e('Quoting Information', 'gogalapagos')?></h2>
             <ul>
-                <li><strong>BARCO: </strong> <?= $pedidoTemporal['ship'] ?></li>
-                <li><strong>SALIDA: </strong> <?= $pedidoTemporal['departure'] ?></li>
-                <li><strong>DURACION: </strong> <?= $pedidoTemporal['duration'] ?></li>
-                <li><strong>ADULTOS: </strong> <?= $pedidoTemporal['adults'] ?></li>
-                <li><strong>NIÑOS: </strong> <?= $pedidoTemporal['children'] ?></li>
+                <li><strong><?= _e('Ship', 'gogalapagos') ?> </strong> <?= $pedidoTemporal['ship'] ?></li>
+                <li><strong><?= _e('Departure', 'gogalapagos') ?> </strong> <?= $pedidoTemporal['departure'] ?></li>
+                <li><strong><?= _e('Cruise Length', 'gogalapagos') ?> </strong> <?= $pedidoTemporal['duration'] ?></li>
+                <li><strong><?= _e('Adults', 'gogalapagos') ?> </strong> <?= $pedidoTemporal['adults'] ?></li>
+                <li><strong><?= _e('Children', 'gogalapagos') ?> </strong> <?= $pedidoTemporal['children'] ?></li>
             </ul>
         </td>
     </tr>
@@ -163,7 +182,6 @@ function enviarAgradecimiento($pedidoTemporal){
                 <li><strong>NOMBRE: </strong> <?= $pedidoTemporal['traveler'][1]['title']?> <?= $pedidoTemporal['traveler'][1]['fname']?> <?= $pedidoTemporal['traveler'][1]['lname']?></li>
                 <li><strong>TEL&Eacute;FONO: </strong> <a href="phone:<?= $pedidoTemporal['traveler'][1]['phone']?>"><?= $pedidoTemporal['traveler'][1]['phone']?></a></li>
                 <li><strong>EMAIL: </strong> <a href="mailto:<?= $pedidoTemporal['traveler'][1]['email']?>"><?= $pedidoTemporal['traveler'][1]['email']?></a></li>
-                <li><strong>PAIS: </strong> <?= $countries[$pedidoTemporal['traveler'][1]['country']] ?></li>
             </ul>
         </td>
     </tr>

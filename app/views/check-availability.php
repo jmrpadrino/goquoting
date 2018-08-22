@@ -272,7 +272,7 @@ setcookie('goquoting_cookie', '', time() - ( 15 * 60 ) , COOKIEPATH, COOKIE_DOMA
                     <div class="col-xs-10 col-xs-offset-1">
                         <div id="filter-controls-placeholder" class="filter-controls-placeholder" style="display: none;">
                             <select name="duration-search-filter" class="form-control filter-control-select">
-                                <option value="0"><?= _e('All Durations', 'gogalapagos') ?></option>
+                                <option value="0"><?= _e('All Cruises Lengths', 'gogalapagos') ?></option>
                                 <option value="4">4 <?= _e('Days', 'gogalapagos') ?></option>
                                 <option value="8">8 <?= _e('Days', 'gogalapagos') ?></option>
                                 <option value="12">12 <?= _e('Days', 'gogalapagos') ?></option>

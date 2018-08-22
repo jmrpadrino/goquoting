@@ -129,9 +129,11 @@ $onboardservices = get_posts($args);
     }
     .btn-skip-extra{
         margin: 18px auto;
+        color: #636363;
         display: block;
-        border-radius: 0px;
-        border: 1px solid #bbbbbb;
+        border-radius: 6px;
+        border: 2px solid #636363;
+        background: transparent;
     }
     .duration-list{
         justify-content: flex-start
@@ -184,7 +186,7 @@ $onboardservices = get_posts($args);
     .show-resume{
         padding: 16px;
         position: relative;
-        background: #1f1f1f;
+        background: #484848;
         color: white;
         margin-bottom: 36px; 
     }
@@ -276,18 +278,20 @@ $onboardservices = get_posts($args);
     ?>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                <button type="submit" class="btn btn-default btn-skip-extra"><?= _e('Skip this Step') ?></button>
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                <!-- Nav tabs -->
+                <ul class="booking-details-tabs" role="tablist">
+                    <?php for($i = 1; $i <= $_POST['adults']; $i++){ ?>
+                    <li role="presentation" class="booking-details-tab <?= $i == 1 ? 'active' : '' ?>"><a href="#pax-extra-<?= $i ?>" aria-controls="pax-detail-<?= $i ?>" role="tab" data-toggle="tab"><?php printf( _e('Traveler', 'gogalalagps') . ' %s', $i) ?> <?= $i == 1 ? '<span class="main-contact-text">' . _x('Main Contact', 'gogalapagos') . '</span>' : '';
+                        ?></a></li>
+                    <?php } ?>
+                </ul>
             </div>
         </div>
         <div class="row">
-            <!-- Nav tabs -->
-            <ul class="booking-details-tabs" role="tablist">
-                <?php for($i = 1; $i <= $_POST['adults']; $i++){ ?>
-                <li role="presentation" class="booking-details-tab <?= $i == 1 ? 'active' : '' ?>"><a href="#pax-extra-<?= $i ?>" aria-controls="pax-detail-<?= $i ?>" role="tab" data-toggle="tab"><?php printf( _e('Traveler', 'gogalalagps') . ' %s', $i) ?> <?= $i == 1 ? '<span class="main-contact-text">' . _x('Main Contact', 'gogalapagos') . '</span>' : '';
-                    ?></a></li>
-                <?php } ?>
-            </ul>
+            <div class="col-xs-12">
+                <button type="submit" class="btn btn-default btn-skip-extra"><?= _e('Skip this Step') ?></button>
+            </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
@@ -415,80 +419,88 @@ $onboardservices = get_posts($args);
             </div>
         </div>
     </div>
-</form>
-<!-- Modal -->
-<div class="modal fade" id="cabinSumary" tabindex="-1" role="dialog" aria-labelledby="cabinSumary">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-chevron-left"></i></span></button>
-                <h4 class="modal-title text-center" id="myModalLabel"><?= _e('Summary', 'gogalapagos') ?></h4>
-            </div>
-            <div class="modal-body">
-                <ul class="summary-cruise-list">
-                    <li><strong><?= _e('Date', 'gogalapagos') ?></strong> <?= $_POST['departure'] ?></li>
-                    <li><strong><?= _e('Ship', 'gogalapagos') ?></strong> <?= obtenerDatoBarcoPorCodigoDispo($_POST['ship'], 'post_title') ?></li>
-                    <li><strong><?= _e('Itinerary', 'gogalapagos') ?></strong> </li>
-                    <li><strong><?= _e('Duration', 'gogalapagos') ?></strong> <?= $_POST['duration'] . ' - ' . $_POST['duration'] - 1 ?></li>
-                </ul>
-                <div id="sumary-content">
-                    <div class="panel-group" id="cabins-selected-accordion" role="tablist" aria-multiselectable="true">
-                        <!-- LISTADO CABINAS -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                                <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#cabins" href="#cabins" aria-expanded="true" aria-controls="collapseOne"><?= _e('Selected cabins','gogalapagos') ?></a>
-                                    <span class="fas fa-chevron-down pull-right"></span>
-                                </h4>
-                            </div>
-                            <div id="cabins" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body">
-                                    <ol class="sumary-cabins-list">
-                                    <?php 
-                                    foreach($_POST['cabins-selected'] as $key => $value){
-                                        echo '<li>';
-                                        echo '<h2 class="sumary-cabin-title">' . $value['nombreCabina'] . '</h2>';
-                                        echo '<small class="sumary-cabin-features">' . $value['acomodacionTexto'] . '</small>';
-                                        echo '<div class="pull-right cabin-price">' . $value['precioCabina'] . '</div>';
-                                        echo '</li>';
-                                        
-                                        $precio = strval($value['precioCabina']);
-                                        
-                                        $subtotal_cabinas += (int)$precio;
-                                    }
-                                    ?>  
-                                    </ol>
-                                                                    
+
+    <!-- Modal -->
+    <div class="modal fade" id="cabinSumary" tabindex="-1" role="dialog" aria-labelledby="cabinSumary">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-chevron-left"></i></span></button>
+                    <h4 class="modal-title text-center" id="myModalLabel"><?= _e('Summary', 'gogalapagos') ?></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-6">
+                        <ul class="summary-cruise-list">
+                            <li><strong><?= _e('Date', 'gogalapagos') ?></strong> <?= $_POST['departure'] ?></li>
+                            <li><strong><?= _e('Ship', 'gogalapagos') ?></strong> <?= obtenerDatoBarcoPorCodigoDispo($_POST['ship'], 'post_title') ?></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <ul class="summary-cruise-list">
+                            <li><strong><?= _e('Itinerary', 'gogalapagos') ?></strong> </li>
+                            <li><strong><?= _e('Duration', 'gogalapagos') ?></strong> <?= $_POST['duration'] . ' - ' . $_POST['duration'] - 1 ?></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-12">
+                        <div id="sumary-content">
+                            <div class="panel-group" id="cabins-selected-accordion" role="tablist" aria-multiselectable="true">
+                                <!-- LISTADO CABINAS -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#cabins" href="#cabins" aria-expanded="true" aria-controls="collapseOne"><?= _e('Selected cabins','gogalapagos') ?></a>
+                                            <span class="fas fa-chevron-down pull-right"></span>
+                                        </h4>
+                                    </div>
+                                    <div id="cabins" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body">
+                                            <ol class="sumary-cabins-list">
+                                            <?php 
+                                            foreach($_POST['cabins-selected'] as $key => $value){
+                                                echo '<li>';
+                                                echo '<h2 class="sumary-cabin-title">' . $value['nombreCabina'] . '</h2>';
+                                                echo '<small class="sumary-cabin-features">' . $value['acomodacionTexto'] . '</small>';
+                                                echo '<div class="pull-right cabin-price">' . $value['precioCabina'] . '</div>';
+                                                echo '</li>';
+
+                                                $precio = strval($value['precioCabina']);
+
+                                                $subtotal_cabinas += (int)$precio;
+                                            }
+                                            ?>  
+                                            </ol>
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- LISTADO SPECIAL DEALS -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                                <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#deals" href="#deals" aria-expanded="true" aria-controls="collapseOne"><?= _e('Special deals','gogalapagos') ?></a>
-                                    <span class="fas fa-chevron-down pull-right"></span>
-                                </h4>
-                            </div>
-                            <div id="deals" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body">
-                                    <?php
-                                        $special = get_post($_POST['promo']);
-                                        $special_price = 750;
-                                        echo '<h2 class="sumary-cabin-title">' . esc_html( $special->post_title ) . '</h2>';
-                                        echo '<div class="pull-right cabin-price">$ ' . $special_price . '</div>';
-                                    ?>
+                                <!-- LISTADO SPECIAL DEALS -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#deals" href="#deals" aria-expanded="true" aria-controls="collapseOne"><?= _e('Special deals','gogalapagos') ?></a>
+                                            <span class="fas fa-chevron-down pull-right"></span>
+                                        </h4>
+                                    </div>
+                                    <div id="deals" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body">
+                                            <?php
+                                                $special = get_post($_POST['promo']);
+                                                $special_price = 750;
+                                                echo '<h2 class="sumary-cabin-title">' . esc_html( $special->post_title ) . '</h2>';
+                                                echo '<div class="pull-right cabin-price">$ ' . $special_price . '</div>';
+                                            ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button id="add-another-cabin-btn" type="button" class="btn btn-default pull-left" data-dismiss="modal"><?= _e('Add more extras', 'gogalapagos') ?></button>
-                <button id="submit-accommodation" type="button" class="btn btn-warning pull-right"><?= _e('Confirmation', 'gogalapagos') ?></button>
+                <div class="modal-footer">
+                    <button id="add-another-cabin-btn" type="button" class="btn btn-add-cabin pull-left" data-dismiss="modal"><?= _e('Add more extras', 'gogalapagos') ?></button>
+                    <button id="submit-accommodation" type="button" class="btn submit-button pull-right"><?= _e('Confirmation', 'gogalapagos') ?></button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>

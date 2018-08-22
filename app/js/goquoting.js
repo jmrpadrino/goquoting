@@ -523,5 +523,10 @@ $('.counter-service').click(function(){
     }
     console.log(campo.val());
 })
+$('#send-as-quote').click(function(e){
+    e.preventDefault();
+    $('[name="go-request"]').val(0);
+    $('#checkout-form').submit();
+})
 
 

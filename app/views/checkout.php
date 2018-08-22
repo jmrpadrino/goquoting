@@ -57,6 +57,8 @@ $registros = $wpdb->get_results($sqlext);
     }
     .checkout-title{
         color: #191919;
+        text-transform: uppercase;
+        font-weight: bold;
     }
     .summary-cruise-list{
         margin-bottom: 36px;
@@ -92,7 +94,6 @@ $registros = $wpdb->get_results($sqlext);
         padding: 5px;
         align-content: center;
         justify-content: center;
-        background: white;
     }
     .offer-search-filter-placeholder span:before{
         content: '';
@@ -126,7 +127,7 @@ $registros = $wpdb->get_results($sqlext);
         <span><?= obtenerDatoBarcoPorCodigoDispo($_POST['ship'], 'post_title') ?></span>
     </div>
 </div>
-<form id="extrax-form" role="form" method="post" action="<?= home_url('thank-you') ?>/">
+<form id="checkout-form" role="form" method="post" action="<?= home_url('thank-you') ?>/">
     <input type="hidden" name="quote" value="<?= $_GET['id'] ?>">
     <input type="hidden" name="ship" value="<?= $_POST['ship'] ?>">
     <input type="hidden" name="departure" value="<?= $_POST['departure'] ?>">
@@ -154,6 +155,7 @@ $registros = $wpdb->get_results($sqlext);
         }
     }
     ?>
+    <input type="hidden" name="go-request" value="1">
     <div class="cart-header">
         <div class="container">
             <div class="row">
@@ -167,95 +169,103 @@ $registros = $wpdb->get_results($sqlext);
     <div class="car-body">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3">
                     <h2 class="checkout-title text-center"><?= _e('Summary', 'gogalapagos')?></h2>
-                    <ul class="summary-cruise-list">
-                        <li><strong><?= _e('Date', 'gogalapagos') ?></strong> <?= $_POST['departure'] ?></li>
-                        <li><strong><?= _e('Ship', 'gogalapagos') ?></strong> <?= obtenerDatoBarcoPorCodigoDispo($_POST['ship'], 'post_title') ?></li>
-                        <li><strong><?= _e('Itinerary', 'gogalapagos') ?></strong> </li>
-                        <li><strong><?= _e('Duration', 'gogalapagos') ?></strong> <?= $_POST['duration'] . ' - ' . $_POST['duration'] - 1 ?></li>
-                    </ul>
-                    <div id="sumary-content">
-                        <div class="panel-group" id="cabins-selected-accordion" role="tablist" aria-multiselectable="true">
-                            <!-- LISTADO CABINAS -->
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingOne">
-                                    <h4 class="panel-title">
-                                        <a role="button" data-toggle="collapse" data-parent="#cabins" href="#cabins" aria-expanded="true" aria-controls="collapseOne"><?= _e('Selected cabins','gogalapagos') ?></a>
-                                        <span class="fas fa-chevron-down pull-right"></span>
-                                    </h4>
-                                </div>
-                                <div id="cabins" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                    <div class="panel-body">
-                                        <ol class="sumary-cabins-list">
-                                        <?php 
-                                        foreach($_POST['cabins-selected'] as $key => $value){
-                                            echo '<li>';
-                                            echo '<h2 class="sumary-cabin-title">' . $value['nombreCabina'] . '</h2>';
-                                            echo '<small class="sumary-cabin-features">' . $value['acomodacionTexto'] . '</small>';
-                                            echo '<div class="pull-right cabin-price">$ ' . $value['precioCabina'] . '</div>';
-                                            echo '</li>';
+                    <div class="col-sm-6">
+                        <ul class="summary-cruise-list">
+                            <li><strong><?= _e('Date', 'gogalapagos') ?></strong> <?= $_POST['departure'] ?></li>
+                            <li><strong><?= _e('Ship', 'gogalapagos') ?></strong> <?= obtenerDatoBarcoPorCodigoDispo($_POST['ship'], 'post_title') ?></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <ul class="summary-cruise-list">
+                            <li><strong><?= _e('Itinerary', 'gogalapagos') ?></strong> </li>
+                            <li><strong><?= _e('Duration', 'gogalapagos') ?></strong> <?= $_POST['duration'] . ' - ' . $_POST['duration'] - 1 ?></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12">
+                        <div id="sumary-content">
+                            <div class="panel-group" id="cabins-selected-accordion" role="tablist" aria-multiselectable="true">
+                                <!-- LISTADO CABINAS -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#cabins" href="#cabins" aria-expanded="true" aria-controls="collapseOne"><?= _e('Selected cabins','gogalapagos') ?></a>
+                                            <span class="fas fa-chevron-down pull-right"></span>
+                                        </h4>
+                                    </div>
+                                    <div id="cabins" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body">
+                                            <ol class="sumary-cabins-list">
+                                            <?php 
+                                            foreach($_POST['cabins-selected'] as $key => $value){
+                                                echo '<li>';
+                                                echo '<h2 class="sumary-cabin-title">' . $value['nombreCabina'] . '</h2>';
+                                                echo '<small class="sumary-cabin-features">' . $value['acomodacionTexto'] . '</small>';
+                                                echo '<div class="pull-right cabin-price">$ ' . $value['precioCabina'] . '</div>';
+                                                echo '</li>';
 
-                                            $precio = strval($value['precioCabina']);
+                                                $precio = strval($value['precioCabina']);
 
-                                            $subtotal_cabinas += (int)$precio;
-                                        }
-                                        ?>  
-                                        </ol>
+                                                $subtotal_cabinas += (int)$precio;
+                                            }
+                                            ?>  
+                                            </ol>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- LISTADO EXTRAS -->
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingOne">
-                                    <h4 class="panel-title">
-                                        <a role="button" data-toggle="collapse" data-parent="#extras" href="#extras" aria-expanded="true" aria-controls="collapseOne"><?= _e('Travelers Extras','gogalapagos') ?></a>
-                                        <span class="fas fa-chevron-down pull-right"></span>
-                                    </h4>
-                                </div>
-                                <div id="extras" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                    <div class="panel-body">
-                                        <ol class="sumary-cabins-list">
-                                        <?php 
-                                        foreach($_POST['services'] as $services){
-                                            foreach($services as $servicio => $cantidad){
-                                                if($cantidad != 0){
-                                                    echo '<li>';
-                                                    echo '<h2 class="sumary-cabin-title">' . $servicio . '</h2>';
-                                                    echo '<small class="sumary-cabin-features">Amount</small>';
-                                                    echo '<div class="pull-right cabin-price"> ' . $cantidad . '</div>';
-                                                    echo '</li>';
+                                <!-- LISTADO EXTRAS -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#extras" href="#extras" aria-expanded="true" aria-controls="collapseOne"><?= _e('Travelers Extras','gogalapagos') ?></a>
+                                            <span class="fas fa-chevron-down pull-right"></span>
+                                        </h4>
+                                    </div>
+                                    <div id="extras" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body">
+                                            <ol class="sumary-cabins-list">
+                                            <?php 
+                                            foreach($_POST['services'] as $services){
+                                                foreach($services as $servicio => $cantidad){
+                                                    if($cantidad != 0){
+                                                        echo '<li>';
+                                                        echo '<h2 class="sumary-cabin-title">' . $servicio . '</h2>';
+                                                        echo '<small class="sumary-cabin-features">Amount</small>';
+                                                        echo '<div class="pull-right cabin-price"> ' . $cantidad . '</div>';
+                                                        echo '</li>';
+                                                    }
                                                 }
                                             }
-                                        }
-                                        ?>  
-                                        </ol>
+                                            ?>  
+                                            </ol>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- LISTADO SPECIAL DEALS -->
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingOne">
-                                    <h4 class="panel-title">
-                                        <a role="button" data-toggle="collapse" data-parent="#deals" href="#deals" aria-expanded="true" aria-controls="collapseOne"><?= _e('Special deals','gogalapagos') ?></a>
-                                        <span class="fas fa-chevron-down pull-right"></span>
-                                    </h4>
-                                </div>
-                                <div id="deals" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                    <div class="panel-body">
-                                        <?php
-                                            $special = get_post($_POST['promo']);
-                                            $special_price = 750;
-                                            echo '<h2 class="sumary-cabin-title">' . esc_html( $special->post_title ) . '</h2>';
-                                            echo '<div class="pull-right cabin-price offer-price"><small>Save</small> $ ' . $special_price . '</div>';
-                                        ?>
+                                <!-- LISTADO SPECIAL DEALS -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#deals" href="#deals" aria-expanded="true" aria-controls="collapseOne"><?= _e('Special deals','gogalapagos') ?></a>
+                                            <span class="fas fa-chevron-down pull-right"></span>
+                                        </h4>
+                                    </div>
+                                    <div id="deals" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body">
+                                            <?php
+                                                $special = get_post($_POST['promo']);
+                                                $special_price = 750;
+                                                echo '<h2 class="sumary-cabin-title">' . esc_html( $special->post_title ) . '</h2>';
+                                                echo '<div class="pull-right cabin-price offer-price"><small>Save</small> $ ' . $special_price . '</div>';
+                                            ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3">
                     <div class="row">
                         <div class="col-xs-12">
                             <h2 class="checkout-title text-center"><?= _e('Billing Information', 'gogalapagos') ?></h2>
@@ -555,22 +565,22 @@ $registros = $wpdb->get_results($sqlext);
                         </div>
                         <div class="col-xs-12">
                             <div class="form-group">
-                                <label><?= _e('Name on card', 'gogalapagos')?>*</label>
-                                <input type="text" class="form-control" name="cd-name" required>
+                                <label><?= _e('Name on card', 'gogalapagos')?></label>
+                                <input type="text" class="form-control" name="cd-name" >
                             </div>
                         </div>
                         <div class="col-xs-12">
                             <div class="form-group">
-                                <label><?= _e('Card Number', 'gogalapagos')?>*</label>
-                                <input type="number" max-length="16" class="form-control" name="cd-number" required>
+                                <label><?= _e('Card Number', 'gogalapagos')?></label>
+                                <input type="number" max-length="16" class="form-control" name="cd-number" >
                             </div>
                         </div>
                         <div class="col-xs-12">
                             <div class="row">
                                 <div class="col-xs-4">
                                     <div class="form-group">
-                                        <label><?= _e('Exp. Month', 'gogalapagos')?>*</label>
-                                        <select class="form-control" name="cd-exp-month" required>
+                                        <label><?= _e('Exp. Month', 'gogalapagos')?></label>
+                                        <select class="form-control" name="cd-exp-month" >
                                             <option value="0"></option>
                                             <option value="01"><?= _e('JAN', 'gogalapagos') ?></option>
                                             <option value="02"><?= _e('FEB', 'gogalapagos') ?></option>
@@ -589,12 +599,13 @@ $registros = $wpdb->get_results($sqlext);
                                 </div>
                                 <div class="col-xs-4">
                                     <div class="form-group">
-                                        <label><?= _e('Exp. Year', 'gogalapagos')?>*</label>
+                                        <label><?= _e('Exp. Year', 'gogalapagos')?></label>
                                             <?php
                                                 $actual = date('Y');
                                                 $vence = $actual + 6;
                                             ?>
-                                        <select class="form-control" name="cd-exp-year" required>
+                                        <select class="form-control" name="cd-exp-year" >
+                                            <option value="0"></option>
                                             <?php for($i = $actual; $i <= $vence; $i++){ ?>
                                             <option value="<?= $i ?>"><?= $i ?></option>
                                             <?php } ?>
@@ -603,8 +614,8 @@ $registros = $wpdb->get_results($sqlext);
                                 </div>
                                 <div class="col-xs-4">
                                     <div class="form-group">
-                                        <label><?= _e('CCV', 'gogalapagos')?>*</label>
-                                        <input type="password" max-length="3" class="form-control" name="ccv-number" required>
+                                        <label><?= _e('CCV', 'gogalapagos')?></label>
+                                        <input type="password" max-length="3" class="form-control" name="ccv-number" >
                                     </div>
                                 </div>  
                             </div>
@@ -621,8 +632,8 @@ $registros = $wpdb->get_results($sqlext);
     <div class="cart-footer-placeholder">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-md-6 col-md-offset-6">
-                    <button id="submit-payment" type="submit" class="btn submit-button pull-left btn-warning"><?= _e('Pay now', 'gogalapagos') ?></button><button id="request-quote" class="submit-button pull-right"><?= _e('Request a Quote') ?></button>
+                <div class="col-xs-12 col-md-6 col-md-offset-3">
+                    <button id="submit-payment" type="submit" class="btn submit-button pull-left btn-warning"><?= _e('Pay now', 'gogalapagos') ?></button><button type="buttom" id="send-as-quote" class="submit-button pull-right"><?= _e('Request a Quote') ?></button>
                 </div>
             </div>
         </div>
