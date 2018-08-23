@@ -39,7 +39,7 @@ function pedidos_columnas( $defaults )
     if ( $_GET['post_type'] == 'gquote' ){
         $defaults['title'] = 'Quote ID';
         $defaults['quoting_status'] = __('Status', 'gogalapagos');
-        $defaults['quoting_total'] = __('Total', 'gogalapagos');        
+        //$defaults['quoting_total'] = __('Total', 'gogalapagos');        
 
         unset($defaults['language']);
         unset($defaults['ratings']);
@@ -49,7 +49,7 @@ function pedidos_columnas( $defaults )
 
 function pedidos_columnas_contenido($column_name, $post_ID){
     if ($column_name == 'quoting_status') {
-        echo ($cabin_eligos_id = get_post_meta( $post_ID, 'quote_status', TRUE )) == 0 ? '<p class="bg-warning text-center">FOLLOW</p>' : '<p class="bg-primary text-center">CONFIRMED</p>';        
+        echo ($cabin_eligos_id = get_post_meta( $post_ID, 'quote_status', TRUE )) == 0 ? '<p class="bg-info text-center">FOLLOW</p>' : '<p class="bg-success text-center">CONFIRMED</p>';        
     }
 }
 
@@ -58,6 +58,7 @@ function gquote_get_bootstrap(){
     if( 'gquote' == $post_type ){
         wp_enqueue_style( 'gquote-bootstrap-style', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' );
         wp_enqueue_script( 'gquote-bootstrap-script', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' );
+        wp_enqueue_script( 'gquote-admin-script', RUTA_PLUGIN_BOOKING . 'admin/js/go-quoting-admin.js' );
     }
     ?>
     <style>
@@ -76,6 +77,17 @@ function gquote_get_bootstrap(){
             text-align: center;
             z-index: 26;
         }
+        #sync-text-msg .dashicons{
+            margin-bottom: 18px;
+        }
+        #sync-text-msg .dashicons-image-rotate{            
+            -webkit-animation:spin 1s linear infinite;
+            -moz-animation:spin 1s linear infinite;
+            animation:spin 1s linear infinite;
+        }
+        @-moz-keyframes spin { 100% { -moz-transform: rotate(-360deg); } }
+        @-webkit-keyframes spin { 100% { -webkit-transform: rotate(-360deg); } }
+        @keyframes spin { 100% { -webkit-transform: rotate(-360deg); transform:rotate(-360deg); } }
     </style>
     <?php
 }
@@ -339,25 +351,30 @@ function gquote_register_meta_boxes_callback($post){
     $extrasArray = array_shift($extrasArray);
     $travelers = get_post_meta($post->ID, 'quote_traveler', false); 
     $travelers = array_shift($travelers);
+    $status = get_post_meta($post->ID, 'quote_status', true);
 ?>
-<div id="print-area">
+<div id="print-area" style="padding: 20px;" class="bg-<?= ($status == 0) ? 'info' : 'success' ?>">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-sm-4">
             <h3 style="color: #2980b9; font-size: 28px; margin: 0; margin-bottom: 18px;"><?= _e('Quote Details', 'gogalapagos') ?> #<?= get_post_meta($post->ID, 'quote_ID', true) ?></h3>
-            <button class="btn btn-default pull-right" id="print-quote" type="button" onclick="printDiv()"><i class="glyphicon glyphicon-print"></i></button>
-            <button class="btn btn-default pull-right" id="send-quote" type="button"><i class="glyphicon glyphicon-envelope"></i></button>
+        </div>
+        <div class="col-sm-8">
+            <button title="Imprimir" class="btn btn-default pull-right" id="print-quote" type="button" onclick="printDiv()"><i class="glyphicon glyphicon-print"></i></button>
+            <button title="Reenviar" class="btn btn-default pull-right" id="send-quote" type="button"><i class="glyphicon glyphicon-envelope"></i></button>
+            <?php
+                if ($status != 0){
+                    echo '<button class="btn btn-default pull-right" id="sync-receptivo" type="button"><i class="dashicons dashicons-migrate"></i> Descargar a Receptivo</button>';
+                }
+            ?>
         </div>
     </div>
     <div class="row" style="margin-top: 18px;">
         <div class="col-xs-4">
             <h3 style="margin: 0; margin-bottom: 18px;"><?= _e('General', 'gogalapagos')?></h3>
-            <h4><?= _e('Quote Creation date', 'gogalapagos')?></h4>
+            <h4><?= _e('Creation date', 'gogalapagos')?></h4>
             <p><?= $post->post_date ?></p>
             <h4><?= _e('Quote status', 'gogalapagos')?></h4>
             <select id="quote_status" name="quote_status">
-                <?php 
-                    $status = get_post_meta($post->ID, 'quote_status', true);
-                ?>
                 <option value="0" <?= ($status == 0) ? 'selected' : '' ?>>Follow</option>
                 <option value="1" <?= ($status == 1) ? 'selected' : '' ?>>Confirmed</option>
             </select>
@@ -365,7 +382,7 @@ function gquote_register_meta_boxes_callback($post){
         <div class="col-xs-4">
             <h3 style="margin: 0; margin-bottom: 18px;"><?= _e('Quote', 'gogalapagos')?></h3>
             <ul>
-                <li><strong><?= _e('Ship', 'gogalapagos') ?></strong><br /><?= get_post_meta($post->ID, 'quote_ship', true) ?></li>
+                <li><strong><?= _e('Vessel', 'gogalapagos') ?></strong><br /><?= get_post_meta($post->ID, 'quote_ship', true) ?></li>
                 <li><strong><?= _e('Departure', 'gogalapagos') ?></strong><br /><?= get_post_meta($post->ID, 'quote_departure', true) ?></li>
                 <li><strong><?= _e('Applied Promo', 'gogalapagos') ?></strong><br /><?= get_the_title(get_post_meta($post->ID, 'quote_promo', true)) ?></li>
                 <li><strong><?= _e('Duration', 'gogalapagos') ?></strong><br /><?= get_post_meta($post->ID, 'quote_duration', true) ?></li>
@@ -391,36 +408,35 @@ function gquote_register_meta_boxes_callback($post){
             <div class="row">
                 <div class="col-xs-6">
                     <h3 style="margin: 0; margin-bottom: 18px;"><?= _e('Cabins list', 'gogalapagos')?></h3>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th><?= _e('Cabin Name', 'gogalapagos')?></th>
-                                    <th><?= _e('Cabin Code', 'gogalapagos')?></th>
-                                    <th><?= _e('Accommodation', 'gogalapagos')?></th>
-                                    <th><?= _e('People inside', 'gogalapagos')?></th>
-                                    <th align="right" style="text-align: right;"><?= _e('Total Estimated', 'gogalapagos')?></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                    foreach($cabinas as $cabina){
-                        $precioTotal += $cabina['precioCabina'];
-                        echo '<tr>';
-                        echo '<td>' . $cabina['nombreCabina'] . '</td>';
-                        echo '<td>' . $cabina['codigoCabina'] . '</td>';
-                        echo '<td>' . $cabina['acomodacionTexto'] . '</td>';
-                        echo '<td>' . $cabina['personasEnCabina'] . '</td>';
-                        echo '<td align="right">' . $cabina['precioCabina'] . '</td>';
-                        echo '</tr>';
-                    }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th><?= _e('Cabin Type', 'gogalapagos')?></th>
+                                <th><?= _e('Cabin Code', 'gogalapagos')?></th>
+                                <th><?= _e('Accommodation', 'gogalapagos')?></th>
+                                <th><?= _e('Guest Accomm.', 'gogalapagos')?></th>
+                                <th align="right" style="text-align: right;"><?= _e('Total Estimated', 'gogalapagos')?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $precioTotal = 0;
+                                foreach($cabinas as $cabina){
+                                    $precioTotal += $cabina['precioCabina'];
+                                    echo '<tr>';
+                                    echo '<td>' . $cabina['nombreCabina'] . '</td>';
+                                    echo '<td>' . $cabina['codigoCabina'] . '</td>';
+                                    echo '<td>' . $cabina['acomodacionTexto'] . '</td>';
+                                    echo '<td>' . $cabina['personasEnCabina'] . '</td>';
+                                    echo '<td align="right">' . $cabina['precioCabina'] . '</td>';
+                                    echo '</tr>';
+                                }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="col-xs-6">
-                    <h3 style="margin: 0; margin-bottom: 18px;"><?= _e('Travelers Extras', 'gogalapagos')?></h3>
+                    <h3 style="margin: 0; margin-bottom: 18px;"><?= _e('Traveler\'s Extras', 'gogalapagos')?></h3>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -433,21 +449,21 @@ function gquote_register_meta_boxes_callback($post){
                             <tbody>
                                 <?php
                                     $items = 0;
-    $extrassubtotal = 0;
-    foreach($extrasArray as $extras){
-        foreach($extras as $extra => $cantidad){
-            if($cantidad > 0){
-                $onboardservice = goGetPostBySlug($extra);
-                $onboard_price = get_post_meta($onboardservice[$items]->ID, $prefix . 'onboard_service_price', true);
-                echo '<tr>';
-                echo '<td>' . esc_html($onboardservice[$items]->post_title) . '</td>';
-                echo '<td>' . $cantidad . '</td>';
-                echo '<td>' . $onboard_price * $cantidad . '</td>';
-                echo '</tr>';
-            }
-        }
-        $items++;
-    }
+                                    $extrassubtotal = 0;
+                                    foreach($extrasArray as $extras){
+                                        foreach($extras as $extra => $cantidad){
+                                            if($cantidad > 0){
+                                                $onboardservice = goGetPostBySlug($extra);
+                                                $onboard_price = get_post_meta($onboardservice[$items]->ID, $prefix . 'onboard_service_price', true);
+                                                echo '<tr>';
+                                                echo '<td>' . esc_html($onboardservice[$items]->post_title) . '</td>';
+                                                echo '<td>' . $cantidad . '</td>';
+                                                echo '<td>' . $onboard_price * $cantidad . '</td>';
+                                                echo '</tr>';
+                                            }
+                                        }
+                                        $items++;
+                                    }
                                 ?>
                             </tbody>
                         </table>
@@ -462,27 +478,27 @@ function gquote_register_meta_boxes_callback($post){
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <?php
-                                    $tab = 0;
-    foreach ($travelers[0] as $pax){
-        echo '<li role="presentation" class="';
-        echo ($tab == 0) ? 'active' : '';
-        $number = $tab + 1;
-        echo '"><a href="#pax-'. $tab .'" aria-controls="pax-'. $tab .'" role="tab" data-toggle="tab">Pax '. $number .'</a></li>';    
-        $tab++;
-    }
+                                $tab = 0;
+                                foreach ($travelers[0] as $pax){
+                                    echo '<li role="presentation" class="';
+                                    echo ($tab == 0) ? 'active' : '';
+                                    $number = $tab + 1;
+                                    echo '"><a href="#pax-'. $tab .'" aria-controls="pax-'. $tab .'" role="tab" data-toggle="tab">Pax '. $number .'</a></li>';    
+                                    $tab++;
+                                }
                             ?>
                         </ul>
 
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <?php
-    $tab = 0;
-    foreach ($travelers[0] as $pax){
-        echo '<div role="tabpanel" class="tab-pane ';
-        echo ($tab == 0) ? 'active' : 'fade';
-        $number = $tab + 1;
-        echo '" id="pax-'. $tab .'">';    
-        // IMPRIMIR EL ARRAY DEL PAX
+                                $tab = 0;
+                                foreach ($travelers[0] as $pax){
+                                    echo '<div role="tabpanel" class="tab-pane ';
+                                    echo ($tab == 0) ? 'active' : 'fade';
+                                    $number = $tab + 1;
+                                    echo '" id="pax-'. $tab .'">';    
+                                    // IMPRIMIR EL ARRAY DEL PAX
                             ?>
                             <div class="row">
                                 <div class="col-sm-3">
@@ -491,10 +507,10 @@ function gquote_register_meta_boxes_callback($post){
                                         <li><strong>Title</strong> <?= $pax['title'] ?></li>
                                         <li><strong>Full Name</strong> <?= $pax['fname'] ?> <?= $pax['lname'] ?></li>
                                         <li><strong>Gender</strong> <?= ($pax['gender'] == 'm') ? 'Male' : ' Female' ?></li>
-                                        <li><strong>Birth Date</strong> <?= $pax['dirthdate'] ?>/<?= $pax['dirthmonth'] ?>/<?= $pax['dirthyear'] ?></li>
+                                        <li><strong>Date of Birth</strong> <?= $pax['dirthdate'] ?>/<?= $pax['dirthmonth'] ?>/<?= $pax['dirthyear'] ?></li>
                                     </ul>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                     <h4 style="margin: 0; margin: 16px 0;"><?= _e('Contact Information', 'gogalapagos')?></h4>
                                     <ul>
                                         <li><strong>Address</strong> <?= $pax['streetaddress'] ?></li>
@@ -505,11 +521,11 @@ function gquote_register_meta_boxes_callback($post){
                                         <li><strong>Email</strong> <?= $pax['email'] ?></li>
                                     </ul>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-6">
                                     <h4 style="margin: 0; margin: 16px 0;"><?= _e('Additional Information', 'gogalapagos')?></h4>
                                     <ul>
                                         <li>
-                                            <strong>Diet</strong><br />
+                                            <strong>Diet Preferences</strong><br />
                                             <p><?= $pax['diet'] ?></p>
                                         </li>
                                         <li>
@@ -521,9 +537,9 @@ function gquote_register_meta_boxes_callback($post){
                             </div>
                             <?php
                                 //-------------------------//
-                                echo '</div>';
-        $tab++;
-    }
+                                    echo '</div>';
+                                    $tab++;
+                                }
                             ?>
                         </div>
                     </div>
@@ -536,6 +552,23 @@ function gquote_register_meta_boxes_callback($post){
             </div>
         </div>
     </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="syncmsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Downloading to ELIGOS</h4>
+      </div>
+      <div id="sync-text-msg" class="modal-body bg-info text-center">        
+        <i class="dashicons dashicons-image-rotate"></i>
+        <p>Connecting to ELIGOS...</p>
+      </div>
+      <div class="modal-footer hidden">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 <script>
     function printDiv() 
@@ -564,7 +597,7 @@ function gquote_register_meta_boxes_callback($post){
 <?php    
 }
 function gquote_register_meta_boxes() {
-    add_meta_box( 'goquitong-quote-data', __( 'Quote Info', 'textdomain' ), 'gquote_register_meta_boxes_callback', 'gquote' );
+    add_meta_box( 'goquitong-quote-data', '<span class="dashicons dashicons-cart"></span> ' . __( 'Quote Info', 'textdomain' ), 'gquote_register_meta_boxes_callback', 'gquote' );
 }
 add_action( 'add_meta_boxes', 'gquote_register_meta_boxes' );
 
@@ -579,4 +612,34 @@ function goGetPostBySlug($slug){
     $my_onboardservice = get_posts($args);
     return $my_onboardservice;
 }
+
+
+function goDownloadReceptivo(){
+    global $wp_version;
+    $url = 'http://gogalapagos.sistemaskt.com/getjson/?token=rogbV19gAJo33sS9RVdb_xyn_6bCkUWR';
+    $args = array(
+        'timeout'     => 5,
+        'redirection' => 5,
+        'httpversion' => '1.0',
+        'user-agent'  => 'WordPress/' . $wp_version . '; ' . home_url(),
+        'blocking'    => true,
+        'headers'     => array(),
+        'cookies'     => array(),
+        'body'        => null,
+        'compress'    => false,
+        'decompress'  => true,
+        'sslverify'   => true,
+        'stream'      => false,
+        'filename'    => null
+    ); 
+    
+    $response = wp_remote_get( $url, $args );
+    
+    echo '<pre>';
+    var_dump(json_decode($response['body']));
+    echo '</pre>';
+    die();
+    
+}
+add_action('wp_ajax_goDownloadReceptivo','goDownloadReceptivo');
 ?>

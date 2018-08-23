@@ -93,6 +93,47 @@ function dataStructureConfiguration(){
 add_action('plugins_loaded', 'dataStructureConfiguration');
 
 
+/*** USUARIO Y ROLES DE USUARIO ***/
+function go_web_sales_management_role() {
+    add_role('go_web_sales',
+        'Go Web Sales',
+        array(
+            'read' => true,
+            'edit_posts' => false,
+            'delete_posts' => false,
+            'publish_posts' => false,
+            'upload_files' => false,
+        )
+    );
+}
+add_action('admin_init','go_web_sales_management_role',50);
+
+function go_add_role_caps() {
+ 
+     // Add the roles you'd like to administer the custom post types
+     $roles = array('go_web_sales', 'administrator');
+
+     // Loop through each role and assign capabilities
+     foreach($roles as $the_role) { 
+
+          $role = get_role($the_role);
+
+          $role->add_cap( 'read' );
+          $role->add_cap( 'read_gquote');
+          $role->add_cap( 'read_private_gquotes' );
+          $role->add_cap( 'edit_gquote' );
+          $role->add_cap( 'edit_gquotes' );
+          $role->add_cap( 'edit_others_gquotes' );
+          $role->add_cap( 'edit_published_gquotes' );
+          $role->remove_cap( 'publish_gquotes' );
+          $role->remove_cap( 'delete_others_gquotes' );
+          $role->remove_cap( 'delete_private_gquotes' );
+          $role->remove_cap( 'delete_published_gquotes' );
+
+    }
+}
+add_action('admin_init','go_add_role_caps',999);
+
  
 /**
  * goquoting_pedidos: se registra el custom post type para pedidos.
@@ -149,11 +190,11 @@ function goquoting_pedidos() {
 		'publicly_queryable'    => false,
 		'query_var'             => 'web-sales',
 		'rewrite'               => false,
-		'capability_type'       => 'post',
-        'capabilities' => array(
-            'create_posts' => 'do_not_allow',
-            'delete_published_posts' => 'do_not_allow',
-        ),
+		'capability_type'       => array('gquote', 'gquotes'),
+//        'capabilities' => array(
+//            'create_posts' => 'do_not_allow',
+//            //'delete_published_posts' => 'do_not_allow',
+//        ),
         'map_meta_cap' => true,
 		'show_in_rest'          => true,
 		'rest_base'             => 'web-sales',
