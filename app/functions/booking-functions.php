@@ -120,6 +120,21 @@ function obtenerCabinasPorBarco($id_barco){
     
     return $cabinas;
 }
+function obtenerCabinasPorCodigoDispo($codigoCabina){
+    $args = array(
+    'post_type' => 'ggcabins',
+    'posts_per_page' => -1,
+    'meta_query' => array(
+        array(
+            'key'     => META_PREFIX . 'cabin_eligos_code',
+            'value'   => $codigoCabina,
+            'compare' => 'LIKE',
+        ),
+    ));
+    $cabinas = get_posts($args);
+    
+    return $cabinas;
+}
 // RECUPERAR PROMO DE WORDPRESS
 function obtenerPromo($id_promo){    
     $promo = get_post($id_promo);

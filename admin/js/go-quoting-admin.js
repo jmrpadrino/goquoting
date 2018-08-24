@@ -66,3 +66,78 @@ $('#sync-receptivo').click( function(){
         }
     })
 })
+$('#send-quote').click(function(){
+    $('#send-quote-to').modal('show');
+})
+function printDiv() 
+{
+    var divToPrint=document.getElementById('print-area');
+    var newWin=window.open('','Print-Window');
+    var vistaPrint = '';
+    vistaPrint += '<html>';
+    vistaPrint += '<head>';
+    vistaPrint += '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">';
+    vistaPrint += '</head>';
+    vistaPrint += '<body onload="window.print()">';
+    vistaPrint += divToPrint.innerHTML;
+    vistaPrint += '</body>';
+    vistaPrint += '</html>';
+
+    console.log(vistaPrint);
+
+    newWin.document.open();
+    newWin.document.write(vistaPrint);
+    //newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+    newWin.document.close();
+    setTimeout(function(){newWin.close();},10);
+}
+function enviarQuote(){
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    var campoemail = $('[name=emailto]');
+    var mailfrom = $('[name=emailfrom]');
+    var messagge = $('[name=topmsg]');
+    var body = $('#print-area');
+    
+    console.log(mailfrom.val());
+    console.log(campoemail.val());
+    
+    if(!regex.test(campoemail.val())){
+        $('.email-to').addClass('has-error');
+        campoemail.focus();
+    }else{
+        
+        $('.email-to')
+            .removeClass('has-error')
+            .addClass('has-success');
+        
+        //enviar_quote_via_ajax
+        $.ajax({
+            type: 'POST',
+            url: ajaxurl,
+            data : {
+                action: 'enviar_quote_via_ajax',
+                mailfrom: mailfrom.val(),
+                mailto: campoemail.val(),
+                messagge: messagge.val(),
+                body: body.html(),
+            },
+            beforeSend: function(){
+                $('#send-quote-now')
+                    .removeClass('btn-primary')
+                    .addClass('btn-warning');
+            },
+            success: function( response ){
+                $('#send-quote-now')
+                    .removeClass('btn-warning')
+                    .addClass('btn-success');
+                $('#send-quote-to').modal('hide');
+                
+            },
+            error: function(){
+                $('#send-quote-now')
+                    .removeClass('btn-warning')
+                    .addClass('btn-danger');
+            }
+        });
+    }
+}
