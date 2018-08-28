@@ -1,10 +1,11 @@
 $('#sync-receptivo').click( function(){
+    var quoteId = $('#quoteID').val();
     $.ajax({
         type: 'POST',
         url: ajaxurl,
         data : {
             action: 'goDownloadReceptivo',
-            var1: 'valor1',
+            quoteId: quoteId,
         },
         beforeSend  : function(){
             $('#syncmsg').modal('show');
@@ -34,6 +35,12 @@ $('#sync-receptivo').click( function(){
                         .text('The information has been downloaded to ELIGOS...');
                     $('.modal-footer')
                         .removeClass('hidden');
+                    if(response == 'ERROR'){
+                        $('#q-code').html('<span class="text-danger"><strong>ERROR</strong></span>');
+                    }else{
+                        //$('#q-code').text(response);
+                        console.log(response);
+                    }
                 }else{
                     $('#sync-text-msg')
                         .removeClass('bg-info')

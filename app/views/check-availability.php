@@ -1,4 +1,8 @@
-<?php 
+<?php
+if(get_option( 'goquoting-link-system' ) != 'on'){
+    wp_redirect( home_url('request-a-quote'), 302 );
+    exit;
+}
 $prefix = 'gg_'; 
 // ELIMINAR COOKIE
 unset($_COOKIE['goquoting_cookie']);

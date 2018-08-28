@@ -37,7 +37,7 @@ add_action('manage_posts_custom_column', 'pedidos_columnas_contenido', 10, 2);
 function pedidos_columnas( $defaults )
 {
     if ( $_GET['post_type'] == 'gquote' ){
-        $defaults['title'] = 'Quote ID';
+        $defaults['title'] = 'Quote REF';
         $defaults['country'] = __('Country', 'gogalapagos');
         $defaults['quoting_status'] = __('Status', 'gogalapagos');
         /*<img src="<?= RUTA_PLUGIN_BOOKING .'images/flags/'. strtolower(get_post_meta($post->ID, 'quote_billing_country', true)) ?>.png" alt="<?= $countries[get_post_meta($post->ID, 'quote_billing_country', true)] ?>">*/
@@ -124,6 +124,12 @@ function gquote_get_bootstrap(){
         background: -ms-linear-gradient(-45deg, rgba(238,250,173,1) 0%, rgba(187,199,122,1) 100%);
         background: linear-gradient(135deg, rgba(238,250,173,1) 0%, rgba(187,199,122,1) 100%);
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eefaad', endColorstr='#bbc77a', GradientType=1 );
+    }
+    .quote-ref-title{
+        color: #2980b9; font-weight: bold; font-size: 32px; margin: 0;
+    }
+    .quote-ref-title+small{
+        font-size: 16px;
     }
     @-moz-keyframes spin { 100% { -moz-transform: rotate(-360deg); } }
     @-webkit-keyframes spin { 100% { -webkit-transform: rotate(-360deg); } }
@@ -392,17 +398,20 @@ function gquote_register_meta_boxes_callback($post){
     $travelers = get_post_meta($post->ID, 'quote_traveler', false); 
     $travelers = array_shift($travelers);
     $status = get_post_meta($post->ID, 'quote_status', true);
+    $qcode = get_post_meta($post->ID, 'quote_qcode', true);
 ?>
+<input id="quoteID" type="hidden" name="quoteID" value="<?= $_GET['post'] ?>">
 <div id="print-area" style="padding: 20px;" class="bg-<?= ($status == 0) ? 'info' : 'success' ?>">
     <div class="row">
         <div class="col-sm-5">
-            <h3 style="color: #2980b9; font-weight: bold; font-size: 32px; margin: 0; margin-bottom: 18px;"><?= _e('Quote Details', 'gogalapagos') ?> #<?= get_post_meta($post->ID, 'quote_ID', true) ?></h3>
+            <h3 class="quote-ref-title"><?= _e('Quote Details', 'gogalapagos') ?> #<?= get_post_meta($post->ID, 'quote_ID', true) ?></h3>            
+            <small><strong>Q-CODE:</strong> <span id="q-code"><?= (!$qcode) ? 'no Q Code yet!' : $qcode ?></span></small>
         </div>
         <div class="col-sm-7">
             <button title="Imprimir" class="btn btn-default pull-right" id="print-quote" type="button" onclick="printDiv()"><i class="glyphicon glyphicon-print"></i></button>
             <button title="Reenviar" class="btn btn-default pull-right" id="send-quote" type="button"><i class="glyphicon glyphicon-envelope"></i></button>
             <?php
-            if ($status != 0){
+            if ($status != 0 && !$qcode){
                 echo '<button class="btn btn-default pull-right" id="sync-receptivo" type="button"><i class="dashicons dashicons-migrate"></i> Download to ELIGOS</button>';
             }
             ?>
@@ -699,9 +708,13 @@ function goDownloadReceptivo(){
 
     $response = wp_remote_get( $url, $args );
 
-    echo '<pre>';
-    var_dump(json_decode($response['body']));
-    echo '</pre>';
+    //echo $response;
+    $tquote = 'T-'.rand(1000, 9999).'-'.date('Y');
+    update_post_meta($_POST['quoteId'], 'quote_qcode', $tquote);
+    $tcode = get_post_meta($_POST['quoteId'], 'quote_qcode', true);
+    
+    echo $tcode;
+    
     die();
 
 }

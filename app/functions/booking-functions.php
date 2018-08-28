@@ -1,7 +1,6 @@
 <?php
 global $wpdb;
 
-
 // USO DE COOKIES
 // CREAR COOKIE
 function crearCookie(){

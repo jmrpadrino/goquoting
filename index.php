@@ -35,6 +35,7 @@ require_once('admin/booking-system-setup.php');
 require_once('admin/booking-system-admin-functions.php');
 require_once('app/booking-system-create-pages.php');
 require_once('app/booking-system-shortcodes.php');
+require_once('app/booking-system-frontend.php');
 
 /*
 

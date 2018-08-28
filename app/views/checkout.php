@@ -1,5 +1,10 @@
 <?php
-include PATH_PLUGIN_BOOKING . '/app/functions/booking-functions.php';
+if (get_option( 'goquoting-link-system' ) != 'on'){
+    wp_redirect( home_url('request-a-quote'), 302 );
+    exit;
+}
+require_once PATH_PLUGIN_BOOKING . '/app/functions/booking-functions.php';
+global $wpdb;
 $prefix = 'gg_';
 if (!isset($_GET['id']) && !isset($_COOKIE['goquoting_cookie'])){
     empezarProceso();
