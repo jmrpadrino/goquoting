@@ -37,9 +37,12 @@ add_action('manage_posts_custom_column', 'pedidos_columnas_contenido', 10, 2);
 function pedidos_columnas( $defaults )
 {
     if ( $_GET['post_type'] == 'gquote' ){
-        $defaults['title'] = 'Quote REF';
-        $defaults['country'] = __('Country', 'gogalapagos');
-        $defaults['quoting_status'] = __('Status', 'gogalapagos');
+        $defaults['title'] = '<span class="dashicons dashicons-sticky"></span> ' . 'Quote REF';
+        $defaults['country'] = '<span class="dashicons dashicons-admin-site"></span> ' . __('Country', 'gogalapagos');
+        $defaults['quoting_status'] = '<span class="dashicons dashicons-post-status"></span> ' . __('Status', 'gogalapagos');
+        $defaults['quoting_t_code'] = '<span class="dashicons dashicons-tag"></span> ' . __('T-CODE', 'gogalapagos');
+        $defaults['quoting_main_contact'] = '<span class="dashicons 
+dashicons-admin-users"></span> ' . __('Main Contact Name', 'gogalapagos');
         /*<img src="<?= RUTA_PLUGIN_BOOKING .'images/flags/'. strtolower(get_post_meta($post->ID, 'quote_billing_country', true)) ?>.png" alt="<?= $countries[get_post_meta($post->ID, 'quote_billing_country', true)] ?>">*/
         //$defaults['quoting_total'] = __('Total', 'gogalapagos');        
 
@@ -57,6 +60,13 @@ function pedidos_columnas_contenido($column_name, $post_ID){
         echo '<img src="' 
         . RUTA_PLUGIN_BOOKING .'images/flags/'. strtolower(get_post_meta($post_ID, 'quote_billing_country', true)) 
         . '.png" title="'. devolverPais(get_post_meta($post_ID, 'quote_billing_country', true)).'">';        
+    }
+    if ($column_name == 'quoting_t_code') {
+        echo (get_post_meta($post_ID, 'quote_qcode', true)) == '' ? 'no T-CODE yet!' : get_post_meta($post_ID, 'quote_qcode', true);        
+    }
+    if ($column_name == 'quoting_main_contact') {
+        $travelers = get_post_meta($post_ID, 'quote_traveler', false);
+        echo $travelers[0][1]['title'].' '.$travelers[0][1]['fname'].' '.$travelers[0][1]['lname'];        
     }
 }
 
@@ -85,8 +95,11 @@ function gquote_get_bootstrap(){
         text-align: center;
         z-index: 26;
     }
-    .column-country{
-        width: 100px;
+    .column-country, .column-quoting_status, .column-quoting_t_code{
+        width: 120px;
+    }
+    .column-quoting_main_contact{
+        width: 200px;
     }
     #print-area{
         font-family: 'Didact Gothic', sans-serif;
@@ -141,255 +154,6 @@ add_action( 'admin_head', 'gquote_get_bootstrap' );
 
 function gquote_register_meta_boxes_callback($post){
 
-    $countries = array
-        (
-        'AF' => 'Afghanistan',
-        'AX' => 'Aland Islands',
-        'AL' => 'Albania',
-        'DZ' => 'Algeria',
-        'AS' => 'American Samoa',
-        'AD' => 'Andorra',
-        'AO' => 'Angola',
-        'AI' => 'Anguilla',
-        'AQ' => 'Antarctica',
-        'AG' => 'Antigua And Barbuda',
-        'AR' => 'Argentina',
-        'AM' => 'Armenia',
-        'AW' => 'Aruba',
-        'AU' => 'Australia',
-        'AT' => 'Austria',
-        'AZ' => 'Azerbaijan',
-        'BS' => 'Bahamas',
-        'BH' => 'Bahrain',
-        'BD' => 'Bangladesh',
-        'BB' => 'Barbados',
-        'BY' => 'Belarus',
-        'BE' => 'Belgium',
-        'BZ' => 'Belize',
-        'BJ' => 'Benin',
-        'BM' => 'Bermuda',
-        'BT' => 'Bhutan',
-        'BO' => 'Bolivia',
-        'BA' => 'Bosnia And Herzegovina',
-        'BW' => 'Botswana',
-        'BV' => 'Bouvet Island',
-        'BR' => 'Brazil',
-        'IO' => 'British Indian Ocean Territory',
-        'BN' => 'Brunei Darussalam',
-        'BG' => 'Bulgaria',
-        'BF' => 'Burkina Faso',
-        'BI' => 'Burundi',
-        'KH' => 'Cambodia',
-        'CM' => 'Cameroon',
-        'CA' => 'Canada',
-        'CV' => 'Cape Verde',
-        'KY' => 'Cayman Islands',
-        'CF' => 'Central African Republic',
-        'TD' => 'Chad',
-        'CL' => 'Chile',
-        'CN' => 'China',
-        'CX' => 'Christmas Island',
-        'CC' => 'Cocos (Keeling) Islands',
-        'CO' => 'Colombia',
-        'KM' => 'Comoros',
-        'CG' => 'Congo',
-        'CD' => 'Congo, Democratic Republic',
-        'CK' => 'Cook Islands',
-        'CR' => 'Costa Rica',
-        'CI' => 'Cote D\'Ivoire',
-        'HR' => 'Croatia',
-        'CU' => 'Cuba',
-        'CY' => 'Cyprus',
-        'CZ' => 'Czech Republic',
-        'DK' => 'Denmark',
-        'DJ' => 'Djibouti',
-        'DM' => 'Dominica',
-        'DO' => 'Dominican Republic',
-        'EC' => 'Ecuador',
-        'EG' => 'Egypt',
-        'SV' => 'El Salvador',
-        'GQ' => 'Equatorial Guinea',
-        'ER' => 'Eritrea',
-        'EE' => 'Estonia',
-        'ET' => 'Ethiopia',
-        'FK' => 'Falkland Islands (Malvinas)',
-        'FO' => 'Faroe Islands',
-        'FJ' => 'Fiji',
-        'FI' => 'Finland',
-        'FR' => 'France',
-        'GF' => 'French Guiana',
-        'PF' => 'French Polynesia',
-        'TF' => 'French Southern Territories',
-        'GA' => 'Gabon',
-        'GM' => 'Gambia',
-        'GE' => 'Georgia',
-        'DE' => 'Germany',
-        'GH' => 'Ghana',
-        'GI' => 'Gibraltar',
-        'GR' => 'Greece',
-        'GL' => 'Greenland',
-        'GD' => 'Grenada',
-        'GP' => 'Guadeloupe',
-        'GU' => 'Guam',
-        'GT' => 'Guatemala',
-        'GG' => 'Guernsey',
-        'GN' => 'Guinea',
-        'GW' => 'Guinea-Bissau',
-        'GY' => 'Guyana',
-        'HT' => 'Haiti',
-        'HM' => 'Heard Island & Mcdonald Islands',
-        'VA' => 'Holy See (Vatican City State)',
-        'HN' => 'Honduras',
-        'HK' => 'Hong Kong',
-        'HU' => 'Hungary',
-        'IS' => 'Iceland',
-        'IN' => 'India',
-        'ID' => 'Indonesia',
-        'IR' => 'Iran, Islamic Republic Of',
-        'IQ' => 'Iraq',
-        'IE' => 'Ireland',
-        'IM' => 'Isle Of Man',
-        'IL' => 'Israel',
-        'IT' => 'Italy',
-        'JM' => 'Jamaica',
-        'JP' => 'Japan',
-        'JE' => 'Jersey',
-        'JO' => 'Jordan',
-        'KZ' => 'Kazakhstan',
-        'KE' => 'Kenya',
-        'KI' => 'Kiribati',
-        'KR' => 'Korea',
-        'KW' => 'Kuwait',
-        'KG' => 'Kyrgyzstan',
-        'LA' => 'Lao People\'s Democratic Republic',
-        'LV' => 'Latvia',
-        'LB' => 'Lebanon',
-        'LS' => 'Lesotho',
-        'LR' => 'Liberia',
-        'LY' => 'Libyan Arab Jamahiriya',
-        'LI' => 'Liechtenstein',
-        'LT' => 'Lithuania',
-        'LU' => 'Luxembourg',
-        'MO' => 'Macao',
-        'MK' => 'Macedonia',
-        'MG' => 'Madagascar',
-        'MW' => 'Malawi',
-        'MY' => 'Malaysia',
-        'MV' => 'Maldives',
-        'ML' => 'Mali',
-        'MT' => 'Malta',
-        'MH' => 'Marshall Islands',
-        'MQ' => 'Martinique',
-        'MR' => 'Mauritania',
-        'MU' => 'Mauritius',
-        'YT' => 'Mayotte',
-        'MX' => 'Mexico',
-        'FM' => 'Micronesia, Federated States Of',
-        'MD' => 'Moldova',
-        'MC' => 'Monaco',
-        'MN' => 'Mongolia',
-        'ME' => 'Montenegro',
-        'MS' => 'Montserrat',
-        'MA' => 'Morocco',
-        'MZ' => 'Mozambique',
-        'MM' => 'Myanmar',
-        'NA' => 'Namibia',
-        'NR' => 'Nauru',
-        'NP' => 'Nepal',
-        'NL' => 'Netherlands',
-        'AN' => 'Netherlands Antilles',
-        'NC' => 'New Caledonia',
-        'NZ' => 'New Zealand',
-        'NI' => 'Nicaragua',
-        'NE' => 'Niger',
-        'NG' => 'Nigeria',
-        'NU' => 'Niue',
-        'NF' => 'Norfolk Island',
-        'MP' => 'Northern Mariana Islands',
-        'NO' => 'Norway',
-        'OM' => 'Oman',
-        'PK' => 'Pakistan',
-        'PW' => 'Palau',
-        'PS' => 'Palestinian Territory, Occupied',
-        'PA' => 'Panama',
-        'PG' => 'Papua New Guinea',
-        'PY' => 'Paraguay',
-        'PE' => 'Peru',
-        'PH' => 'Philippines',
-        'PN' => 'Pitcairn',
-        'PL' => 'Poland',
-        'PT' => 'Portugal',
-        'PR' => 'Puerto Rico',
-        'QA' => 'Qatar',
-        'RE' => 'Reunion',
-        'RO' => 'Romania',
-        'RU' => 'Russian Federation',
-        'RW' => 'Rwanda',
-        'BL' => 'Saint Barthelemy',
-        'SH' => 'Saint Helena',
-        'KN' => 'Saint Kitts And Nevis',
-        'LC' => 'Saint Lucia',
-        'MF' => 'Saint Martin',
-        'PM' => 'Saint Pierre And Miquelon',
-        'VC' => 'Saint Vincent And Grenadines',
-        'WS' => 'Samoa',
-        'SM' => 'San Marino',
-        'ST' => 'Sao Tome And Principe',
-        'SA' => 'Saudi Arabia',
-        'SN' => 'Senegal',
-        'RS' => 'Serbia',
-        'SC' => 'Seychelles',
-        'SL' => 'Sierra Leone',
-        'SG' => 'Singapore',
-        'SK' => 'Slovakia',
-        'SI' => 'Slovenia',
-        'SB' => 'Solomon Islands',
-        'SO' => 'Somalia',
-        'ZA' => 'South Africa',
-        'GS' => 'South Georgia And Sandwich Isl.',
-        'ES' => 'Spain',
-        'LK' => 'Sri Lanka',
-        'SD' => 'Sudan',
-        'SR' => 'Suriname',
-        'SJ' => 'Svalbard And Jan Mayen',
-        'SZ' => 'Swaziland',
-        'SE' => 'Sweden',
-        'CH' => 'Switzerland',
-        'SY' => 'Syrian Arab Republic',
-        'TW' => 'Taiwan',
-        'TJ' => 'Tajikistan',
-        'TZ' => 'Tanzania',
-        'TH' => 'Thailand',
-        'TL' => 'Timor-Leste',
-        'TG' => 'Togo',
-        'TK' => 'Tokelau',
-        'TO' => 'Tonga',
-        'TT' => 'Trinidad And Tobago',
-        'TN' => 'Tunisia',
-        'TR' => 'Turkey',
-        'TM' => 'Turkmenistan',
-        'TC' => 'Turks And Caicos Islands',
-        'TV' => 'Tuvalu',
-        'UG' => 'Uganda',
-        'UA' => 'Ukraine',
-        'AE' => 'United Arab Emirates',
-        'GB' => 'United Kingdom',
-        'US' => 'United States',
-        'UM' => 'United States Outlying Islands',
-        'UY' => 'Uruguay',
-        'UZ' => 'Uzbekistan',
-        'VU' => 'Vanuatu',
-        'VE' => 'Venezuela',
-        'VN' => 'Viet Nam',
-        'VG' => 'Virgin Islands, British',
-        'VI' => 'Virgin Islands, U.S.',
-        'WF' => 'Wallis And Futuna',
-        'EH' => 'Western Sahara',
-        'YE' => 'Yemen',
-        'ZM' => 'Zambia',
-        'ZW' => 'Zimbabwe',
-    );
-
     $prefix = 'gg_';
     $cabinas = get_post_meta($post->ID, 'quote_cabins', false); 
     $cabinas = array_shift($cabinas);
@@ -400,12 +164,14 @@ function gquote_register_meta_boxes_callback($post){
     $status = get_post_meta($post->ID, 'quote_status', true);
     $qcode = get_post_meta($post->ID, 'quote_qcode', true);
 ?>
+<form method="post">
 <input id="quoteID" type="hidden" name="quoteID" value="<?= $_GET['post'] ?>">
+<?php wp_nonce_field( 'gquote_register_meta_boxes_nonce', 'gquote_status_nonce' ); ?>
 <div id="print-area" style="padding: 20px;" class="bg-<?= ($status == 0) ? 'info' : 'success' ?>">
     <div class="row">
         <div class="col-sm-5">
             <h3 class="quote-ref-title"><?= _e('Quote Details', 'gogalapagos') ?> #<?= get_post_meta($post->ID, 'quote_ID', true) ?></h3>            
-            <small><strong>Q-CODE:</strong> <span id="q-code"><?= (!$qcode) ? 'no Q Code yet!' : $qcode ?></span></small>
+            <small><strong>T-CODE:</strong> <span id="q-code"><?= (!$qcode) ? 'no T-CODE yet!' : $qcode ?></span></small>
         </div>
         <div class="col-sm-7">
             <button title="Imprimir" class="btn btn-default pull-right" id="print-quote" type="button" onclick="printDiv()"><i class="glyphicon glyphicon-print"></i></button>
@@ -452,7 +218,7 @@ function gquote_register_meta_boxes_callback($post){
                 <li><strong><?= _e('Phone', 'gogalapagos') ?></strong><br /><a href="tel:<?= $travelers[0][1]['phone'] ?>"><?= $travelers[0][1]['phone'] ?></a></li>
                 <li><strong><?= _e('Address', 'gogalapagos') ?></strong></li>
                 <li><?= get_post_meta($post->ID, 'quote_billing_address', true) ?>, <?= get_post_meta($post->ID, 'quote_billing_city', true) ?>, <?= get_post_meta($post->ID, 'quote_billing_state', true) ?>.</li>
-                <li><?= $countries[get_post_meta($post->ID, 'quote_billing_country', true)] ?> - <?= get_post_meta($post->ID, 'quote_billing_zipcode', true) ?>.</li>
+                <li><?= devolverPais(get_post_meta($post->ID, 'quote_billing_country', true)) ?> - <?= get_post_meta($post->ID, 'quote_billing_zipcode', true) ?>.</li>
                 <li><img src="<?= RUTA_PLUGIN_BOOKING .'images/flags/'. strtolower(get_post_meta($post->ID, 'quote_billing_country', true)) ?>.png" alt="<?= $countries[get_post_meta($post->ID, 'quote_billing_country', true)] ?>"></li>
             </ul>
         </div>
@@ -615,6 +381,7 @@ function gquote_register_meta_boxes_callback($post){
         </div>
     </div>
 </div>
+</form>
 <!-- Modal -->
 <div class="modal fade" id="syncmsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -669,6 +436,17 @@ function gquote_register_meta_boxes_callback($post){
 </div>
 <?php    
 }
+function goquitongSaveStatus( $post_id ){
+    if( !isset( $_POST['gquote_status_nonce'] ) || !wp_verify_nonce( $_POST['gquote_status_nonce'],'gquote_register_meta_boxes_nonce') ) 
+        return;
+
+    if ( !current_user_can( 'edit_post', $post_id ))
+        return;
+    
+    update_post_meta($post_id, 'quote_status',  sanitize_text_field($_POST['quote_status']));
+    
+}
+add_action('save_post', 'goquitongSaveStatus');
 function gquote_register_meta_boxes() {
     add_meta_box( 'goquitong-quote-data', '<span class="dashicons dashicons-cart"></span> ' . __( 'Quote Info', 'textdomain' ), 'gquote_register_meta_boxes_callback', 'gquote' );
 }

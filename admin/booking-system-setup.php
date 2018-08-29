@@ -125,10 +125,10 @@ function go_add_role_caps() {
           $role->add_cap( 'edit_gquotes' );
           $role->add_cap( 'edit_others_gquotes' );
           $role->add_cap( 'edit_published_gquotes' );
+          $role->add_cap( 'delete_others_gquotes' );
+          $role->add_cap( 'delete_private_gquotes' );
+          $role->add_cap( 'delete_published_gquotes' );
           $role->remove_cap( 'publish_gquotes' );
-          $role->remove_cap( 'delete_others_gquotes' );
-          $role->remove_cap( 'delete_private_gquotes' );
-          $role->remove_cap( 'delete_published_gquotes' );
 
     }
 }
