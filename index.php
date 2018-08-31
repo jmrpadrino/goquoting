@@ -10,6 +10,8 @@ Description: This plugin allows you to have a communication interface with Go Ga
 Author: jmrPadrino & The Go Galapagos Team
 Version: 1.0
 Author URI: https://choclomedia.com
+Text Domain:  gogalapagos
+Domain Path:  /languages
 */
 
 /**

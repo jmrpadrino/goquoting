@@ -1,0 +1,2811 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: gogalapagos\n"
+"POT-Creation-Date: 2018-08-29 17:29-0500\n"
+"PO-Revision-Date: 2018-08-29 17:29-0500\n"
+"Last-Translator: Jose Rodriguez <jrodriguez@webcreek.com>\n"
+"Language-Team: Choclomedia <ceo@choclomedia.com>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x:2c,1;_ex:2c,1\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: admin/booking-system-admin-functions.php:41 app/views/checkout.php:287
+#: app/views/travelers-details.php:198
+msgid "Country"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:42
+msgid "Status"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:43
+msgid "T-CODE"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:45
+#, fuzzy
+#| msgid "Ir a Contacto"
+msgid "Main Contact Name"
+msgstr "Go to Contact"
+
+#: admin/booking-system-admin-functions.php:173
+msgid "Quote Details"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:188
+msgid "General"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:189
+msgid "Creation date"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:191
+msgid "Quote status"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:202
+#: admin/booking-system-setup.php:149 admin/booking-system-setup.php:175
+msgid "Quote"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:204
+#, fuzzy
+#| msgid "Our Vessels"
+msgid "Vessel"
+msgstr "Nuestras Embarcaciones"
+
+#: admin/booking-system-admin-functions.php:205
+#: app/functions/booking-functions.php:185
+msgid "Departure"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:206
+#, fuzzy
+msgid "Starting Itinerary"
+msgstr "Buscar"
+
+#: admin/booking-system-admin-functions.php:207
+msgid "Applied Promo"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:208 app/views/accommodation.php:254
+#: app/views/checkout.php:188 app/views/travelers-extras.php:446
+#, fuzzy
+msgid "Duration"
+msgstr "Actividades"
+
+#: admin/booking-system-admin-functions.php:209
+#: app/functions/booking-functions.php:187 app/views/check-availability.php:253
+msgid "Adults"
+msgstr "Adultos"
+
+#: admin/booking-system-admin-functions.php:209
+#: app/functions/booking-functions.php:188 app/views/check-availability.php:265
+msgid "Children"
+msgstr "Niños"
+
+#: admin/booking-system-admin-functions.php:213
+msgid "Contact & Billing"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:216
+#, fuzzy
+#| msgid "Last Name"
+msgid "Name"
+msgstr "Apellido"
+
+#: admin/booking-system-admin-functions.php:217
+msgid "Email"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:218
+msgid "Phone"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:219
+msgid "Address"
+msgstr "Dirección"
+
+#: admin/booking-system-admin-functions.php:230
+#, fuzzy
+#| msgid "Locaciones"
+msgid "Cabins list"
+msgstr "Locations"
+
+#: admin/booking-system-admin-functions.php:234
+#, fuzzy
+#| msgid "Cabins"
+msgid "Cabin Type"
+msgstr "Cabinas"
+
+#: admin/booking-system-admin-functions.php:235
+#, fuzzy
+#| msgid "Ship"
+msgid "Cabin Code"
+msgstr "Barco"
+
+#: admin/booking-system-admin-functions.php:236 app/views/accommodation.php:144
+msgid "Accommodation"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:237
+msgid "Guest Accomm."
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:238
+msgid "Total Estimated"
+msgstr "Estimado total"
+
+#: admin/booking-system-admin-functions.php:261
+msgid "Traveler's Extras"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:266
+msgid "Extra"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:267
+msgid "Amount"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:268
+msgid "Subtotal"
+msgstr ""
+
+#: admin/booking-system-admin-functions.php:299
+#, fuzzy
+#| msgid "More Information"
+msgid "Travelers Information"
+msgstr "Información Adicional"
+
+#: admin/booking-system-admin-functions.php:328
+#, fuzzy
+#| msgid "Technical Information"
+msgid "Personal Information"
+msgstr "Información Técnica"
+
+#: admin/booking-system-admin-functions.php:337
+#, fuzzy
+#| msgid "More Information"
+msgid "Contact Information"
+msgstr "Información Adicional"
+
+#: admin/booking-system-admin-functions.php:348
+#, fuzzy
+#| msgid "Technical Information"
+msgid "Additional Information"
+msgstr "Información Técnica"
+
+#: admin/booking-system-admin-functions.php:451
+msgid "Quote Info"
+msgstr ""
+
+#: admin/booking-system-setup.php:146
+msgctxt "Post Type General Name"
+msgid "Quotes"
+msgstr ""
+
+#: admin/booking-system-setup.php:147
+msgctxt "Post Type Singular Name"
+msgid "Quote"
+msgstr ""
+
+#: admin/booking-system-setup.php:148
+msgid "Quotes"
+msgstr ""
+
+#: admin/booking-system-setup.php:150
+#, fuzzy
+#| msgid "Locaciones"
+msgid "Item Archives"
+msgstr "Locations"
+
+#: admin/booking-system-setup.php:151
+#, fuzzy
+#| msgid "Locaciones"
+msgid "Item Attributes"
+msgstr "Locations"
+
+#: admin/booking-system-setup.php:152
+#, fuzzy
+msgid "Parent Item:"
+msgstr "Buscar"
+
+#: admin/booking-system-setup.php:153
+#, fuzzy
+#| msgid "All Results"
+msgid "All Items"
+msgstr "Todos los Resultados"
+
+#: admin/booking-system-setup.php:154
+#, fuzzy
+#| msgid "Nuevo Item"
+msgid "Add New Item"
+msgstr "New item"
+
+#: admin/booking-system-setup.php:155
+msgid "Add New"
+msgstr ""
+
+#: admin/booking-system-setup.php:156
+#, fuzzy
+#| msgid "Nuevo Item"
+msgid "New Item"
+msgstr "New item"
+
+#: admin/booking-system-setup.php:157
+#, fuzzy
+#| msgid "Editar Item"
+msgid "Edit Item"
+msgstr "Edit item"
+
+#: admin/booking-system-setup.php:158
+#, fuzzy
+#| msgid "Ver Item"
+msgid "Update Item"
+msgstr "View item"
+
+#: admin/booking-system-setup.php:159
+#, fuzzy
+#| msgid "Ver Item"
+msgid "View Item"
+msgstr "View item"
+
+#: admin/booking-system-setup.php:160
+#, fuzzy
+#| msgid "Ver Item"
+msgid "View Items"
+msgstr "View item"
+
+#: admin/booking-system-setup.php:161
+#, fuzzy
+msgid "Search Item"
+msgstr "Buscar"
+
+#: admin/booking-system-setup.php:162
+msgid "Not found"
+msgstr ""
+
+#: admin/booking-system-setup.php:163
+msgid "Not found in Trash"
+msgstr ""
+
+#: admin/booking-system-setup.php:164
+msgid "Featured Image"
+msgstr ""
+
+#: admin/booking-system-setup.php:165
+msgid "Set featured image"
+msgstr ""
+
+#: admin/booking-system-setup.php:166
+msgid "Remove featured image"
+msgstr ""
+
+#: admin/booking-system-setup.php:167
+msgid "Use as featured image"
+msgstr ""
+
+#: admin/booking-system-setup.php:168
+msgid "Insert into item"
+msgstr ""
+
+#: admin/booking-system-setup.php:169
+msgid "Uploaded to this item"
+msgstr ""
+
+#: admin/booking-system-setup.php:170
+#, fuzzy
+#| msgid "Items populares"
+msgid "Items list"
+msgstr "Most popular"
+
+#: admin/booking-system-setup.php:171
+msgid "Items list navigation"
+msgstr ""
+
+#: admin/booking-system-setup.php:172
+msgid "Filter items list"
+msgstr ""
+
+#: admin/booking-system-setup.php:176
+msgid "Web Quotes"
+msgstr ""
+
+#: app/functions/booking-functions.php:182
+#, fuzzy
+#| msgid "More Information"
+msgid "Quoting Information"
+msgstr "Información Adicional"
+
+#: app/functions/booking-functions.php:184 app/views/accommodation.php:248
+#: app/views/checkout.php:182 app/views/travelers-extras.php:440
+msgid "Ship"
+msgstr "Barco"
+
+#: app/functions/booking-functions.php:186 app/views/check-availability.php:416
+#, fuzzy
+#| msgid "Cruises"
+msgid "Cruise Length"
+msgstr "Cruceros"
+
+#: app/views/accommodation.php:145
+msgid "Select your Cabin Accommodation"
+msgstr ""
+
+#: app/views/accommodation.php:163
+msgctxt "gogalapagos"
+msgid "Pending Assignment"
+msgstr ""
+
+#: app/views/accommodation.php:164
+#, fuzzy
+msgctxt "gogalapagos"
+msgid "guests"
+msgstr "Solicitar cotización"
+
+#: app/views/accommodation.php:168
+msgid "Proceed to checkout"
+msgstr ""
+
+#: app/views/accommodation.php:174
+msgid "Show all cabin categories"
+msgstr ""
+
+#: app/views/accommodation.php:202
+msgid "per adult"
+msgstr ""
+
+#: app/views/accommodation.php:215
+msgid "Accommodations for this cabin"
+msgstr ""
+
+#: app/views/accommodation.php:217
+#, fuzzy
+#| msgid "Security Information"
+msgid "Select Accommodation"
+msgstr "Información de Seguridad"
+
+#: app/views/accommodation.php:227
+msgid "Please choose the accommodation to add this cabin. Thank you."
+msgstr ""
+
+#: app/views/accommodation.php:230
+#, fuzzy
+#| msgid "Cabins"
+msgid "Add Cabin"
+msgstr "Cabinas"
+
+#: app/views/accommodation.php:242 app/views/checkout.php:178
+#: app/views/travelers-extras.php:434
+msgid "Summary"
+msgstr ""
+
+#: app/views/accommodation.php:247 app/views/checkout.php:181
+#: app/views/travelers-extras.php:439
+msgid "Date"
+msgstr ""
+
+#: app/views/accommodation.php:253 app/views/checkout.php:187
+#: app/views/travelers-extras.php:445
+#, fuzzy
+#| msgid "Itineraries"
+msgid "Itinerary"
+msgstr "Itinerarios"
+
+#: app/views/accommodation.php:264
+msgid "Add another cabin"
+msgstr ""
+
+#: app/views/accommodation.php:265
+#, fuzzy
+#| msgid "Book Now"
+msgid "Book now"
+msgstr "Reservar Ahora"
+
+#: app/views/check-availability.php:228
+msgid "Select dates"
+msgstr ""
+
+#: app/views/check-availability.php:235
+msgid "to"
+msgstr "A"
+
+#: app/views/check-availability.php:272
+msgid "Are you more than 9?"
+msgstr ""
+
+#: app/views/check-availability.php:274
+#, fuzzy
+msgid "Search"
+msgstr "Buscar"
+
+#: app/views/check-availability.php:279
+msgid "All Cruises Lengths"
+msgstr ""
+
+#: app/views/check-availability.php:280 app/views/check-availability.php:281
+#: app/views/check-availability.php:282 app/views/check-availability.php:422
+#: app/views/check-availability.php:433 app/views/check-availability.php:444
+msgid "Days"
+msgstr "Días"
+
+#: app/views/check-availability.php:285
+#, fuzzy
+#| msgid "Ships"
+msgid "All Ships"
+msgstr "Barcos"
+
+#: app/views/check-availability.php:291
+msgid "Offers Only"
+msgstr ""
+
+#: app/views/check-availability.php:307
+msgid "Ships"
+msgstr "Barcos"
+
+#: app/views/check-availability.php:308
+#, fuzzy
+#| msgid "Choose your departure"
+msgid "Choose your ship and departure"
+msgstr "Consulte fechas de salida"
+
+#: app/views/check-availability.php:342
+#, fuzzy
+#| msgid "Check departure dates"
+msgid "Departure Dates"
+msgstr "Consulte fechas de salida"
+
+#: app/views/check-availability.php:343
+msgid "See all Dates"
+msgstr ""
+
+#: app/views/check-availability.php:343
+msgid "Hide Dates"
+msgstr ""
+
+#: app/views/check-availability.php:347 app/views/check-availability.php:354
+#: app/views/check-availability.php:361 app/views/check-availability.php:367
+#: app/views/check-availability.php:373
+msgid "Jun"
+msgstr ""
+
+#: app/views/check-availability.php:380 app/views/check-availability.php:387
+#: app/views/check-availability.php:393 app/views/check-availability.php:400
+msgid "Jul"
+msgstr ""
+
+#: app/views/check-availability.php:406
+msgid "Apr"
+msgstr ""
+
+#: app/views/check-availability.php:465
+msgid "Cabins available on this date"
+msgstr ""
+
+#: app/views/check-availability.php:480
+msgid ""
+"Please check the selection of the cruise departure date and duration. Thank "
+"you."
+msgstr ""
+
+#: app/views/check-availability.php:488 app/views/travelers-details.php:522
+#: app/views/travelers-extras.php:385
+#, fuzzy
+#| msgid "Next Page"
+msgid "Next Step"
+msgstr "Pág Siguiente"
+
+#: app/views/check-availability.php:489
+#, fuzzy
+msgid "Select Your Cabin"
+msgstr "Buscar"
+
+#: app/views/check-availability.php:501
+msgid "13 days or more"
+msgstr ""
+
+#: app/views/check-availability.php:504
+msgid ""
+"If you want to consult itineraries of 13 days or more, please fill out the "
+"following form and one of our agent will contact you."
+msgstr ""
+
+#: app/views/check-availability.php:507
+msgid "Go to the form"
+msgstr ""
+
+#: app/views/checkout.php:168
+msgid "Confirmation &amp; Payment"
+msgstr ""
+
+#: app/views/checkout.php:169
+msgid "Enter your Payment details"
+msgstr ""
+
+#: app/views/checkout.php:198 app/views/travelers-extras.php:456
+msgid "Selected cabins"
+msgstr ""
+
+#: app/views/checkout.php:226
+msgid "Travelers Extras"
+msgstr ""
+
+#: app/views/checkout.php:254 app/views/travelers-extras.php:485
+#, fuzzy
+#| msgid "Social Areas"
+msgid "Special deals"
+msgstr "Áreas Sociales"
+
+#: app/views/checkout.php:276
+#, fuzzy
+#| msgid "Technical Information"
+msgid "Billing Information"
+msgstr "Información Técnica"
+
+#: app/views/checkout.php:280
+msgid "Same as billing "
+msgstr ""
+
+#: app/views/checkout.php:289
+msgid "Select Country"
+msgstr ""
+
+#: app/views/checkout.php:544 app/views/travelers-details.php:462
+#, fuzzy
+#| msgid "Address"
+msgid "Street Address"
+msgstr "Dirección"
+
+#: app/views/checkout.php:550 app/views/travelers-details.php:470
+msgid "City"
+msgstr ""
+
+#: app/views/checkout.php:556
+msgid "State"
+msgstr ""
+
+#: app/views/checkout.php:562 app/views/travelers-details.php:476
+#, fuzzy
+#| msgid "Ship"
+msgid "Zip Code"
+msgstr "Barco"
+
+#: app/views/checkout.php:569
+#, fuzzy
+#| msgid "More Information"
+msgid "Credit Card Information"
+msgstr "Información Adicional"
+
+#: app/views/checkout.php:573
+msgid "Name on card"
+msgstr ""
+
+#: app/views/checkout.php:579
+#, fuzzy
+#| msgid "Phone Number"
+msgid "Card Number"
+msgstr "Número de Teléfono"
+
+#: app/views/checkout.php:587
+msgid "Exp. Month"
+msgstr ""
+
+#: app/views/checkout.php:590
+msgid "JAN"
+msgstr ""
+
+#: app/views/checkout.php:591
+msgid "FEB"
+msgstr ""
+
+#: app/views/checkout.php:592
+#, fuzzy
+#| msgid "MARCAS"
+msgid "MAR"
+msgstr "BRANDS"
+
+#: app/views/checkout.php:593
+msgid "APR"
+msgstr ""
+
+#: app/views/checkout.php:594
+msgid "MAY"
+msgstr ""
+
+#: app/views/checkout.php:595
+msgid "JUN"
+msgstr ""
+
+#: app/views/checkout.php:596
+msgid "JUL"
+msgstr ""
+
+#: app/views/checkout.php:597
+msgid "AUG"
+msgstr ""
+
+#: app/views/checkout.php:598
+msgid "SEP"
+msgstr ""
+
+#: app/views/checkout.php:599
+msgid "OCT"
+msgstr ""
+
+#: app/views/checkout.php:600
+msgid "NOV"
+msgstr ""
+
+#: app/views/checkout.php:601
+msgid "DEC"
+msgstr ""
+
+#: app/views/checkout.php:607
+msgid "Exp. Year"
+msgstr ""
+
+#: app/views/checkout.php:622
+msgid "CCV"
+msgstr ""
+
+#: app/views/checkout.php:641
+msgid "Pay now"
+msgstr ""
+
+#: app/views/checkout.php:641
+msgid "Request a Quote"
+msgstr "Solicite una Cotización"
+
+#: app/views/thank-you.php:60
+msgid "Thank you for your booking!"
+msgstr ""
+
+#: app/views/thank-you.php:61
+msgid "A confirmation email  will be sent to you shortly"
+msgstr ""
+
+#: app/views/thank-you.php:62
+msgid "New Quote"
+msgstr ""
+
+#: app/views/thank-you.php:76
+msgid "Internal Server Error"
+msgstr ""
+
+#: app/views/thank-you.php:77
+msgid "Wow! Something went wrong"
+msgstr ""
+
+#: app/views/thank-you.php:78
+msgid ""
+"Try to reload this page or do not hesitate to contact us if the problem "
+"persists"
+msgstr ""
+
+#: app/views/travelers-details.php:66
+msgid "Details"
+msgstr ""
+
+#: app/views/travelers-details.php:67
+msgid "Complete travelers details"
+msgstr ""
+
+#: app/views/travelers-details.php:100 app/views/travelers-extras.php:290
+msgid "Traveler"
+msgstr ""
+
+#: app/views/travelers-details.php:100 app/views/travelers-extras.php:290
+#, fuzzy
+#| msgid "Ir a Contacto"
+msgctxt "gogalapagos"
+msgid "Main Contact"
+msgstr "Go to Contact"
+
+#: app/views/travelers-details.php:114
+msgid "Title"
+msgstr ""
+
+#: app/views/travelers-details.php:116
+msgid "Mr."
+msgstr ""
+
+#: app/views/travelers-details.php:117
+msgid "Mrs."
+msgstr ""
+
+#: app/views/travelers-details.php:123
+msgid "First Name"
+msgstr "Nombre"
+
+#: app/views/travelers-details.php:131
+msgid "Last Name"
+msgstr "Apellido"
+
+#: app/views/travelers-details.php:139
+msgid "Gender"
+msgstr ""
+
+#: app/views/travelers-details.php:141
+msgid "Male"
+msgstr ""
+
+#: app/views/travelers-details.php:142
+msgid "Female"
+msgstr ""
+
+#: app/views/travelers-details.php:148
+msgid "Phone Number"
+msgstr "Número de Teléfono"
+
+#: app/views/travelers-details.php:156
+#, fuzzy
+#| msgid "Email Address"
+msgid "E-mail Address"
+msgstr "Email"
+
+#: app/views/travelers-details.php:164
+#, fuzzy
+msgid "Birth Date"
+msgstr "Buscar"
+
+#: app/views/travelers-details.php:454
+msgid "City State"
+msgstr ""
+
+#: app/views/travelers-details.php:483
+msgid "Special Requirements"
+msgstr ""
+
+#: app/views/travelers-details.php:489
+msgid "Diet"
+msgstr ""
+
+#: app/views/travelers-details.php:491
+msgid "Select Diet Requirements"
+msgstr ""
+
+#: app/views/travelers-details.php:492
+msgid "Diet 1"
+msgstr ""
+
+#: app/views/travelers-details.php:493
+msgid "Diet 2"
+msgstr ""
+
+#: app/views/travelers-details.php:494
+msgid "Diet 3"
+msgstr ""
+
+#: app/views/travelers-details.php:502
+#, fuzzy
+#| msgid "Medidas"
+msgid "Medical"
+msgstr "Sizes"
+
+#: app/views/travelers-details.php:504
+msgid "Select Medical Condition"
+msgstr ""
+
+#: app/views/travelers-details.php:505
+#, fuzzy
+#| msgid "Medidas"
+msgid "Medical 1"
+msgstr "Sizes"
+
+#: app/views/travelers-details.php:506
+#, fuzzy
+#| msgid "Medidas"
+msgid "Medical 2"
+msgstr "Sizes"
+
+#: app/views/travelers-details.php:507
+#, fuzzy
+#| msgid "Medidas"
+msgid "Medical 3"
+msgstr "Sizes"
+
+#: app/views/travelers-details.php:523
+#, fuzzy
+#| msgid "Get your trip"
+msgid "Extras for your trip"
+msgstr "Reserve su viaje"
+
+#: app/views/travelers-extras.php:254
+msgid "Extras"
+msgstr ""
+
+#: app/views/travelers-extras.php:255
+msgid "Aditional Packages or your trip"
+msgstr ""
+
+#: app/views/travelers-extras.php:298
+msgid "Skip this Step"
+msgstr ""
+
+#: app/views/travelers-extras.php:307
+msgid "Select your drinks packages"
+msgstr ""
+
+#: app/views/travelers-extras.php:319 app/views/travelers-extras.php:348
+msgid "Pack"
+msgstr ""
+
+#: app/views/travelers-extras.php:336
+#, fuzzy
+#| msgid "Choose your trip"
+msgid "Choose your internet package"
+msgstr "Escoja su viaje"
+
+#: app/views/travelers-extras.php:364
+#, fuzzy
+#| msgid "Go Galapagos user's manual"
+msgid "Additional Activities"
+msgstr "Go Galapagos manual de usuario"
+
+#: app/views/travelers-extras.php:368
+msgid "Kayak"
+msgstr ""
+
+#: app/views/travelers-extras.php:375
+msgid "Wetsuit"
+msgstr ""
+
+#: app/views/travelers-extras.php:386 app/views/travelers-extras.php:506
+#, fuzzy
+#| msgid "More Information"
+msgid "Confirmation"
+msgstr "Información Adicional"
+
+#: app/views/travelers-extras.php:406
+#, fuzzy
+#| msgid "Go Packages"
+msgid "Number of packages"
+msgstr "Paquetes Go"
+
+#: app/views/travelers-extras.php:416
+msgid "Done"
+msgstr ""
+
+#: app/views/travelers-extras.php:505
+msgid "Add more extras"
+msgstr ""
+
+#~ msgid "Well, it seems that the page you are looking for does not exist"
+#~ msgstr "Disculpas, esta página no está disponible."
+
+#~ msgid "Don't worry, you can still find youir way easily"
+#~ msgstr "No se preocupe, todavía puede encontrar su camino fácilmente."
+
+#~ msgid "Return to Homepage"
+#~ msgstr "Regreso a la página principal"
+
+#~ msgid "Plan Your Trip Now"
+#~ msgstr "¡Organice su viaje ahora!"
+
+#~ msgid ""
+#~ "Every island in the Galapagos is different one from the other and all "
+#~ "this is due to how they were formed. If the 4,600 million years of Earth"
+#~ "´s history will be simulated in 24 hours, the Galapagos Islands had been "
+#~ "formed in the last two minutes of that day. The 19 islands and 219 islets "
+#~ "were created by successive volcanic eruptions over a hot spot located on "
+#~ "the seafloor of the Nazca Plate. The first of them emerged in the middle "
+#~ "of the Pacific Ocean about 5 million years ago. The islands are settled "
+#~ "on the Nazca Plate and move about 5 centimeters a year eastward."
+#~ msgstr ""
+#~ "Cada isla en Galápagos es diferente una de la otra y esto se debe a cómo "
+#~ "se formaron. Si los 4.600 millones de años de la historia de la Tierra se "
+#~ "simularán en 24 horas, las Islas Galápagos se formaron en los últimos dos "
+#~ "minutos de ese día. Las 19 islas y 219 islotes fueron creados por "
+#~ "sucesivas erupciones volcánicas sobre un punto caliente ubicado en el "
+#~ "fondo del mar de la Placa de Nazca. El primero de ellos surgió en el "
+#~ "medio del Océano Pacífico hace unos 5 millones de años. Las islas se "
+#~ "asientan en la Placa de Nazca y se mueven anualmente 5 centímetros hacia "
+#~ "el este."
+
+#~ msgid ""
+#~ "That is why the oldest islands of the archipelago are far about 200 "
+#~ "kilometers east from the youngest islands that are still above the hot "
+#~ "spot. In this sense, all the islands have different ages and geological "
+#~ "conditions. The very volcanically active young islands are still in "
+#~ "process of formation and the oldest islands, farthest from the  hot spot, "
+#~ "are in different processes of erosion. The different geological ages, "
+#~ "altitudes and ocean currents that affect them make the  ecosystems, "
+#~ "flora, fauna, landscapes, colors and geology of each island to be "
+#~ "different from one another."
+#~ msgstr ""
+#~ "Es por eso que las islas más antiguas del archipiélago están a unos 200 "
+#~ "kilómetros al este de las islas más jóvenes que todavía están por encima "
+#~ "del punto caliente. En este sentido, todas las islas tienen diferentes "
+#~ "edades y condiciones geológicas. Las islas jóvenes, muy activas "
+#~ "volcánicamente hablando, están todavía en proceso de formación y las "
+#~ "islas más antiguas, más alejadas del punto caliente, se encuentran en "
+#~ "diferentes procesos de erosión. Las diferentes edades geológicas, "
+#~ "altitudes y corrientes oceánicas que las afectan ,hacen que los "
+#~ "ecosistemas de flora, fauna, paisajes, colores y geología de cada isla "
+#~ "sean diferentes entre sí."
+
+#~ msgid ""
+#~ "The untouched of its terrestrial and aquatic ecosystems makes it a "
+#~ "natural sanctuary. Each island has a different magic. In few places on "
+#~ "the planet there is chance to see such impressive and stunning landscapes "
+#~ "and contrasting colors so marked and attractive. Their many wonders "
+#~ "include impressive geological formations, ancient and recent lava flows, "
+#~ "various types of cones and tunnels formed by flows inside the Earth."
+#~ msgstr ""
+#~ "Sus ecosistemas terrestres y acuáticos no tocados por el hombre, las "
+#~ "convierten en un santuario natural.  Cada isla tiene una magia diferente. "
+#~ "En pocos lugares del planeta existe la posibilidad de ver paisajes tan "
+#~ "impresionantes e impresionantes y colores contrastantes tan marcados y "
+#~ "atractivos. Sus varias maravillas incluyen impresionantes formaciones "
+#~ "geológicas, flujos de lava antiguos y recientes, varios tipos de conos y "
+#~ "túneles formados por flujos dentro de la Tierra."
+
+#~ msgid "Explore the "
+#~ msgstr "Explore el"
+
+#~ msgid ""
+#~ "Get the best from both worlds! These are our recommended tours that we "
+#~ "have prepared for vacationers that want to have a more complete travel "
+#~ "experience."
+#~ msgstr ""
+#~ "¡Disfrute lo mejor de los dos mundos!  Estos son nuestros tours "
+#~ "recomendados que hemos preparado para viajeros que quieres una "
+#~ "experiencia más completa en su viaje."
+
+#~ msgid ""
+#~ "Our all-inclusive Go Packages are a favorite amongst our clients due that "
+#~ "they mix an unforgettable luxury cruise in the Galapagos Islands with "
+#~ "amazing inland landscapes and cultural experiences in continental Ecuador "
+#~ "and Peru."
+#~ msgstr ""
+#~ "Nuestros paquetes todo incluido son los preferidos de nuestros clientes "
+#~ "por la mezcla de un inolvidable crucero en las Islas Galapagos con "
+#~ "increíbles paisajes y las experiencias culturales en Ecuador y Peru "
+#~ "continental."
+
+#~ msgid "Rates"
+#~ msgstr "Tarifas"
+
+#~ msgid "per person"
+#~ msgstr "por persona"
+
+#~ msgid ""
+#~ "We offer ample flexibility to adapt to any special needs or interests of "
+#~ "the new traveler. From special activities to dietary needs we have hosted "
+#~ "several types of travelers and made their vacation a true tailor-made "
+#~ "experience. These are some examples of our programs."
+#~ msgstr ""
+#~ "Ofrecemos una amplia flexibilidad para adaptarnos a cualquier necesidad o "
+#~ "interés del viajero contemporáneo.  Desde actividades especiales a dietas "
+#~ "específicas, hemos organizado a varios tipos de viajeros, creando una "
+#~ "verdadera experiencia personalizada.  Estos son algunos ejemplos de "
+#~ "nuestros programas."
+
+#~ msgid "Get the deal"
+#~ msgstr "Ver Oferta"
+
+#~ msgid "Move through the images"
+#~ msgstr "Ver las imágenes"
+
+#~ msgid "Land Tours"
+#~ msgstr "Tours Continentales"
+
+#~ msgid "Enjoy new experiences"
+#~ msgstr "Disfrute de nuevas experiencias"
+
+#~ msgid "Login"
+#~ msgstr "Iniciar sesión"
+
+#~ msgid "Register"
+#~ msgstr "Resgístrate"
+
+#~ msgid "Site Map"
+#~ msgstr "Mapa del Sitio"
+
+#~ msgid "Contact Us"
+#~ msgstr "Contáctenos"
+
+#~ msgid "Proud member of:"
+#~ msgstr "Orgullosos Miembros de:"
+
+#~ msgid "Go Galapagos Ltda. All rights reserved. 1980 - 2017"
+#~ msgstr "Go Galapagos Ltda.  Todos los derechos reservados 2018."
+
+#~ msgid "Members Site"
+#~ msgstr "Portal Miembros"
+
+#~ msgid "Suscribe to our news"
+#~ msgstr "Suscríbase a nuestras noticias"
+
+#~ msgid "Go Galapagos Ltda. All rights reserved."
+#~ msgstr "Go Galapagos Ltda.  Todos los derechos reservados."
+
+#~ msgid "Find"
+#~ msgstr "Encuentre"
+
+#~ msgid "Enjoy"
+#~ msgstr "Disfrute"
+
+#~ msgid "the Enchanted Islands"
+#~ msgstr "las Islas Encantadas"
+
+#~ msgid "Request a quote"
+#~ msgstr "Solicite una cotización"
+
+#~ msgid "Offers &amp; News"
+#~ msgstr "Ofertas & Noticias"
+
+#~ msgid "Menu"
+#~ msgstr "Menú"
+
+#~ msgid "Tell us what are you looking for?"
+#~ msgstr "¿Qué estás buscando?"
+
+#~ msgid "Type here and press enter"
+#~ msgstr "Escriba aquí y presione Enter"
+
+#~ msgid "You may also be interested in"
+#~ msgstr "Podría interesarle también…"
+
+#~ msgid "Loading"
+#~ msgstr "Cargando"
+
+#~ msgid "Multi Idioma"
+#~ msgstr "Multi Language"
+
+#~ msgid "Uso exclusivo del qTranslate-x"
+#~ msgstr "Exclusive use of qTranslate-x"
+
+#~ msgid "Suscribe"
+#~ msgstr "Suscríbete"
+
+#~ msgid "Uso exclusivo de Constant Contact"
+#~ msgstr "Exclusive use of Constant Contact"
+
+#~ msgid "Choose a Deck"
+#~ msgstr "Escoja una Cubierta"
+
+#~ msgid "Prev Page"
+#~ msgstr "Pág Previa"
+
+#~ msgid "Blog"
+#~ msgstr "Blog"
+
+#~ msgid "Get the latest news"
+#~ msgstr "Mire las últimas noticias"
+
+#~ msgid "Search the blog"
+#~ msgstr "Busque en el Blog"
+
+#~ msgid "Categories"
+#~ msgstr "Categorias"
+
+#~ msgid "There's no posts yet"
+#~ msgstr "No hay posts"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Direct Sales"
+#~ msgstr "Ventas Directas"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Incoming Sales"
+#~ msgstr "Ventas Entrantes"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Business Development"
+#~ msgstr "Desarrollo de Negocios"
+
+#~ msgid ""
+#~ "Stay in touch with us by calling (593) 2-2267000 or by completing the "
+#~ "following form:"
+#~ msgstr "Contáctenos llamando al (593) 2-226 7000 o llene este formulario:"
+
+#~ msgid "Description"
+#~ msgstr "Descripción"
+
+#~ msgid "Send"
+#~ msgstr "Enviar"
+
+#~ msgid "Emergency contact"
+#~ msgstr "Contacto de Emergencia"
+
+#~ msgid "Land Operations Manager"
+#~ msgstr "Gerente de Operaciones en Tierra"
+
+#~ msgid "From outside"
+#~ msgstr "Desde afuera"
+
+#~ msgid "From"
+#~ msgstr "Desde"
+
+#~ msgid "Directions & Toll Free Numbers"
+#~ msgstr "Direcciones & Números Gratuitos"
+
+#~ msgid "Main Office"
+#~ msgstr "Oficina Principal"
+
+#~ msgid "Phone (Area Code)"
+#~ msgstr "Teléfono (código de área)"
+
+#~ msgid "Fax"
+#~ msgstr "Fax"
+
+#~ msgid "Office Schedule"
+#~ msgstr "Horario de Atención"
+
+#~ msgid "Quito time"
+#~ msgstr "Hora de Quito"
+
+#~ msgid "Galapagos Office"
+#~ msgstr "Oficina Go Galapagos "
+
+#~ msgid "Galapagos time"
+#~ msgstr "Hora de Galápagos"
+
+#~ msgid "Toll Free Numbres"
+#~ msgstr "Números Gratuitos"
+
+#~ msgid "Partners"
+#~ msgstr "Miembros"
+
+#~ msgid "Direct Passengers"
+#~ msgstr "Pasajeros Directos"
+
+#~ msgid "Local Phone Numbers"
+#~ msgstr "Número de Teléfonos Locales"
+
+#~ msgid "Our Sales Team Email Adresses"
+#~ msgstr "Emails de nuestro Equipo de Ventas"
+
+#~ msgid "Deck Plan"
+#~ msgstr "Plan de Cubierta"
+
+#~ msgid "The Go Galapagos Difference"
+#~ msgstr "La Diferencia Go Galapagos"
+
+#~ msgid "Experience the best of The Pacific Coast"
+#~ msgstr "Conozca lo mejor de la Costa del Pacífico"
+
+#~ msgid "View More"
+#~ msgstr "Ver más"
+
+#~ msgid "Services aboard our fleet"
+#~ msgstr "Servicios abordo de nuestra flota"
+
+#~ msgid "Onboard service and facilities"
+#~ msgstr "Facilidades y servicios abordo"
+
+#~ msgid "Cabin service and facilities"
+#~ msgstr "Facilidades y servicios de Cabina"
+
+#~ msgid "Services available in the Galapagos Legend only"
+#~ msgstr "Servicios disponibles solo en el Galapagos Legend"
+
+#~ msgid "Have fun on the Galapagos Islands"
+#~ msgstr "Diviértase en las Islas Galápagos"
+
+#~ msgid ""
+#~ "These two yachts are the intimate experience guest are looking for, with "
+#~ "their respective capacity of 19 and 12, their cabins offer a sense of an "
+#~ "intimate and private yacht experience. In small spaces, the service is "
+#~ "more personalized and meeting fellow travelers are easy to share the "
+#~ "experience of the trip. All social areas are designed with style and "
+#~ "comfort, as well as the cabins that include excellent amenities. The "
+#~ "external open deck areas have perfect spaces designed to socialize, relax "
+#~ "and enjoy the best of the Pacific sun.gogalapagos"
+#~ msgstr ""
+#~ "Estos dos yates son la experiencia íntima que los huéspedes están "
+#~ "buscando, con sus respectivas capacidades de 36 y 20, sus cabinas ofrecen "
+#~ "una sensación de una experiencia de yate íntimo y privado. En espacios "
+#~ "pequeños, el servicio es más personalizado y se conoce a otros viajeros "
+#~ "compartiendo la experiencia del viaje. Todas las áreas sociales están "
+#~ "diseñadas con estilo y comodidad, así como las cabinas que incluyen "
+#~ "excelentes comodidades. Las áreas externas de cubierta abierta tienen "
+#~ "espacios perfectos, diseñados para socializar, relajarse y disfrutar de "
+#~ "lo mejor del sol del Pacífico."
+
+#~ msgid "A Typical Cruise Day"
+#~ msgstr "Un Día Abordo"
+
+#~ msgid "Please fill the form"
+#~ msgstr "Por favor llene el formulario"
+
+#~ msgid "Learn More"
+#~ msgstr "Más información"
+
+#~ msgid "Results for: "
+#~ msgstr "Resultados para:"
+
+#~ msgid "Articles"
+#~ msgstr "Artículos"
+
+#~ msgid "Islands"
+#~ msgstr "Islas"
+
+#~ msgid "Activities"
+#~ msgstr "Actividades"
+
+#~ msgid "Read More"
+#~ msgstr "Ver más"
+
+#~ msgid "Close"
+#~ msgstr "Cerrar"
+
+#~ msgid "More about "
+#~ msgstr "Ver más"
+
+#~ msgid "at the Galapagos Islands"
+#~ msgstr "en las Islas Galápagos"
+
+#~ msgid "Animal Groups"
+#~ msgstr "Grupos de Animales"
+
+#~ msgid "Animal Group"
+#~ msgstr "Grupos de Animales"
+
+#~ msgid "Scientific Name"
+#~ msgstr "Nombre Científico"
+
+#~ msgid "Animal Average Size"
+#~ msgstr "Tamaño promedio"
+
+#~ msgid "Animal Average Weight"
+#~ msgstr "Peso promedio"
+
+#~ msgid "Places where you may see this animal"
+#~ msgstr "Lugares donde podría ver este animal"
+
+#~ msgid "Visitor Sites"
+#~ msgstr "Lugares de Visita"
+
+#~ msgid "Visitor Site"
+#~ msgstr "Lugares de Visita"
+
+#~ msgid "Go visit this Island"
+#~ msgstr "Visite esta Isla"
+
+#~ msgid "Itineraries available"
+#~ msgstr "Itinerarios Disponibles"
+
+#~ msgid "Activities on the "
+#~ msgstr "Actividades en el"
+
+#~ msgid "More about this activity"
+#~ msgstr "Más sobre esta actividad"
+
+#~ msgid "Move through the activities"
+#~ msgstr "Ver más actividades"
+
+#~ msgid "The Galapagos Islands"
+#~ msgstr "Las Islas Galápagos"
+
+#~ msgid "View more about this island"
+#~ msgstr "Ver más sobre esta isla"
+
+#~ msgid "Move through the islands"
+#~ msgstr "Ver más islas"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Monday"
+#~ msgstr "Lunes"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Tuesday"
+#~ msgstr "Martes"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Wednesday"
+#~ msgstr "Miércoles"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Thursday"
+#~ msgstr "Jueves"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Friday"
+#~ msgstr "Viernes"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Saturday"
+#~ msgstr "Sábado"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Sunday"
+#~ msgstr "Domingo"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "None"
+#~ msgstr "— "
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Dry Landing"
+#~ msgstr "Desembarque Seco"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Wet Landing"
+#~ msgstr "Desembarque Mojado"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Dry or Wet Landing"
+#~ msgstr "Desembarque mojado o seco"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Circumnavigation"
+#~ msgstr "Circumnavegación"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Eroded Tuff"
+#~ msgstr "Toba erosionada"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Flat"
+#~ msgstr "Plano"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Flat & Muddy"
+#~ msgstr "Plano & Fangoso"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Flat & Petrified Lava"
+#~ msgstr "Plano & Toba petrificada"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Flat & Sandy"
+#~ msgstr "Plano & Arenoso"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Flat & Semi-rocky"
+#~ msgstr "Plano & Semi-rocoso"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Hill/mountain"
+#~ msgstr "Cerro/montaña"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Marsh"
+#~ msgstr "Pantanoso"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Muddy"
+#~ msgstr "Fangoso"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Petrified Lava"
+#~ msgstr "Lava petrificada"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Rocky"
+#~ msgstr "Rocoso"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Rocky & Petrified Lava"
+#~ msgstr "Rocoso & Lava petrificada"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Rocky & Sandy"
+#~ msgstr "Rocoso & Arenoso"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Sandy"
+#~ msgstr "Arenoso"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Shallow Ocean"
+#~ msgstr "Agua poco profunda"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Slippery"
+#~ msgstr "Resbaladizo"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Steep"
+#~ msgstr "Empinado"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Steep & Petrified Lava"
+#~ msgstr "Empinado & Lava petrificada"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Water"
+#~ msgstr "Agua"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Wooden Trail"
+#~ msgstr "Sendero de Madera"
+
+#~ msgid "View Itinerary Map"
+#~ msgstr "Ver Mapa de Itinerario"
+
+#~ msgid "Day"
+#~ msgstr "Día"
+
+#~ msgid "Disembarking"
+#~ msgstr "Desembarcando"
+
+#~ msgid "Type of Terrain"
+#~ msgstr "Tipo de Terreno"
+
+#~ msgid "Physical Conditions Required"
+#~ msgstr "Condicion Física"
+
+#~ msgid "Itineraty route"
+#~ msgstr "Ruta de Itinerario"
+
+#~ msgid "Highlights"
+#~ msgstr "Atracciones Destacadas"
+
+#~ msgid "Our latest posts"
+#~ msgstr "Nuestras últimas publicaciones"
+
+#~ msgid "Tags"
+#~ msgstr "Etiquetas"
+
+#~ msgid "All"
+#~ msgstr "Todo"
+
+#~ msgid "There is not animals in this gruop yet."
+#~ msgstr "No hay animales en este grupo aún"
+
+#~ msgid "Our History"
+#~ msgstr "Nuestra historia"
+
+#~ msgid "Galapagos Conservancy"
+#~ msgstr "Galapagos Conservancy"
+
+#~ msgid "Social Investment"
+#~ msgstr "Inversión Social"
+
+#~ msgid "Our Partners"
+#~ msgstr "Nuestros Socios"
+
+#~ msgid "Plan Your Trip Now!"
+#~ msgstr "¡Organiza tu viaje ahora!"
+
+#~ msgid "The Go Galapagos Experience"
+#~ msgstr "La Experiencia Go Galapagos"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "You're in"
+#~ msgstr "Usted está"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Home"
+#~ msgstr "Inicio"
+
+#~ msgid "3D Floor Plan"
+#~ msgstr "Plano 3D"
+
+#~ msgid "Cabin Location"
+#~ msgstr "Localización de Cabina"
+
+#~ msgid "All FAQs"
+#~ msgstr "Todos las FAQs"
+
+#~ msgid "Our customers say"
+#~ msgstr "Nuestros huéspedes dicen"
+
+#~ msgid "Quito & Surroundings"
+#~ msgstr "Quito & Alrededores"
+
+#~ msgid "Guayaquil"
+#~ msgstr "Guayaquil"
+
+#~ msgid "Cuenca"
+#~ msgstr "Cuenca"
+
+#~ msgid "Amazon"
+#~ msgstr "Amazonía"
+
+#~ msgid "Per&uacute;"
+#~ msgstr "Perú"
+
+#~ msgid "Experience"
+#~ msgstr "La experiencia"
+
+#~ msgid "Deck Plan & Technical Information"
+#~ msgstr "Plan de Cubiertas & Información Técnica"
+
+#~ msgid "360 Virtual Tour"
+#~ msgstr "Tour Virtual 360"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Galapagos Islands"
+#~ msgstr "Islas Galápagos"
+
+#~ msgctxt "gogalapagos"
+#~ msgid "Animals & Wildlife"
+#~ msgstr "Animales & Fauna"
+
+#~ msgid ""
+#~ "Adaptation, evolution, endemism and fearlessness are probably the "
+#~ "concepts that best describe the only animals that complement the natural "
+#~ "magic of the Galapagos Islands. The species that by chance were carried "
+#~ "by ocean or air currents, managed to reach these isolated and remote "
+#~ "islands, facing a very different and extreme environment."
+#~ msgstr ""
+#~ "La adaptación, la evolución, el endemismo y la falta de miedo son "
+#~ "probablemente los conceptos que mejor describen a los únicos animales que "
+#~ "complementan la magia natural de las Islas Galápagos. Las especies, que "
+#~ "por casualidad fueron transportadas por el océano o por las corrientes de "
+#~ "viento, lograron llegar a estas islas aisladas y remotas, enfrentando un "
+#~ "ambiente muy diferente y extremo."
+
+#~ msgid "Animals Grouped By"
+#~ msgstr "Animales Agrupados por"
+
+#~ msgid ""
+#~ "Every island in the Galapagos is different one from the other and all "
+#~ "this is due to how they were formed. If the 4,600 million years of Earth"
+#~ "´s history will be simulated in 24 hours, the Galapagos Islands had been "
+#~ "formed in the last two minutes of that day. The 19 islands and 219 islets "
+#~ "were created by successive volcanic eruptions over a hot spot located on "
+#~ "the seafloor of the Nazca Plate. The first of them emerged in the middle "
+#~ "of the Pacific Ocean about 5 million years ago. The islands are settled "
+#~ "on the Nazca Plate and move about 5 centimeters a year eastward. "
+#~ msgstr ""
+#~ "Cada isla en Galápagos es diferente, una de la otra, y todo esto se debe "
+#~ "a cómo se formaron. Si los 4.600 millones de años de la historia de la "
+#~ "Tierra se simularán en 24 horas, las Islas Galápagos se formaron en los "
+#~ "últimos dos minutos de ese día. Las 19 islas y 219 islotes fueron creados "
+#~ "por sucesivas erupciones volcánicas sobre un punto caliente ubicado en el "
+#~ "fondo marino de la placa de Nazca. El primero de ellos surgió en el medio "
+#~ "del Océano Pacífico hace unos 5 millones de años. Las islas se asientan "
+#~ "en la placa de Nazca y se mueven unos 5 centímetros al año hacia el este."
+
+#~ msgid "See more Islands"
+#~ msgstr "Ver más islas"
+
+#~ msgid "Anothers Social Areas"
+#~ msgstr "Otras Áreas Sociales"
+
+#~ msgid "View Complete Itinerary"
+#~ msgstr "Ver Itinerario Completo"
+
+#~ msgid "Extended Cruise"
+#~ msgstr "Crucero Extendido"
+
+#~ msgid "Check departure dates "
+#~ msgstr "Consulte fechas de salida "
+
+#~ msgid "Plan your trip now"
+#~ msgstr "¡Organice su viaje ahora!"
+
+#~ msgid "Map"
+#~ msgstr "Mapa"
+
+#~ msgid "Fauna"
+#~ msgstr "Fauna"
+
+#~ msgid "Flora &amp; Fauna"
+#~ msgstr "Flora & Fauna"
+
+#~ msgid ""
+#~ "Schedule subject to change at any time due to park regulations and "
+#~ "weather."
+#~ msgstr ""
+#~ "Horarios sujetos a cambio en cualquier momento por concepto a las "
+#~ "regulaciones del parque y del clima."
+
+#, fuzzy
+#~ msgid "Sea Deck"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~ msgid "Sky Deck"
+#~ msgstr "Buscar"
+
+#~ msgctxt "Post Type General Name"
+#~ msgid "Ships"
+#~ msgstr "Barcos"
+
+#~ msgctxt "Post Type Singular Name"
+#~ msgid "Ship"
+#~ msgstr "Barco"
+
+#, fuzzy
+#~ msgid "Parent Ship:"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~| msgid "Editar item"
+#~ msgid "Edit Ship"
+#~ msgstr "Edit item"
+
+#, fuzzy
+#~ msgid "Parent Deck:"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~| msgid "Editar Item"
+#~ msgid "Edit Deck"
+#~ msgstr "Edit item"
+
+#, fuzzy
+#~ msgid "View Decks"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~ msgid "Parent Cabin:"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~| msgid "Social Media"
+#~ msgctxt "Post Type General Name"
+#~ msgid "Social Areas"
+#~ msgstr "Social Media"
+
+#, fuzzy
+#~| msgid "Social Media"
+#~ msgctxt "Post Type Singular Name"
+#~ msgid "Social Area"
+#~ msgstr "Social Media"
+
+#, fuzzy
+#~ msgid "Parent Social Area:"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~| msgid "Social Media"
+#~ msgid "New Social Area"
+#~ msgstr "Social Media"
+
+#, fuzzy
+#~| msgid "Social Media"
+#~ msgid "Edit Social Area"
+#~ msgstr "Social Media"
+
+#, fuzzy
+#~| msgid "Social Media"
+#~ msgid "Update Social Area"
+#~ msgstr "Social Media"
+
+#, fuzzy
+#~| msgid "Social Media"
+#~ msgid "View Social Area"
+#~ msgstr "Social Media"
+
+#, fuzzy
+#~| msgid "Social Media"
+#~ msgid "View Social Areas"
+#~ msgstr "Social Media"
+
+#, fuzzy
+#~ msgid "Search Social Area"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~| msgid "Social Media"
+#~ msgid "Social Areas list"
+#~ msgstr "Social Media"
+
+#, fuzzy
+#~| msgid "Social Media"
+#~ msgid "Social Area"
+#~ msgstr "Social Media"
+
+#, fuzzy
+#~| msgid "Go Galapagos user's manual"
+#~ msgid "Go Galapagos Social Area"
+#~ msgstr "Go Galapagos manual de usuario"
+
+#, fuzzy
+#~ msgid "View Itineraries"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~ msgid "Parent Island:"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~ msgid "View Island"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~| msgid "Locaciones"
+#~ msgctxt "Post Type General Name"
+#~ msgid "Locations"
+#~ msgstr "Locations"
+
+#, fuzzy
+#~| msgid "Locaciones"
+#~ msgctxt "Post Type Singular Name"
+#~ msgid "Location"
+#~ msgstr "Locations"
+
+#, fuzzy
+#~| msgid "Locaciones"
+#~ msgid "Locations"
+#~ msgstr "Locations"
+
+#, fuzzy
+#~ msgid "Parent Location:"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~| msgid "Locaciones"
+#~ msgid "All Locations"
+#~ msgstr "Locations"
+
+#, fuzzy
+#~| msgid "Por Locacion"
+#~ msgid "New Location"
+#~ msgstr "By Location"
+
+#, fuzzy
+#~| msgid "Social Media"
+#~ msgid "Update Location"
+#~ msgstr "Social Media"
+
+#, fuzzy
+#~| msgid "Por Locacion"
+#~ msgid "View Location"
+#~ msgstr "By Location"
+
+#, fuzzy
+#~| msgid "Locaciones"
+#~ msgid "View Locations"
+#~ msgstr "Locations"
+
+#, fuzzy
+#~ msgid "Search Location"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~ msgid "Parent Activity:"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~ msgid "Search Activity"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~ msgid "Parent Animal:"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~| msgid "Editar item"
+#~ msgid "Edit Animal"
+#~ msgstr "Edit item"
+
+#, fuzzy
+#~ msgid "View Animal"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~ msgid "Search Animal"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~ msgid "Parent Testimonial:"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~| msgid "Editar item"
+#~ msgid "Edit Testimonial"
+#~ msgstr "Edit item"
+
+#, fuzzy
+#~ msgid "View Testimonial"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~ msgid "Search Testimonial"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~| msgid "Go Galapagos user's manual"
+#~ msgid "Galapagos Testimonials"
+#~ msgstr "Go Galapagos manual de usuario"
+
+#, fuzzy
+#~| msgid "Book Now"
+#~ msgctxt "gogalapagos"
+#~ msgid "Download Now"
+#~ msgstr "Reservar Ahora"
+
+#~ msgid "Go Galapagos user's manual"
+#~ msgstr "Go Galapagos manual de usuario"
+
+#~ msgid "User's Tutorial and Information Support"
+#~ msgstr "Tutorial del Usuario e información de Soporte"
+
+#~ msgid ""
+#~ "An overview of Go Galapagos Wordpress Theme, how to download and use, "
+#~ "basic templates and examples, and more."
+#~ msgstr ""
+#~ "Una visión general de Go Galapagos Wordpress Theme, cómo descargar y "
+#~ "usar, plantillas y ejemplos básicos, y más."
+
+#~ msgid "Slogan"
+#~ msgstr "Slogan"
+
+#, fuzzy
+#~ msgid "Ship's Deck"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~ msgid "Parent Group:"
+#~ msgstr "Buscar"
+
+#, fuzzy
+#~| msgid "Separe con comas"
+#~ msgid "Separate Groups with commas"
+#~ msgstr "Separate with comas"
+
+#, fuzzy
+#~ msgid "Search Groups"
+#~ msgstr "Buscar"
+
+#~ msgid "Overview"
+#~ msgstr "Descripción General"
+
+#~ msgid "Back to top"
+#~ msgstr "Ir arriba"
+
+#~ msgid "Welcome"
+#~ msgstr "Bienvenido"
+
+#~ msgid "Here you can find"
+#~ msgstr "Aqui puede encontrar"
+
+#~ msgid "View Now!"
+#~ msgstr "Ver ahora!"
+
+#~ msgid "Animals likely to be seen"
+#~ msgstr "Animales que se suelen ver"
+
+#~ msgid "Download Now"
+#~ msgstr "Descargar ahora"
+
+#~ msgid "Plan Your <br /> Galapagos Trip"
+#~ msgstr "Planifique su <br /> viaje a Galapagos"
+
+#~ msgid "Quick Access:"
+#~ msgstr "Acceso Rápido:"
+
+#, fuzzy
+#~ msgid "Ship Itineraries"
+#~ msgstr "Buscar"
+
+#~ msgid "Galapagos Legend cruise ship reviews"
+#~ msgstr "Opiniones sobre el Crusero Galapagos Legend"
+
+#, fuzzy
+#~ msgid "Parent Ship"
+#~ msgstr "Buscar"
+
+#~ msgid "Anterior"
+#~ msgstr "Previous"
+
+#~ msgid "Siguiente"
+#~ msgstr "Next"
+
+#~ msgid "Establecimientos abiertos hoy"
+#~ msgstr "Establishments open today"
+
+#~ msgid "Quiero verlos todos!"
+#~ msgstr "I want to see them all!"
+
+#~ msgid "Agregar nuevo"
+#~ msgstr "Add new"
+
+#~ msgid "Establecimientos"
+#~ msgstr "Establishments"
+
+#~ msgid "Especialidades"
+#~ msgstr "Specialties"
+
+#~ msgid "¿Dónde están los Foodtrucks en Quito?"
+#~ msgstr "Where are the Foodtrucks in Quito?"
+
+#~ msgid ""
+#~ "<p>Los <strong>\"food trucks\"</strong> son una de las tendencias "
+#~ "gastronómicas a posicionarse durante el 2016, año en el que el Ecuador "
+#~ "aparentemente verá proliferar la oferta de comida bajo esta modalidad.</"
+#~ "p>\n"
+#~ "                                <p>En Quito, los camiones de comida "
+#~ "aparecieron en el 2014 con tres ofertas gastronómicas que se duplicaron "
+#~ "para el 2015.</p>"
+#~ msgstr ""
+#~ "<p>The <strong>\"food trucks\"</strong> are one of the gastronomic "
+#~ "tendencies to be positioned during the 2016, year in which Ecuador will "
+#~ "apparently see a proliferation of food supply under this modality.</p><p> "
+#~ "In Quito, food trucks appeared in 2014 with three gastronomic offerings "
+#~ "that doubled by 2015.</p>"
+
+#~ msgid "Dirección"
+#~ msgstr "Address"
+
+#~ msgid "Teléfono"
+#~ msgstr "Phone"
+
+#~ msgid "¿Conóces estos Food Parks en Quito? - #SigueLaRuta"
+#~ msgstr "Do you know these Food Parks in Quito? - #FollowTheRoute"
+
+#~ msgid "Ver más"
+#~ msgstr "See more"
+
+#~ msgid "Son muchos los Food Trucks en Quito donde puedes comer y disfrutar!"
+#~ msgstr "There are many Food Trucks in Quito where you can eat and enjoy!"
+
+#~ msgid "#SigueLaRuta"
+#~ msgstr "#FollowTheRoute"
+
+#~ msgid "Quiero ver mucho mas!"
+#~ msgstr "I want to see much more!"
+
+#~ msgid "Descubre lo mejor que tiene Quito para ti"
+#~ msgstr "Discover the best Quito has for you"
+
+#~ msgid "Buscar"
+#~ msgstr "Search"
+
+#~ msgid "Sigue la Ruta"
+#~ msgstr "Follow the route"
+
+#~ msgid "Busca rápidamente lo que quieres"
+#~ msgstr "Quickly find what you want"
+
+#~ msgid "Por Especialidad"
+#~ msgstr "By Specialty"
+
+#~ msgid "Por Establecimiento"
+#~ msgstr "By Establishment"
+
+#~ msgid ""
+#~ "Los <strong>\"food trucks\"</strong> son una de las tendencias "
+#~ "gastronómicas a posicionarse durante el 2016, año en el que el Ecuador "
+#~ "aparentemente verá proliferar la oferta de comida bajo esta modalidad.</"
+#~ "p>\n"
+#~ "                                <p>En Quito, los camiones de comida "
+#~ "aparecieron en el 2014 con tres ofertas gastronómicas que se duplicaron "
+#~ "para el 2015.</p>"
+#~ msgstr ""
+#~ "<p>The <strong>\"food trucks\"</strong> are one of the gastronomic "
+#~ "tendencies to be positioned during the 2016, year in which Ecuador will "
+#~ "apparently see a proliferation of food supply under this modality.</p><p> "
+#~ "In Quito, food trucks appeared in 2014 with three gastronomic offerings "
+#~ "that doubled by 2015.</p>"
+
+#~ msgid "Servicios"
+#~ msgstr "Services"
+
+#~ msgid ""
+#~ "Aquí en <span class=\"choclo\">Choclo</span><span class=\"media\">media</"
+#~ "span> reconocemos que hay muchos retos que enfrentan nuestros usuarios, "
+#~ "nuestra familia. Es por eso que estamos felices de anunciar que estamos "
+#~ "reinventando nuestra lista de servicios. Vamos a hacer el trabajo "
+#~ "personalizado para ayudarle en su desarrollo de <strong>WordPress</"
+#~ "strong>."
+#~ msgstr ""
+#~ "Here at <span class=\"choclo\">Choclo</span><span class=\"media\">media</"
+#~ "span> we recognize that there are many challenges faced by our users, our "
+#~ "family. Therefore, we are happy to announce that we are reinventing our "
+#~ "list of services. We do custom work to help you in your "
+#~ "<strong>WordPress</strong> development."
+
+#~ msgid "Todos los derechos reservados"
+#~ msgstr "All rights reserved"
+
+#~ msgid "Inicio"
+#~ msgstr "Home"
+
+#~ msgctxt "choclomedia"
+#~ msgid "servicios"
+#~ msgstr "services"
+
+#~ msgid "clientes"
+#~ msgstr "customers"
+
+#~ msgid "Clientes"
+#~ msgstr "Customers"
+
+#~ msgid "Navegacion Principal"
+#~ msgstr "Main Navigation"
+
+#~ msgid "Lenguajes"
+#~ msgstr "Languages"
+
+#~ msgid "Aparece en la sección del footer del sitio."
+#~ msgstr "Apears in the footer section of the site"
+
+#~ msgid ""
+#~ "Somos una empresa en crecimiento dedicada al diseño y desarrollo de "
+#~ "p&aacute;ginas web en Quito."
+#~ msgstr ""
+#~ "We are a growing company dedicated to the design and development of web "
+#~ "pages in Quito."
+
+#~ msgid "P&aacute;ginas web en Quito | Diseño y desarrollo en WordPress"
+#~ msgstr "Web pages in Quito | Design and development on WordPress"
+
+#~ msgid "Todos los Servicios"
+#~ msgstr "View all Services"
+
+#~ msgid "contacto"
+#~ msgstr "contact"
+
+#~ msgid "Servicios de Choclomedia"
+#~ msgstr "Choclomedia's services"
+
+#~ msgid ""
+#~ "Somos diseño y desarrollo de <span class=\"yellow-words\">páginas web</"
+#~ "span> en <span class=\"yellow-words\">Quito</span>."
+#~ msgstr ""
+#~ "We are design and development of <span class=\"yellow-words\">web pages</"
+#~ "span> in <span class=\"yellow-words\">Quito</span>."
+
+#~ msgid ""
+#~ "Sabemos que nos merecemos una <span class=\"yellow-words\">mejor "
+#~ "oportunidad</span>, por eso usamos la <span class=\"yellow-words\">mejor "
+#~ "tecnología web</span>, para impulsar su proyecto."
+#~ msgstr ""
+#~ "We know that we deserve a <span class=\"yellow-words\">better chance</"
+#~ "span>, so we use <span class=\"yellow-words\">the best web technology</"
+#~ "span>, to promote your project."
+
+#~ msgid "beneficios"
+#~ msgstr "pros"
+
+#~ msgid "Son"
+#~ msgstr "There are"
+
+#~ msgid "los beneficios <br/> que obtendrás <br /> con"
+#~ msgstr "pros <br/> you will get <br /> with"
+
+#~ msgid "Obtienes una base de clientes más grande."
+#~ msgstr "Get a larger customer base."
+
+#~ msgid "Educas a los consumidores sobre tú negocio."
+#~ msgstr "Educate consumers about your business."
+
+#~ msgid "Costo de promoción y comercialización eficaz."
+#~ msgstr "Cost of promotion and effective marketing."
+
+#~ msgid "Mejoras la comunicación con tus clientes."
+#~ msgstr "Improve communication with your customers."
+
+#~ msgid "Mantienes ventaja sobre tus competidores."
+#~ msgstr "You maintain an advantage over your competitors."
+
+#~ msgid "Descubre"
+#~ msgstr "Discover"
+
+#~ msgid "c&oacute;mo impulsar tu organizaci&oacute;n"
+#~ msgstr "how to promote your organization"
+
+#~ msgid "servicios"
+#~ msgstr "services"
+
+#~ msgid ""
+#~ "Nuestros servicios de diseño y desarrollo de páginas web siempre serán de "
+#~ "una calidad excepcional, debido a que nos esforzamos por lograr la "
+#~ "excelencia en todo lo que hacemos, con el fin de agregar un valor "
+#~ "significativo a su negocio."
+#~ msgstr ""
+#~ "Our services of design and development of web pages will always be of "
+#~ "exceptional quality, since we strive to achieve excellence in everything "
+#~ "that we do, in order to add significant value to your business."
+
+#~ msgid "Hablemos"
+#~ msgstr "Let's talk"
+
+#~ msgid "Conozca nuestros servicios"
+#~ msgstr "Discover all our services"
+
+#~ msgid "<span class=\"orange\">Su página web</span> <br />a medida"
+#~ msgstr "<span class=\"orange\">Your custom</span> <br />website"
+
+#~ msgid ""
+#~ "Hacemos diseño y desarrollo de paginas web dinámico y de vanguardia para "
+#~ "organizaciones y negocios de todo tipo."
+#~ msgstr ""
+#~ "We design and develop dynamic and state-of-the-art web pages for "
+#~ "organizations and businesses of all kinds."
+
+#~ msgid ""
+#~ "Podemos adaptar requisitos complejos a una solución profesional fácil de "
+#~ "administrar."
+#~ msgstr ""
+#~ "We can adapt complex requirements to an easy-to-manage professional "
+#~ "solution."
+
+#~ msgid "Díganos que necesita?"
+#~ msgstr "Tell us what you need?"
+
+#~ msgid "Direcci&oacute;n"
+#~ msgstr "Address"
+
+#~ msgid "Tel&eacute;fono"
+#~ msgstr "Phone"
+
+#~ msgid "También somos sociales"
+#~ msgstr "We are also social"
+
+#~ msgid "Trabajemos de la mano."
+#~ msgstr "Let's work hand in hand."
+
+#~ msgid "Nombre"
+#~ msgstr "Name"
+
+#~ msgid "Correo Electr&oacute;nico"
+#~ msgstr "E-mail"
+
+#~ msgid "Compa&ntilde;&iacute;a"
+#~ msgstr "company"
+
+#~ msgid "Su mensaje"
+#~ msgstr "Your message"
+
+#~ msgid "Todos los datos son requeridos"
+#~ msgstr "All data is required"
+
+#~ msgid "Enviar"
+#~ msgstr "Submit"
+
+#~ msgid "Clientes <span class=\"satisfied\">Satisfechos</span>"
+#~ msgstr "<span class=\"satisfied\">Satisfied</span> customers"
+
+#~ msgid ""
+#~ "es un portal de noticias diseñado a medida. Trabaja bajo "
+#~ "<strong>WordPress</strong>, el home es autoadministrable a trav&eacute;s "
+#~ "de un plugin hecho a medida. <strong>3 meses de desarrollo.</strong>"
+#~ msgstr ""
+#~ "Is a bespoke news portal. It works under <strong> WordPress</strong>, the "
+#~ "home is self-administered through a custom plugin. <strong>3 months of "
+#~ "development. </strong>"
+
+#~ msgid "Beneficios"
+#~ msgstr "Pros"
+
+#~ msgid "Satisfechos"
+#~ msgstr "Satisfied"
+
+#~ msgid ""
+#~ "Sabemos que nos merecemos una <span class=\"yellow-words\">mejor "
+#~ "oportunidad</span>, por eso usamos la <span class=\"yellow-words\">mejor "
+#~ "tecnología</span> para diseñar y desarrollar <span class=\"yellow-words"
+#~ "\">páginas web</span> para usted, en <span class=\"yellow-words\">Quito</"
+#~ "span>."
+#~ msgstr ""
+#~ "We know that we deserve a <span class=\"yellow-words\">better "
+#~ "opportunity</span>, that's why we use <span class=\"yellow-words\">the "
+#~ "best technology</span> to design and develop <span class=\"yellow-words"
+#~ "\">web pages</span> in <span class=\"yellow-words\">Quito</span>."
+
+#~ msgid ""
+#~ "Nuestro servicio y diseño de páginas web siempre serán de una calidad "
+#~ "excepcional, debido a que nos esforzamos por lograr la excelencia en todo "
+#~ "lo que hacemos, con el fin de agregar un valor significativo a su negocio."
+#~ msgstr ""
+#~ "Our service and design will always be of exceptional quality as we strive "
+#~ "for excellence in everything we do, in order to add significantly to your "
+#~ "business."
+
+#~ msgid "los beneficios <br/> que tendrás <br /> con"
+#~ msgstr "pros <br/> you will get <br /> with"
+
+#~ msgid ""
+#~ "Somos diseño y desarrollo de <span class=\"yellow-words\">páginas web</"
+#~ "span> en Quito."
+#~ msgstr ""
+#~ "We design and develop <span class=\"yellow-words\">web pages</span> in "
+#~ "Quito."
+
+#~ msgid "Páginas web en Quito | Diseño y desarrollo en WordPress"
+#~ msgstr "Websites in Quito | Design and development in WordPress"
+
+#~ msgid "Fregaderos"
+#~ msgstr "DishWashers"
+
+#~ msgid "Accesorios"
+#~ msgstr "Accesories"
+
+#~ msgid "Ver mas"
+#~ msgstr "See more"
+
+#~ msgid "Navegacion del Footer 1"
+#~ msgstr "Footer nav 1"
+
+#~ msgid "Navegacion del Footer 2"
+#~ msgstr "Footer nav 2"
+
+#~ msgid "Area de Widget 1"
+#~ msgstr "Widget area 1"
+
+#~ msgid "Modelo"
+#~ msgstr "Model"
+
+#~ msgid "Alfanumérico."
+#~ msgstr "Alphanumeric"
+
+#~ msgid "Características"
+#~ msgstr "Features"
+
+#~ msgid "Tinas"
+#~ msgstr "Tubs"
+
+#~ msgid "Use numeros."
+#~ msgstr "Use numbers"
+
+#~ msgid "Instalación"
+#~ msgstr "Instalation"
+
+#~ msgid "Ancho"
+#~ msgstr "Width"
+
+#~ msgid "Largo"
+#~ msgstr "Large"
+
+#~ msgid "Profundidad"
+#~ msgstr "Deep"
+
+#~ msgid "Lista de Accesorios"
+#~ msgstr "Accesories List"
+
+#~ msgid "Escriba la lista de accesorios que viene con el producto."
+#~ msgstr "Write the accesories list that comes with the product."
+
+#~ msgid "Documentos"
+#~ msgstr "Documents"
+
+#~ msgid "Diagrama"
+#~ msgstr "Diagram"
+
+#~ msgid "Manual de Limpieza"
+#~ msgstr "Cleaning Manual"
+
+#~ msgid "Manual de Instalación"
+#~ msgstr "Installation Manual"
+
+#~ msgid "Imagen"
+#~ msgstr "Image"
+
+#~ msgid "Imagen del banner"
+#~ msgstr "Banner Image"
+
+#~ msgid "Pegue aqui la ruta de la imagen desde el administrador de <a href=\""
+#~ msgstr "Paste here the image's url from <a href=\""
+
+#~ msgid "Mensaje"
+#~ msgstr "Mesage"
+
+#~ msgid "Mensaje Principal"
+#~ msgstr "Main Mesage"
+
+#~ msgid "Escriba un texto corto promocional para este banner."
+#~ msgstr "Write a promo text for this banner"
+
+#~ msgid "Boton \"Call to Action\""
+#~ msgstr "\"Call to Action\" buton"
+
+#~ msgid "Texto del Boton"
+#~ msgstr "Buton text"
+
+#~ msgid "Link del Boton"
+#~ msgstr "Buton Link"
+
+#~ msgid "Alineación"
+#~ msgstr "Alignment"
+
+#~ msgid "Derecha"
+#~ msgstr "Right"
+
+#~ msgid "Centro"
+#~ msgstr "Center"
+
+#~ msgid "Izquierda"
+#~ msgstr "Left"
+
+#~ msgid "Direccion"
+#~ msgstr "Address"
+
+#~ msgid "Geolocalización"
+#~ msgstr "Geolocation"
+
+#~ msgid "Coordenadas de Google Maps"
+#~ msgstr "Google Maps Coords"
+
+#~ msgid "Introduzca las coordenadas del lugar."
+#~ msgstr "Enter the coordinates of the place."
+
+#~ msgid "Contacto y Redes Sociales"
+#~ msgstr "Contact & Social Network Info"
+
+#~ msgid "Teléfono de Oficina"
+#~ msgstr "Office Telephone"
+
+#~ msgid "Correo Electrónico"
+#~ msgstr "Email"
+
+#~ msgid "Coloque aqui la dirección completa de su perfil en esta red."
+#~ msgstr "Write the entire URL of the social network"
+
+#~ msgctxt "Post Type General Name"
+#~ msgid "Fregadero"
+#~ msgstr "DishWasher"
+
+#~ msgctxt "Post Type Singular Name"
+#~ msgid "Fregaderos"
+#~ msgstr "DishWashers"
+
+#~ msgid "Item Padre:"
+#~ msgstr "Parent ítem:"
+
+#~ msgid "Todos los items"
+#~ msgstr "All items"
+
+#~ msgid "Agregar nuevo item"
+#~ msgstr "Add new ítem"
+
+#~ msgid "Actualizar Item"
+#~ msgstr "Update item"
+
+#~ msgid "Buscar Item"
+#~ msgstr "Search ítem"
+
+#~ msgid "No encontrado"
+#~ msgstr "Not found"
+
+#~ msgid "No encontrado en papelera"
+#~ msgstr "Not found on trash"
+
+#~ msgid "Fregaderos de Frinox"
+#~ msgstr "Frinox's DishWashers"
+
+#~ msgctxt "Post Type General Name"
+#~ msgid "Accesorio"
+#~ msgstr "Accessory"
+
+#~ msgctxt "Post Type Singular Name"
+#~ msgid "Accesorios"
+#~ msgstr "Accessories"
+
+#~ msgid "Accesorios de Frinox"
+#~ msgstr "Frinox's Accessories"
+
+#~ msgctxt "Taxonomy General Name"
+#~ msgid "Series"
+#~ msgstr "Series"
+
+#~ msgctxt "Taxonomy Singular Name"
+#~ msgid "Serie"
+#~ msgstr "Serie"
+
+#~ msgid "Series"
+#~ msgstr "Series"
+
+#~ msgid "Item padre"
+#~ msgstr "Parent ítem:"
+
+#~ msgid "Item padre:"
+#~ msgstr "Parent ítem:"
+
+#~ msgid "Nuevo nombre"
+#~ msgstr "New name"
+
+#~ msgid "Actualizar item"
+#~ msgstr "Update item"
+
+#~ msgid "Ver item"
+#~ msgstr "View item"
+
+#~ msgid "Agregar o quitar items"
+#~ msgstr "Add or remove items"
+
+#~ msgid "Escoja de los mas usados"
+#~ msgstr "Pick from most used"
+
+#~ msgid "Buscar items"
+#~ msgstr "Search ítem"
+
+#~ msgctxt "Taxonomy General Name"
+#~ msgid "Acabados"
+#~ msgstr "Workmanship"
+
+#~ msgctxt "Taxonomy Singular Name"
+#~ msgid "Acabado"
+#~ msgstr "Workmanship"
+
+#~ msgid "Acabados"
+#~ msgstr "Workmanship"
+
+#~ msgctxt "Taxonomy General Name"
+#~ msgid "Materiales"
+#~ msgstr "Materials"
+
+#~ msgid "Materiales"
+#~ msgstr "Materials"
+
+#~ msgctxt "Taxonomy General Name"
+#~ msgid "Calibres"
+#~ msgstr "Calibers"
+
+#~ msgctxt "Taxonomy Singular Name"
+#~ msgid "Calibre"
+#~ msgstr "Caliber"
+
+#~ msgid "Calibres"
+#~ msgstr "Calibers"
+
+#~ msgid "Comparar"
+#~ msgstr "Compare"
+
+#~ msgid "Archivo .pdf / .docx"
+#~ msgstr ".pdf / .doc file"
+
+#~ msgid "Seleccione un archivo de su disco duro."
+#~ msgstr "Select a file from your hard drive."
+
+#~ msgid "Yellow"
+#~ msgstr "Amarillo"
+
+#~ msgid "Purple"
+#~ msgstr "Púrpura"
+
+#~ msgid "Blue"
+#~ msgstr "Azul"
+
+#~ msgctxt "string url"
+#~ msgid "inicio"
+#~ msgstr "home"
+
+#~ msgid "Volver"
+#~ msgstr "Go back"
+
+#~ msgctxt "string url"
+#~ msgid "contacto"
+#~ msgstr "contact"
+
+#~ msgid "esta es la pagina de inicio"
+#~ msgstr "this is the index page"
+
+#~ msgid "este es otro texto par aprobar"
+#~ msgstr "This is another testing text"
+
+#~ msgctxt "Post Type General Name"
+#~ msgid "Producto"
+#~ msgstr "Product"
+
+#~ msgctxt "Post Type Singular Name"
+#~ msgid "Productos"
+#~ msgstr "Products"
+
+#~ msgid "Productos"
+#~ msgstr "Products"
+
+#~ msgid "productos"
+#~ msgstr "products"
+
+#~ msgid "Productos de Frinox"
+#~ msgstr "Frinox's products"
+
+#~ msgctxt "frinox"
+#~ msgid "Contacto"
+#~ msgstr "Contact"
+
+#~ msgctxt "string url"
+#~ msgid "Contacto"
+#~ msgstr "Contact"
+
+#~ msgid "Coordenadas"
+#~ msgstr "Coords"
+
+#~ msgid "Ingredientes"
+#~ msgstr "Ingredients"
+
+#~ msgid "Ingrediente"
+#~ msgstr "Ingredient"
+
+#~ msgid "Porciones"
+#~ msgstr "Portions"
+
+#~ msgctxt "string url"
+#~ msgid "nosotros"
+#~ msgstr "about-us"
+
+#~ msgid "Información Adicional"
+#~ msgstr "Aditional Information"
+
+#, fuzzy
+#~ msgid "Facebook"
+#~ msgstr "Facebook App"
+
+#~ msgid "Correos Electrónicos"
+#~ msgstr "Emails"
+
+#~ msgctxt "frinox"
+#~ msgid "esta es la pagina de inicio"
+#~ msgstr "this is the index page"
+
+#~ msgid "CATEGORÍAS"
+#~ msgstr "CATEGORIES"
+
+#~ msgid "Nuestras Tiendas"
+#~ msgstr "Our Stores"
+
+#~ msgid "Contacto Rapido"
+#~ msgstr "Quick Contact"
+
+#~ msgid "NOMBRE"
+#~ msgstr "NAME"
+
+#~ msgid "CORREO ELECTRÓNICO"
+#~ msgstr "E-MAIL"
+
+#~ msgid "PAÍS"
+#~ msgstr "COUNTRY"
+
+#~ msgid "COMENTARIOS"
+#~ msgstr "COMMENTS"
+
+#~ msgid "Acepto los"
+#~ msgstr "I accept the"
+
+#~ msgid "terminos y condiciones"
+#~ msgstr "terms and conditions"
+
+#~ msgid "ENVIAR"
+#~ msgstr "SEND"
+
+#~ msgid "Mapa del Sitio"
+#~ msgstr "Sitemap"
+
+#~ msgid "Nosotros"
+#~ msgstr "About Us"
+
+#~ msgctxt "string url"
+#~ msgid "recetas"
+#~ msgstr "recipes"
+
+#~ msgid "Recetas"
+#~ msgstr "Recipes"
+
+#~ msgctxt "string url"
+#~ msgid "ventas-institucionales"
+#~ msgstr "institutional-sales"
+
+#~ msgid "Ventas Institucionales"
+#~ msgstr "Institutional Sales"
+
+#~ msgctxt "string url"
+#~ msgid "tiendas"
+#~ msgstr "stores"
+
+#~ msgid "Encu&eacute;ntranos"
+#~ msgstr "Find Us"
+
+#~ msgid "Subscripci&oacute;n al bolet&iacute;n"
+#~ msgstr "Newsletter"
+
+#~ msgid "Otro proyecto desarrollado por"
+#~ msgstr "Another project developed by"
+
+#~ msgid "Misión"
+#~ msgstr "Mission"
+
+#~ msgid "Visión"
+#~ msgstr "Vision"
+
+#~ msgctxt "Post Type General Name"
+#~ msgid "Recetas"
+#~ msgstr "Recipes"
+
+#~ msgctxt "Post Type Singular Name"
+#~ msgid "Recetas"
+#~ msgstr "Recipe"
+
+#~ msgid "Todas las recetas"
+#~ msgstr "All recipes"
+
+#~ msgid "Crear nueva receta"
+#~ msgstr "Create new recipe"
+
+#~ msgid "Nueva receta"
+#~ msgstr "New recipe"
+
+#~ msgctxt "recetas"
+#~ msgid "recetas"
+#~ msgstr "recipes"
+
+#~ msgid "recetas"
+#~ msgstr "recipes"
+
+#~ msgctxt "Taxonomy General Name"
+#~ msgid "Tipos de Recetas"
+#~ msgstr "Types of Recipes"
+
+#~ msgctxt "Taxonomy Singular Name"
+#~ msgid "Tipo de Receta"
+#~ msgstr "Recipe type"
+
+#~ msgid "Tipos de Recetas"
+#~ msgstr "Types of Recipes"
+
+#~ msgid "Todos las Recetas"
+#~ msgstr "All Recipes"
+
+#~ msgctxt "Taxonomy General Name"
+#~ msgid "Marcas"
+#~ msgstr "Brands"
+
+#~ msgctxt "Taxonomy Singular Name"
+#~ msgid "Marcas"
+#~ msgstr "Brand"
+
+#~ msgid "Marcas"
+#~ msgstr "Brands"
+
+#~ msgid "Todos las Marcas"
+#~ msgstr "All Brands"
+
+#, fuzzy
+#~ msgid "Agregar nueva Marca"
+#~ msgstr "Create new recipe"
+
+#~ msgid "Actualizar Marcas"
+#~ msgstr "Update Brands"
+
+#~ msgctxt "Post Type General Name"
+#~ msgid "Tiendas"
+#~ msgstr "Stores"
+
+#~ msgctxt "Post Type Singular Name"
+#~ msgid "Tienda"
+#~ msgstr "Store"
+
+#~ msgid "Tiendas"
+#~ msgstr "Stores"
+
+#~ msgid "Todas las tiendas"
+#~ msgstr "All stores"
+
+#~ msgctxt "tiendas"
+#~ msgid "tiendas"
+#~ msgstr "stores"
+
+#~ msgid "tiendas"
+#~ msgstr "stores"
+
+#~ msgid "Publicidad"
+#~ msgstr "Advertising"
+
+#~ msgid "Hola"
+#~ msgstr "Hello"
+
+#~ msgid "[Cerrar Sesión]"
+#~ msgstr "[Logout]"
+
+#~ msgid "NOSOTROS"
+#~ msgstr "ABOUT US"
+
+#~ msgid "RECETAS"
+#~ msgstr "RECIPES"
+
+#~ msgid "VENTAS INSTITUCIONALES"
+#~ msgstr "INSTITUTIONAL SALES"
+
+#~ msgid "ENCUÉNTRANOS"
+#~ msgstr "FIND US"
+
+#~ msgid "Encuéntranos"
+#~ msgstr "Find Us"
+
+#~ msgid "Empezar proceso"
+#~ msgstr "Start process"
+
+#~ msgid "DESCRIPCIÓN DEL PRODUCTO"
+#~ msgstr "PRODUCT DESCRIPTION"
+
+#~ msgid "CARACTERÍSTICAS"
+#~ msgstr "FEATURES"
+
+#~ msgid "RECETAS QUE NECESITAN DE ESTE PRODUCTO"
+#~ msgstr "RECIPES THAT NEED OF THIS PRODUCT"
+
+#~ msgid "INGREDIENTES"
+#~ msgstr "INGREDIENTS"
+
+#~ msgid "PROCEDIMIENTO"
+#~ msgstr "PROCEDURE"
+
+#~ msgid "PRODUCTOS USADOS EN ESTA RECETA"
+#~ msgstr "PRODUCTS USED IN THIS RECIPE"
+
+#~ msgid "COMPRAR AHORA"
+#~ msgstr "SHOP NOW"
+
+#~ msgctxt "mnt"
+#~ msgid "productos"
+#~ msgstr "items"
+
+#~ msgctxt "mnt"
+#~ msgid "producto"
+#~ msgstr "item"
+
+#~ msgid "About Us"
+#~ msgstr "¿Quiénes Somos?"
+
+#~ msgid "Legal"
+#~ msgstr "Legal"
+
+#~ msgid "Affiliates"
+#~ msgstr "Afiliados"
+
+#~ msgid "Cookie Policy"
+#~ msgstr "Política de Cookies"
+
+#~ msgid "Calling Guide"
+#~ msgstr "Guía Telefónica"
+
+#~ msgid "Pay as you Go"
+#~ msgstr "Postpago"
+
+#~ msgid "Smart Home Phone Service"
+#~ msgstr "Servicio Telefónico Inteligente"
+
+#~ msgid "GSM / Sim card"
+#~ msgstr "GSM / Sim card"
+
+#~ msgid "Android App"
+#~ msgstr "Android App"
+
+#~ msgid "Apple iOS App"
+#~ msgstr "Apple iOS App"
+
+#~ msgid "Windows Phone App"
+#~ msgstr "Windows Phone App"
+
+#, fuzzy
+#~ msgid "Pay as yo Go"
+#~ msgstr "Postpago"
+
+#, fuzzy
+#~ msgid "Smart Phone Unlimited"
+#~ msgstr "Servicio Telefónico Inteligente"
+
+#, fuzzy
+#~ msgid "Smart Phone 500 Min"
+#~ msgstr "Servicio Telefónico Inteligente"
+
+#, fuzzy
+#~ msgid "Global Roaming Pay as you Go"
+#~ msgstr "Postpago"
+
+#~ msgid "Our Apps"
+#~ msgstr "Aplicaciones"
+
+#~ msgid "Sign In"
+#~ msgstr "Registrarse"
+
+#~ msgid "Green"
+#~ msgstr "Verde"
+
+#~ msgid "Red"
+#~ msgstr "Rojo"
+
+#, fuzzy
+#~ msgid "Worlwide Service"
+#~ msgstr "Servicios Telefónicos"
+
+#~ msgid "4 things Global Link"
+#~ msgstr "4 cosas en las que Global Link"
+
+#~ msgid "is really good at!"
+#~ msgstr "es realmente bueno!"
+
+#~ msgid "Online Support"
+#~ msgstr "Soporte En-línea"
+
+#~ msgid "about-us"
+#~ msgstr "¿Quiénes Somos?"
